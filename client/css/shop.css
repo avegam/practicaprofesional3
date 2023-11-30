@@ -1,0 +1,19 @@
+        /* Agrega estilos según sea necesario */
+        .producto {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-right: 10px;
+        }
+        div {
+            margin-right: 10px;
+        }
+        button {
+            margin-left: auto;
+        }

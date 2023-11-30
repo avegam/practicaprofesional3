@@ -1,0 +1,75 @@
+/* ----- ESTILO PAGINAS DE PRODUCTOS--*/
+h1{
+    text-align: center;
+    margin: 30px 0px;
+    
+}
+
+img {
+    
+    width: 220px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 20px 20px 0px 0px;
+   
+}
+
+.contenedor{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin-bottom:20px;
+    justify-content: center;
+   
+
+     
+}
+.contenedor>div{
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    background-color: #fafcff;
+    border-radius: 20px;
+
+}
+.contenedor>div:hover{
+    background-color: #f5f0c4;
+}
+
+.informacion{
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:15px;
+    
+
+}
+
+.informacion .precio 
+{
+    font-size: 20px;
+    font-weight: 500;
+
+   
+}
+.informacion .estilo_titulo{
+    font-size: 20px;
+    font-weight: 300;
+   
+}
+.informacion button{
+    background-color: rgb(247, 156, 171);
+    width: 100px;
+    height: 50px;
+    border-radius: 30px;
+    border: none;
+    font-size: 17px;
+    font-weight: 300;
+    cursor: pointer; 
+}
+
+.informacion>p:first-child{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-weight: 300;
+}

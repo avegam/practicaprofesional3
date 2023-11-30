@@ -1,0 +1,56 @@
+.carousel-inner
+{
+  height: 500px;
+  transition-duration: 1ms;
+}
+
+.container
+{
+ /* text-align: center;
+ justify-content: space-between;
+*/
+
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+width: auto;
+height: 50px;
+font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+
+}
+
+.container img 
+{
+  max-width: 30%;
+  /* max-width:100%*/
+  height: 300%;
+  border-radius: 25px;
+  cursor: pointer;
+  
+
+}
+
+
+.container img:hover
+{
+  transform:scale(1.1);
+  transition: 0.8s;
+  filter: brightness(87%);
+  
+}
+
+
+.container p
+{
+  position:absolute;
+  transform: (-50%, -50%);
+  top:105%;
+
+}
+
+.estilo_texto{
+  text-align: center; 
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+}
+
