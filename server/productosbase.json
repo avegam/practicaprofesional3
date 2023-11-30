@@ -1,0 +1,66 @@
+[
+    {
+      "nombre": "Shampoo Solido",
+      "precio": 2900,
+      "imagen": "Shampoo-solido.jpg",
+      "stock": "10",
+      "ingredientes": "Aceite de argán Aceite de jojoba, Aceite de almendras, Vitamina E, Aceite Esencial de Lavanda espliego.",
+      "uso": "Aplicá el shampoo frotandolo en las manos para generar espuma o directamente sobre el cuero cabelludo y extendelo sobre el largo del cabello. Enjuagá con abuendante agua para quitar por completo la espuma."
+    },
+    {
+      "nombre": "Serum Capilar",
+      "precio": 4300,
+      "imagen": "Serum-Capilar.jpg",
+      "stock": "10",
+      "ingredientes": "Aceite de argán Aceite de jojoba, Aceite de almendras, Vitamina E, Aceite Esencial de Lavanda espliego.",
+      "uso": "Aplicar una pequeña cantidad en las puntas del cabello."
+    },
+    {
+      "nombre": "Desodorante Solido",
+      "precio": 2000,
+      "imagen": "Desodorante-Solido.JPG",
+      "stock": "10",
+      "ingredientes": "aceite de coco, ácido esteárico, aceite de limón combinado con coco. Cera de soja, y bicarbonato de sodio.",
+      "uso": "Aplica sobre piel limpia y seca,Desliza suavemente en axilas,Repite según necesidad."
+    },
+    {
+      "nombre": "Jabon Corporal",
+      "precio": 1600,
+      "imagen": "Jabon-Corporal.jpg",
+      "stock": "10",
+      "ingredientes": "Glicerina Neutra Vegetal + Arcilla Caolín + Manteca de Karité + Oleato, Flores y Aceite Esencial de Romero",
+      "uso": "Aplicar únicamente en cuerpo con movimientos circulares y enjuagar la zona con agua templada."
+    },
+    {
+      "nombre": "Óleo vegano",
+      "precio": 1690,
+      "imagen": "Oleo-Vegano.jpg",
+      "stock": "10",
+      "ingredientes": "Siliconas, Aceite Nat de Naranja, Frag Naranja.",
+      "uso": "Masajes relajantes aromatizantes.En aromaterapia la naranja es energizante, promueve una sensación de felicidad y calidez. Es eficaz para tratar los callos en los pies y para apoyar la formación de colágeno en la piel. Ayuda a estimular la acción linfática para promover el equilibrio en los procesos del agua, lo que resulta en la desintoxicación de su cuerpo."
+    },
+    {
+      "nombre": "Agua Micelar",
+      "precio": 3000,
+      "imagen": "Agua-Micelar.jpg",
+      "stock": "10",
+      "ingredientes": "agua, Agua floral de Rosa Damascena, Glicéridos caprílicos/cápricos PEG-6,Propilenglicol, Extracto de Semilla de Avena Sativa, Levulinato de sodio , Sorbato de potasio, Benzoato sódico",
+      "uso": "Aplicar el agua micelar con un algodón en rostro. Sin arrastrar, sin frotar, con movimientos suaves. No enjuagar.Utilizar por la mañana y/o por la noche."
+    },
+    {
+      "nombre": "Balsamo Labial",
+      "precio": 1600,
+      "imagen": "Balsamo-Labial.jpg",
+      "stock": "10",
+      "ingredientes": "Aceite de almendras, Manteca De Karite, Manteca de Cacao, Cera Carnauba y Aceite Esencial de Lavanda Spliego.",
+      "uso": "Aplicar sobre los labios la cantidad de veces que se considere necesaria."
+    },
+    {
+      "nombre": "Jabon Exfoliante",
+      "precio": 2500,
+      "imagen": "Jabon-Exfoliante.jpg",
+      "stock": "10",
+      "ingredientes": "Glicerina Neutra Vegetal, Arcilla Roja, Manteca de Karité, Oleato de Lavanda, Aceite Esencial de Vainilla",
+      "uso": "Humedecer el rostro, aplicar en con movimientos circulares, dejar secar de 5 a 10 minutos, luego proceder a enjuagar el rostro."
+    }
+  ]
