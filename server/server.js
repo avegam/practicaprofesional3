@@ -227,4 +227,75 @@ app.get('/datos', async (req, res) => {
 // Llamar a la función para insertar productos al iniciar el servidor
 /*insertarProductos();*/
 
+const bodyParser=require('body-parser');
+const bcrypt= require('bcrypt');
+const userModelo= require('./modelos/user');
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+/*
+/* ERROR A CORREGIR 
+ 
+app.post('/registrar',(req,res)=>{
+  const{nombre,apellido,email,password}=req.body;
+
+  const user = new User({nombre,apellido,email,password})
+
+  user.save(error=>{
+  if(error){
+    res.status(500).send("Error al registrar el usuario");
+  }
+  else{
+    res.status(200).send("Usuario registrado")
+  }
+  })
+
+});
+*/
+/*
+ SACADO */
+app.post('/registrar', async (req, res) => {
+  const { Nombre, Apellido, Email, password } = req.body;
+ console.log(req.body)
+  const user = new userModelo({ Nombre, Apellido, Email, password });
+  console.log(user)
+  try {
+    await user.save();
+    res.status(200).send("Usuario registrado");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al registrar el usuario");
+  }
+});
+
+
+app.post('/authenticate',(req,res) =>{
+  const {email, password }= req.body;
+
+  user.findOne({email}),(error,user)=> {
+    if(error){
+      res.status(500).send("Error al Autenticar  el usuario");
+    } else if(!email){
+      res.status(500).send("Error usuario no existe");
+
+    } else{
+      user.isCorrectPassword(password,(error, result)=>{
+        if(error){
+          res.status(500).send("Error al Autenticar  el usuario");
+        } else if( result){
+
+          res.status(200).send(" Autenticado correctamente  el usuario");
+        }
+        else{
+          res.status(500).send("Usuario y/o contraseña incorrecta");
+
+        }
+      });
+    }
+
+  }
+
+});
+
 
