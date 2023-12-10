@@ -50,6 +50,12 @@ app.get("/detalleproducto/*", function (req, res) {
   res.sendFile(filePath);
 });
 
+// Ruta a Productos detallados
+app.get("/modificarproducto/*", function (req, res) {
+  const filePath = path.resolve(__dirname, "..", "client", "html","modificarproducto.html"); 
+  res.sendFile(filePath);
+});
+
 // Ruta a Contacto
 app.get("/contacto", function (req, res) {
   const filePath = path.resolve(__dirname, "..", "client","html", "contacto.html"); 
