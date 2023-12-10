@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Archivos temporales
 *.log
 *.tmp
@@ -6,4 +7,14 @@
 node_modules/
 
 # Archivos compilados
+=======
+#Archivos temporales
+*.log
+*.tmp
+
+#Módulos de Node.js
+node_modules/
+
+#Archivos compilados
+>>>>>>> af3b72e2e949d4bce8f5e4919e8da9072e9be4e5
 dist/
