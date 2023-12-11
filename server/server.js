@@ -145,7 +145,7 @@ const ClienteModel= mongoose.model('clientes',clienteSchema);
 
 const mostrar= async()=>{
   const clientes=await ClienteModel.find()
-  console.log(clientes)
+  //console.log(clientes)
 }
 
 mostrar()
@@ -155,7 +155,7 @@ mostrar()
 
 const mostrar2= async()=>{
 const producto=await productoModel.find()
-console.log(producto)
+//console.log(producto)
 }
 
 mostrar2()

@@ -13,10 +13,10 @@ const  UserSchema=new mongoose.Schema({
 });
 */
 
-const  UserSchema=new mongoose.Schema({
-nombre: String,
-apellido: String,
-email: String,
+const  UserSchema = mongoose.Schema({
+Nombre: String,
+Apellido: String,
+Email: String,
 password: String
 })
 
