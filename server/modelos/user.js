@@ -41,17 +41,29 @@ UserSchema.pre('save', function(next){
 });   
 
 
-UserSchema.methods.isCorrectPassword=function(password,callback){
+UserSchema.methods.isCorrectPassword = function (password) {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, this.password, function (error, same) {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(same);
+        }
+      });
+    });
+  };
+/*UserSchema.methods.isCorrectPassword=function(password,callback){
     bcrypt.compare(password,this.password, function(error,same){
     if(error){
         callback(error);
     }else{
-        callback(error,same);
+        
+        callback(null,same);
        }
 
     });
     
-};
+};*/
 
 const userModel = mongoose.model('user',UserSchema);
 module.exports = userModel;

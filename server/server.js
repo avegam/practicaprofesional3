@@ -276,17 +276,19 @@ app.post('/registrar', async (req, res) => {
 });
 
 
-app.post('/authenticate',(req,res) =>{
+/*app.post('/authenticate',(req,res) =>{
   const {email, password }= req.body;
-
-  user.findOne({email}),(error,user)=> {
+  console.log(req.body)
+  console.log(email)
+  userModelo.findOne({Email:email}),(error,userModelo)=> {
+  console.log(userModelo)
     if(error){
       res.status(500).send("Error al Autenticar  el usuario");
     } else if(!email){
       res.status(500).send("Error usuario no existe");
 
     } else{
-      user.isCorrectPassword(password,(error, result)=>{
+      userModelo.isCorrectPassword(password,(error, result)=>{
         if(error){
           res.status(500).send("Error al Autenticar  el usuario");
         } else if( result){
@@ -302,6 +304,34 @@ app.post('/authenticate',(req,res) =>{
 
   }
 
+});*/
+
+
+app.post('/authenticate', async (req, res) => {
+  const { email, password } = req.body;
+  console.log(req.body);
+  console.log(email);
+
+  try {
+    const user = await userModelo.findOne({ Email: email });
+
+    console.log(user);
+
+    if (!user) {
+      return res.status(500).send("Error: el usuario no existe");
+    }
+
+    const result = await user.isCorrectPassword(password);
+
+    if (result) {
+      return res.status(200).send("Autenticado correctamente el usuario");
+    } else {
+      return res.status(500).send("Usuario y/o contraseña incorrecta");
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Error al autenticar el usuario");
+  }
 });
 
 
