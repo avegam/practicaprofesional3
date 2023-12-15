@@ -306,7 +306,7 @@ app.post('/registrar', async (req, res) => {
 
 });*/
 
-
+//* auntenticar
 app.post('/authenticate', async (req, res) => {
   const { email, password } = req.body;
   console.log(req.body);
