@@ -259,7 +259,7 @@ app.post('/registrar', async (req, res) => {
 });
 
 
-/* AUTENTICACION DE USUARIO  */
+/* AUTENTICACION DE USUARIO  pero en serio*/
 app.post('/authenticate', async (req, res) => {
   const { email, password } = req.body;
   console.log(req.body);
