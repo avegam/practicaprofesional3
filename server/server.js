@@ -69,10 +69,11 @@ app.get("/shop", function (req, res) {
 });
 
 // Rutas a Olvidar Contraseña
-app.get("/olvidarcontraseña", function (req, res) {
-  const filePath = path.resolve(__dirname, "..", "client", "html","olvidarcontraseña.html"); 
+app.get("/olvidarcontrasena", function (req, res) {
+  const filePath = path.resolve(__dirname, "..", "client", "html","olvidarcontrasena.html"); 
   res.sendFile(filePath);
 });
+
 
 
 
