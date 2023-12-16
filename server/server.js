@@ -68,6 +68,12 @@ app.get("/shop", function (req, res) {
   res.sendFile(filePath);
 });
 
+// Rutas a Olvidar Contraseña
+app.get("/olvidarcontraseña", function (req, res) {
+  const filePath = path.resolve(__dirname, "..", "client", "html","olvidarcontraseña.html"); 
+  res.sendFile(filePath);
+});
+
 
 
 app.post("/create_preference", (req, res) => {

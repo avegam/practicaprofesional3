@@ -52,18 +52,7 @@ UserSchema.methods.isCorrectPassword = function (password) {
       });
     });
   };
-/*UserSchema.methods.isCorrectPassword=function(password,callback){
-    bcrypt.compare(password,this.password, function(error,same){
-    if(error){
-        callback(error);
-    }else{
-        
-        callback(null,same);
-       }
 
-    });
-    
-};*/
 
 const userModel = mongoose.model('user',UserSchema);
 module.exports = userModel;

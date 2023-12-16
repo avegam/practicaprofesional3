@@ -1,0 +1,58 @@
+
+.container {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 10%;
+    width: 40%;
+    background-color: #f4f4f4;
+   
+  }
+  
+  .estilo_titulo{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  form {
+    margin-top: 60px;
+  }
+  
+  table {
+    width: 80%;
+    text-align: center;
+  }
+  
+
+  label {
+   display: block;
+   margin-bottom: 8px;
+   text-align: center;
+  }
+  
+  input {
+    width: 100%; 
+    padding: 5px; 
+    margin-bottom: 16px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px;
+  }
+  
+  button {
+
+    color: #fff;
+    border: 0;
+    border-radius: 25px;
+    background-color: #4caf50;
+    width: 25%;
+   
+    }
+
+.estilo_iniciarSesion{
+  text-align: center;
+}
+
+.estilo_boton{
+  text-align: center;
+}
+
+
+   

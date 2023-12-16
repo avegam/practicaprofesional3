@@ -18,7 +18,7 @@ form {
 }
 
 table {
-  width: 80%;
+  width: 75%;
   text-align: center;
 }
 
@@ -30,7 +30,7 @@ label {
 }
 
 input {
-  width: 85%; 
+  width: 100%; 
   padding: 5px; 
   margin-bottom: 16px; 
   border: 1px solid #ccc; 
