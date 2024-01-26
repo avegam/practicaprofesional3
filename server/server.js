@@ -5,6 +5,8 @@ const path = require("path");
 
 const productoModel = require('./modelos/producto'); // Asegúrate de ajustar la ruta según la ubicación de tu modelo
 const mercadopago = require("mercadopago");
+const jwt = require('jsonwebtoken');
+const authorize = require('./AutorizacionMiddleware');
 
 
 // REPLACE WITH YOUR ACCESS TOKEN AVAILABLE IN: https://developers.mercadopago.com/panel
@@ -22,6 +24,11 @@ app.use(cors());
 // Rutas a Iniciar sesion
 app.get("/ingresar", function (req, res) {
   const filePath = path.resolve(__dirname, "..", "client","html", "ingresar.html"); 
+  res.sendFile(filePath);
+});
+// Rutas a ingreso exitoso
+app.get("/loginexitoso", function (req, res) {
+  const filePath = path.resolve(__dirname, "..", "client","html", "loginexito.html"); 
   res.sendFile(filePath);
 });
 
@@ -45,13 +52,13 @@ app.get("/productos", function (req, res) {
 });
 
 // Ruta a Productos detallados
-app.get("/detalleproducto/*", function (req, res) {
+app.get("/detalleproducto/*",authorize('Admin'), function (req, res) {
   const filePath = path.resolve(__dirname, "..", "client", "html","detalleproducto.html"); 
   res.sendFile(filePath);
 });
 
 // Ruta a Productos detallados
-app.get("/modificarproducto/*", function (req, res) {
+app.get("/modificarproducto/*",authorize('Admin'), function (req, res) {
   const filePath = path.resolve(__dirname, "..", "client", "html","modificarproducto.html"); 
   res.sendFile(filePath);
 });
@@ -254,7 +261,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.post('/registrar', async (req, res) => {
   const { Nombre, Apellido, Email, password } = req.body;
  console.log(req.body)
-  const user = new userModelo({ Nombre, Apellido, Email, password });
+ const Rol = "cliente"
+  const user = new userModelo({ Nombre, Apellido, Email, password,Rol });
   console.log(user)
   try {
     await user.save();
@@ -267,9 +275,11 @@ app.post('/registrar', async (req, res) => {
 
 
 /* AUTENTICACION DE USUARIO  pero en serio*/
+const secretKey = 'tu_clave_secreta'; // Reemplaza con tu clave secreta
+
 app.post('/authenticate', async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
+console.log(req.body);
   console.log(email);
 
   try {
@@ -284,7 +294,19 @@ app.post('/authenticate', async (req, res) => {
     const result = await user.isCorrectPassword(password);
 
     if (result) {
-      return res.status(200).send("Autenticado correctamente el usuario");
+      // Autenticado correctamente, generando el token
+      //const token = generateAuthToken(user);
+      user.generateAuthToken()
+        .then(token => {
+          console.log(token);
+          // Continúa con el código que utiliza el token aquí
+          return res.status(200).redirect(`/loginexitoso?x-auth-token=${token}`);
+        })
+        .catch(error => {
+          console.error('Error al generar el token:', error);
+        });
+
+      
     } else {
       return res.status(500).send("Usuario y/o contraseña incorrecta");
     }
@@ -293,5 +315,14 @@ app.post('/authenticate', async (req, res) => {
     return res.status(500).send("Error al autenticar el usuario");
   }
 });
+
+
+
+
+// Función para generar el token JWT
+/*
+function generateAuthToken(user) {
+  return jwt.sign({ _id: user._id }, secretKey, { expiresIn: '1h' }); // Puedes ajustar la duración del token según tus necesidades
+}*/
 
 
