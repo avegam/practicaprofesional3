@@ -1,4 +1,4 @@
-// authorizeMiddleware.js
+// authorizeMiddleware.js x
 const jwt = require('jsonwebtoken');
 //const getCookie = require('../client/js/carrito.js')
 
