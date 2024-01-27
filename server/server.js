@@ -46,7 +46,7 @@ app.get("/", function (req, res) {
 
 
 // Ruta a Productos
-app.get("/productos", function (req, res) {
+app.get("/productos",authorize('Admin'), function (req, res) {
   const filePath = path.resolve(__dirname, "..", "client", "html","productos.html"); 
   res.sendFile(filePath);
 });
