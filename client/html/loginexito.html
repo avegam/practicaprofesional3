@@ -54,6 +54,11 @@
     // Almacenar el token en localStorage
     localStorage.setItem('token', token);
 
+    
+
+    // Configura la cookie con el nombre 'miToken'
+    document.cookie = 'Token=' + token + '; path=/';
+
   </script>
 </body>
 </html>

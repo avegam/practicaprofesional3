@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const saltRounds = 10;
-const secretKey = 'tu_clave_secreta'; // Reemplaza con tu clave secreta
+const secretKey = 'clave_secreta'; // Reemplaza con tu clave secreta
 
 const UserSchema = mongoose.Schema({
   Nombre: String,
