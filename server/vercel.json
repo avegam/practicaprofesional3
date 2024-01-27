@@ -1,5 +1,6 @@
 {
     "version":2,
+    "buildCommand": "npm start",
     "build":[{"src":"server/package.json", "use":"@vercel/node"}],
-    "routes":[{"src":"/(.*)","dest":"/server.js"}]
+    "routes":[{"src":"/(.*)","dest":"server/$1"}]
 }
