@@ -3,10 +3,10 @@ const app = express();
 const cors = require("cors");
 const path = require("path");
 
-const productoModel = require('./modelos/producto'); // Asegúrate de ajustar la ruta según la ubicación de tu modelo
+const productoModel = require('./server/modelos/producto'); // Asegúrate de ajustar la ruta según la ubicación de tu modelo
 const mercadopago = require("mercadopago");
 const jwt = require('jsonwebtoken');
-const authorize = require('./AutorizacionMiddleware');
+const authorize = require('./server/AutorizacionMiddleware');
 
 
 // REPLACE WITH YOUR ACCESS TOKEN AVAILABLE IN: https://developers.mercadopago.com/panel
@@ -17,67 +17,67 @@ access_token:"TEST-2643009668753140-112518-a9bb2fbc8f1f5ac0960837e56681f5e9-1566
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static(__dirname + '/client/imagenes'));
-app.use(express.static(path.join(__dirname, "../client")));
+app.use(express.static(path.join(__dirname, "/client")));
 app.use(cors());
 
 
 // Rutas a Iniciar sesion
 app.get("/ingresar", function (req, res) {
-  const filePath = path.resolve(__dirname, "..", "client","html", "ingresar.html"); 
+  const filePath = path.resolve(__dirname, "client","html", "ingresar.html"); 
   res.sendFile(filePath);
 });
 // Rutas a ingreso exitoso
 app.get("/loginexitoso", function (req, res) {
-  const filePath = path.resolve(__dirname, "..", "client","html", "loginexito.html"); 
+  const filePath = path.resolve(__dirname, "client","html", "loginexito.html"); 
   res.sendFile(filePath);
 });
 
 // Rutas a registrar
 app.get("/registrar", function (req, res) {
-  const filePath = path.resolve(__dirname, "..", "client","html", "registrar.html"); 
+  const filePath = path.resolve(__dirname,  "client","html", "registrar.html"); 
   res.sendFile(filePath);
 });
 
 // Rutas a Index Principal
 app.get("/", function (req, res) {
-  const filePath = path.resolve(__dirname, "..", "client","html", "index.html"); 
+  const filePath = path.resolve(__dirname, "client","html", "index.html"); 
   res.sendFile(filePath);
 });
 
 
 // Ruta a Productos
 app.get("/productos",authorize('Admin'), function (req, res) {
-  const filePath = path.resolve(__dirname, "..", "client", "html","productos.html"); 
+  const filePath = path.resolve(__dirname, "client", "html","productos.html"); 
   res.sendFile(filePath);
 });
 
 // Ruta a Productos detallados
 app.get("/detalleproducto/*",authorize('Admin'), function (req, res) {
-  const filePath = path.resolve(__dirname, "..", "client", "html","detalleproducto.html"); 
+  const filePath = path.resolve(__dirname, "client", "html","detalleproducto.html"); 
   res.sendFile(filePath);
 });
 
 // Ruta a Productos detallados
 app.get("/modificarproducto/*",authorize('Admin'), function (req, res) {
-  const filePath = path.resolve(__dirname, "..", "client", "html","modificarproducto.html"); 
+  const filePath = path.resolve(__dirname, "client", "html","modificarproducto.html"); 
   res.sendFile(filePath);
 });
 
 // Ruta a Contacto
 app.get("/contacto", function (req, res) {
-  const filePath = path.resolve(__dirname, "..", "client","html", "contacto.html"); 
+  const filePath = path.resolve(__dirname, "client","html", "contacto.html"); 
   res.sendFile(filePath);
 });
 
 // Rutas a Shop
 app.get("/shop", function (req, res) {
-  const filePath = path.resolve(__dirname, "..", "client", "html","shop.html"); 
+  const filePath = path.resolve(__dirname, "client", "html","shop.html"); 
   res.sendFile(filePath);
 });
 
 // Rutas a Olvidar Contraseña
 app.get("/olvidarcontrasena", function (req, res) {
-  const filePath = path.resolve(__dirname, "..", "client", "html","olvidarcontrasena.html"); 
+  const filePath = path.resolve(__dirname, "client", "html","olvidarcontrasena.html"); 
   res.sendFile(filePath);
 });
 
@@ -119,9 +119,9 @@ app.get("/feedback", function (req, res) {
 });
 
 
-
+const port = process.env.PORT || 8080;
 app.listen(8080, () => {
-  console.log("The server is now running on Port 8080");
+  console.log(`The server is now running on Port ${port}`);
 });
 
 
@@ -249,7 +249,7 @@ app.get('/datos', async (req, res) => {
 
 const bodyParser=require('body-parser');
 const bcrypt= require('bcrypt');
-const userModelo= require('./modelos/user');
+const userModelo= require('./server/modelos/user');
 
 
 app.use(bodyParser.json());

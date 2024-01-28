@@ -18,3 +18,4 @@ node_modules/
 #Archivos compilados
 >>>>>>> af3b72e2e949d4bce8f5e4919e8da9072e9be4e5
 dist/
+.vercel
