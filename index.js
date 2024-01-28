@@ -207,7 +207,7 @@ const fs = require('fs').promises;  // Módulo de sistema de archivos de Node.js
 async function insertarProductos() {
   try {
     // Leer el contenido del archivo productos.json
-    const contenidoJSON = await fs.readFile('productosbase.json', 'utf-8');
+    const contenidoJSON = await fs.readFile('server/productosbase.json', 'utf-8');
     const productosjson = JSON.parse(contenidoJSON);
 
     // Insertar cada producto en la base de datos
