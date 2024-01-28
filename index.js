@@ -111,6 +111,8 @@ app.post("/create_preference", (req, res) => {
 });
 
 app.get("/facturita", function (req, res) {
+  console.log(req)
+  console.log(res)
   res.json({
     Payment: req.query.payment_id,
     Status: req.query.status,
