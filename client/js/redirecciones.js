@@ -1,9 +1,9 @@
 
 // Redirecciones a pagina de detalles de productos
 function redirecciondetalle(id) {
-    location.href = "http://localhost:8080/detalleproducto/" + id;
+    location.href = "/detalleproducto/" + id;
 }
 // Redirecciones a pagina de todos los  producto
 function redireccion() {
-    location.href = "http://localhost:8080/productos";
+    location.href = "/productos";
 }

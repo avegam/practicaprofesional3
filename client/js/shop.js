@@ -17,7 +17,7 @@ function buscarProductosEnBaseDeDatos(cookieData) {
       const idProducto = producto.id;
         console.log(producto.id)
       // Realiza una solicitud a la base de datos para obtener el producto con la ID correspondiente
-      fetch(`http://localhost:8080/detalle/`+ producto.id)
+      fetch(`/detalle/`+ producto.id)
         .then(response => response.json())
         .then(data => {
             // creo variables para cada dato extraido de la base
@@ -91,7 +91,7 @@ function comprarbtn(productosformados){
 document.getElementById("checkout").addEventListener("click", function () {
   const orderData = productosformados
   console.log(JSON.stringify(orderData))
-  fetch("http://localhost:8080/create_preference", {
+  fetch("/create_preference", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

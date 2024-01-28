@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const datosLista = document.getElementById('contenedor');
   
     // Realizar la solicitud al backend para obtener datos
-    fetch('http://localhost:8080/datos')
+    fetch('/datos')
       .then(response => response.json())
       .then(data => {
         // Procesar los datos y actualizar la interfaz
