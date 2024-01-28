@@ -39,8 +39,8 @@ app.get("/registrar", function (req, res) {
 });
 
 // Rutas a Index Principal
-app.get("/", function (req, res) {
-  const filePath = path.resolve(__dirname, "client","html", "index.html"); 
+app.get(["/", "/home"], function (req, res) {
+  const filePath = path.resolve(__dirname, "client", "html", "index.html"); 
   res.sendFile(filePath);
 });
 
