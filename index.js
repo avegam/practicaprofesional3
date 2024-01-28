@@ -91,8 +91,8 @@ app.post("/create_preference", (req, res) => {
     items: req.body
     ,
     back_urls: {
-      success: "/home",
-      failure: "/home",
+      success: "https://practicap3.onrender.com/home",
+      failure: "https://practicap3.onrender.com/home",
       pending: "",
     },
     auto_return: "approved",
@@ -108,6 +108,14 @@ app.post("/create_preference", (req, res) => {
     .catch(function (error) {
       console.log(error);
     });
+});
+
+app.get("/facturita", function (req, res) {
+  res.json({
+    Payment: req.query.payment_id,
+    Status: req.query.status,
+    MerchantOrder: req.query.merchant_order_id,
+  });
 });
 
 app.get("/feedback", function (req, res) {
@@ -230,22 +238,6 @@ app.get('/datos', async (req, res) => {
   }
   
 });
-/*app.post("/pago/:list", async (req, res) =>{
-  const id = req.params.list;
-  const preference = await mp.createPreference({
-    items: list,
-    back_urls: {
-      success: 'https://tu-sitio.com/pago-exitoso',
-      failure: 'https://tu-sitio.com/pago-fallido',
-      pending: 'https://tu-sitio.com/pago-pendiente'
-    }
-  });
-  // Abre la ventana de pago
-  window.open(preference.body.init_point, '_blank');
-});*/
-
-// Llamar a la función para insertar productos al iniciar el servidor
-/*insertarProductos();*/
 
 const bodyParser=require('body-parser');
 const bcrypt= require('bcrypt');
