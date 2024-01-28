@@ -111,13 +111,14 @@ app.post("/create_preference", (req, res) => {
 });
 
 app.post("/facturita", function (req, res) {
-  console.log(req)
-  console.log(res)
   /*res.json({
     Payment: req.query.payment_id,
     Status: req.query.status,
     MerchantOrder: req.query.merchant_order_id,
   });*/
+    // Manejar la notificación del webhook aquí
+    console.log('Notificación recibida:', req.body);
+    res.status(200).send('OK');
 });
 
 app.get("/feedback", function (req, res) {
