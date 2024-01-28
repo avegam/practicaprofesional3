@@ -110,14 +110,14 @@ app.post("/create_preference", (req, res) => {
     });
 });
 
-app.get("/facturita", function (req, res) {
+app.post("/facturita", function (req, res) {
   console.log(req)
   console.log(res)
-  res.json({
+  /*res.json({
     Payment: req.query.payment_id,
     Status: req.query.status,
     MerchantOrder: req.query.merchant_order_id,
-  });
+  });*/
 });
 
 app.get("/feedback", function (req, res) {
