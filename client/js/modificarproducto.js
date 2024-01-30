@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const productId = window.location.pathname.replace('/detalleproducto/', '').replace('/modificarproducto/', '');
     console.log(productId)
     // Realizar la solicitud al backend para obtener datos
-    fetch(`http://localhost:8080/detalle/${productId}`)
+    fetch(`/detalle/${productId}`)
       .then(response => response.json())
       .then(data => {
         const { nombre, precio, imagen, ingredientes, uso } = data;
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             uso: event.target.uso.value,
           };
           // Realizar la solicitud al servidor para actualizar los datos
-          // fetch(`http://localhost:8080/actualizar/${productId}`, {
+          // fetch(`/actualizar/${productId}`, {
           //   method: 'POST',
           //   headers: {
           //     'Content-Type': 'application/json',

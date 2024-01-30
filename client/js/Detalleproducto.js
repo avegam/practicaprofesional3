@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const productId = window.location.pathname.replace('/detalleproducto/', '');
 
   // Realizar la solicitud al backend para obtener datos
-  fetch(`http://localhost:8080/detalle/${productId}`)
+  fetch(`/detalle/${productId}`)
     .then(response => response.json())
     .then(data => {
      // Procesar los datos y construir el HTML
