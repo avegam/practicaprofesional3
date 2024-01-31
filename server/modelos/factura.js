@@ -10,20 +10,54 @@ const FacturaSchema = mongoose.Schema({
     date_approved: String,
     //Detalles del pago:
     payment_type_id: String,
-    payment_type_id: String,
     payment_method_id: String,
     issuer_id: String,
     installments: String,
     currency_id: String,
-    transaction_details: Object,
+    transaction_details: {
+        acquirer_reference: String,
+        external_resource_url: String,
+        financial_institution: String,
+        installment_amount: Number,
+        net_received_amount: Number,
+        overpaid_amount: Number,
+        payable_deferral_period: String,
+        payment_method_reference_id: String,
+        total_paid_amount: Number
+    },
     //Detalles del comprador:
-    payer: Object,
+    payer: {
+        identification: {
+            number: String,
+            type: String
+        },
+        entity_type: String,  // O el tipo de dato adecuado
+        phone: {
+            number: String,
+            extension: String,
+            area_code: String
+        },
+        last_name: String,
+        id: String,
+        type: String,
+        first_name: String,
+        email: String
+    },
     //Detalles del artículo(s):
 
     Productsitems: String,
     //Cargos y comisiones:
 
-    charges_details: Array,
+    charges_details: [{
+        accounts: {
+            from: String,
+            to: String
+        },
+        amounts: {
+            original: Number,
+            refunded: Number
+        }
+    }],
     //Fecha de liberación de fondos:
 
     money_release_date: String,
