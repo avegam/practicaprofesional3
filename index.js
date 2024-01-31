@@ -119,7 +119,7 @@ app.post("/facturita", function (req, res) {
     // Manejar la notificación del webhook aquí
     console.log('Notificación recibida:', req.body);
     res.status(200).send('OK');
-    const cosita = req.body.id
+    const cosita = req.body.data.id
     const urlpay = `https://api.mercadopago.com/v1/payments/${cosita}`;
     const acctoken = 'TEST-2643009668753140-112518-a9bb2fbc8f1f5ac0960837e56681f5e9-1566400118'; // Reemplaza con tu token
 
