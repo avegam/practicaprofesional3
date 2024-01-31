@@ -201,7 +201,7 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       console.log('Respuesta de la solicitud:', data);
       console.log('Respuesta de la solicitud json:', JSON.stringify(data, null, 2));
 
-      const { status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description } = data;
+      const { status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description } = JSON.stringify(data, null, 2);
       const idTransaccion = data.id;
       const items = data.additional_info.items;
 
@@ -217,7 +217,7 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       //res.status(200).send("factura cargada");
   } catch (error) {
       console.error('Error al realizar la solicitud:', error);
-      res.status(500).send("Error al cargar factura");
+      //res.status(500).send("Error al cargar factura");
   }
 }
 

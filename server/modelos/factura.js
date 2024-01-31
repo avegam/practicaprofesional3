@@ -17,7 +17,7 @@ const FacturaSchema = mongoose.Schema({
     currency_id: String,
     transaction_details: Object,
     //Detalles del comprador:
-    payer: String,
+    payer: Object,
     //Detalles del artículo(s):
 
     Productsitems: String,
