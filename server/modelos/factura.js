@@ -15,7 +15,7 @@ const FacturaSchema = mongoose.Schema({
     issuer_id: String,
     installments: String,
     currency_id: String,
-    transaction_details: String,
+    transaction_details: Object,
     //Detalles del comprador:
     payer: String,
     //Detalles del artículo(s):
@@ -23,7 +23,7 @@ const FacturaSchema = mongoose.Schema({
     Productsitems: String,
     //Cargos y comisiones:
 
-    charges_details: String,
+    charges_details: Array,
     //Fecha de liberación de fondos:
 
     money_release_date: String,

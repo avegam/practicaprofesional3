@@ -214,7 +214,7 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       console.log(factura);
 
       await factura.save();
-      res.status(200).send("factura cargada");
+      //res.status(200).send("factura cargada");
   } catch (error) {
       console.error('Error al realizar la solicitud:', error);
       res.status(500).send("Error al cargar factura");
