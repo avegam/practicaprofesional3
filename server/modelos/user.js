@@ -36,8 +36,6 @@ UserSchema.methods.generateAuthToken = function () {
 
   return new Promise((resolve, reject) => {
     jwt.sign({ _id: user._id, Rol: user.Rol }, secretKey, { expiresIn: '1h' }, (err, token) => {
-      console.log(token)
-      console.log("el anteriorro")
       if (err) {
         reject(err);
       } else {
