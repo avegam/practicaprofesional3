@@ -134,6 +134,8 @@ app.post("/facturita", function (req, res) {
       .then(data => {
         console.log('Respuesta de la solicitud:', data);
         // Puedes realizar acciones adicionales con la respuesta recibida
+        console.log('Respuesta de la solicitud json:',JSON.stringify(data, null, 2)); // 2 indica la cantidad de espacios de indentación
+        // Puedes realizar acciones adicionales con la respuesta recibida
       })
       .catch(error => {
         console.error('Error al realizar la solicitud:', error);
