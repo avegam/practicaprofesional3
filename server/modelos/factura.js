@@ -63,7 +63,10 @@ const FacturaSchema = mongoose.Schema({
     money_release_date: String,
     //Datos de facturación:
 
-    description: String
+    description: String,
+    items: {type: Object
+    } 
+
 
   })
   
