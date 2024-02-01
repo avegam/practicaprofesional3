@@ -202,15 +202,15 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       console.log('Respuesta de la solicitud json:', JSON.stringify(data, null, 2));
       const jsonData = JSON.stringify(data, null, 2);
       const dataObject = JSON.parse(jsonData);  
-      const { status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, /*transaction_details, payer, charges_details,*/ money_release_date, description } = dataObject;
+      const { status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description } = dataObject;
       const idTransaccion = data.id;
       const items = data.additional_info.items;
       console.log("factura formato:")
-      console.log(items ,idTransaccion,status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, /*transaction_details, payer, charges_details,*/ money_release_date, description)
+      console.log(items ,idTransaccion,status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description)
       const factura = new facturaModelo({
           status, status_detail, date_approved, transaction_amount, payment_type_id,
-          payment_method_id, issuer_id, installments, currency_id, /*transaction_details,
-          payer, charges_details,*/ money_release_date, description, idTransaccion, items
+          payment_method_id, issuer_id, installments, currency_id, transaction_details,
+          payer, charges_details, money_release_date, description, idTransaccion, items
       });
 
       console.log(factura);

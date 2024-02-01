@@ -14,7 +14,7 @@ const FacturaSchema = mongoose.Schema({
     issuer_id: String,
     installments: String,
     currency_id: String,
-    /*transaction_details: {
+    transaction_details: {
         acquirer_reference: String,
         external_resource_url: String,
         financial_institution: String,
@@ -24,9 +24,9 @@ const FacturaSchema = mongoose.Schema({
         payable_deferral_period: String,
         payment_method_reference_id: String,
         total_paid_amount: Number
-    },*/
+    },
     //Detalles del comprador:
-    /*payer: {
+    payer: {
         identification: {
             number: String,
             type: String
@@ -42,13 +42,13 @@ const FacturaSchema = mongoose.Schema({
         type: String,
         first_name: String,
         email: String
-    },*/
+    },
     //Detalles del artículo(s):
 
     Productsitems: String,
     //Cargos y comisiones:
 
-    /*charges_details: [{
+    charges_details: [{
         accounts: {
             from: String,
             to: String
@@ -57,7 +57,7 @@ const FacturaSchema = mongoose.Schema({
             original: Number,
             refunded: Number
         }
-    }],*/
+    }],
     //Fecha de liberación de fondos:
 
     money_release_date: String,
