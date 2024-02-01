@@ -204,7 +204,7 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       const { status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description } = JSON.stringify(data, null, 2);
       const idTransaccion = data.id;
       const items = data.additional_info.items;
-
+      console.log(items ,idTransaccion,status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description)
       const factura = new facturaModelo({
           status, status_detail, date_approved, transaction_amount, payment_type_id,
           payment_method_id, issuer_id, installments, currency_id, transaction_details,
