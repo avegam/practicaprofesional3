@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información de Factura</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>Información de Factura</h2>
+
+    <table id="facturaTable">
+        <thead>
+            <tr>
+                <th>Campo</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Filas de la tabla se llenarán dinámicamente con JavaScript -->
+        </tbody>
+    </table>
+    <h2>Información de Factura</h2>
+    <ul id="facturaList"></ul>
+    <script>
+        // Datos simulados (reemplaza con tus datos reales)
+        /*const facturaData = {
+            idTransaccion: '1316847568',
+            transaction_amount: '19390',
+            status: 'approved',
+            // ... otros campos ...
+        };*/
+// Realizar la solicitud al backend para obtener datos
+fetch(`/facturadatos`)
+    .then(response => response.json())
+    .then(data => { 
+
+    // Obtener el contenedor de la tabla
+    const tabla = document.getElementById("facturaTable");
+
+// Crear la fila de encabezado
+const filaEncabezado = tabla.insertRow();
+
+// Llenar la fila de encabezado con los nombres de los campos
+Object.keys(data[0]).forEach(campo => {
+    const th = document.createElement("th");
+    th.textContent = campo;
+    filaEncabezado.appendChild(th);
+});
+
+// Crear filas de datos para cada registro
+data.forEach(registro => {
+    const filaDatos = tabla.insertRow();
+    // Llenar la fila de datos con los valores de cada campo
+    Object.values(registro).forEach(valor => {
+        const td = document.createElement("td");
+        td.textContent = JSON.stringify(valor); // Convertir a cadena para mostrar objetos
+        filaDatos.appendChild(td);
+    });
+});
+    })
+   .catch(error => console.error('Error al obtener datos:', error));
+    </script>
+</body>
+</html>

@@ -222,6 +222,21 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       //res.status(500).send("Error al cargar factura");
   }
 }
+app.get("/factura", function (req, res) {
+  const filePath = path.resolve(__dirname, "client", "html","factura.html"); 
+  res.sendFile(filePath);
+});
+
+// Ruta para obtener datos desde MongoDB
+app.get('/facturadatos', async (req, res) => {
+  try {
+    const documentos = await facturaModelo.find({});
+    res.json(documentos);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener datos desde la base de datos' });
+  }
+  
+});
 
 /*fetch(urlpay, {
   method: 'GET',
