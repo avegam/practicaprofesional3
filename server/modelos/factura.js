@@ -54,9 +54,9 @@ const ChargeDetailsSchema = mongoose.Schema({
     date_created: { type: String, default: 'vacio' },
     id: { type: String, default: 'vacio' },
     last_updated:{ type: String, default: 'vacio' },
-    metadata: { type: String, default: 'vacio' },
+    //metadata: { type: String, default: 'vacio' },
     name: { type: String, default: 'vacio' },
-    refund_charges: { type: String, default: 'vacio' },
+    //refund_charges: { type: String, default: 'vacio' },
     reserve_id: { type: String, default: 'vacio' },
     type: { type: String, default: 'vacio' }
     // ... otros campos ...
