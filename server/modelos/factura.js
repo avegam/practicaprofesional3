@@ -2,6 +2,7 @@
 const mongoose=require('mongoose')
 
 const TransactionDetailsSchema = mongoose.Schema({
+    _id: false,
     acquirer_reference: String,
     external_resource_url: String,
     financial_institution: String,
@@ -9,12 +10,14 @@ const TransactionDetailsSchema = mongoose.Schema({
 });
 
 const PhoneSchema = mongoose.Schema({
+    _id: false,
     number: String,
     extension: String,
     area_code: String
 });
 
 const PayerSchema = mongoose.Schema({
+    _id: false,
     identification: {
         number: String,
         type: String
@@ -25,6 +28,7 @@ const PayerSchema = mongoose.Schema({
 });
 
 const ChargeDetailsSchema = mongoose.Schema({
+    _id: false,
     accounts: {
         from: String,
         to: String
@@ -37,6 +41,7 @@ const ChargeDetailsSchema = mongoose.Schema({
 });
 
 const ItemSchema = mongoose.Schema({
+    _id: false,
     category_id: String,
     description: String,
     id: String,
