@@ -56,8 +56,80 @@ fetch(`/facturadatos`)
     .then(response => response.json())
     .then(data => { 
 
-     // Obtener el contenedor de la tabla
-     const tabla = document.getElementById("facturaTable");
+        const tabla = document.getElementById("facturaTable");
+
+// Campos específicos que deseas mostrar, incluyendo los del campo "payer"
+const camposAMostrar = ["idTransaccion", "transaction_amount", "status", "status_detail","transaction_details.net_received_amount","payer.identification.number", "payer.identification.type","payer.phone.number","payer.email","payer.phone.area_code","payer.phone.extension"/*,"facturab","entregado"*/];
+
+
+// Crear la fila de encabezado
+const filaEncabezado = tabla.insertRow();
+
+// Llenar la fila de encabezado con los nombres de los campos específicos
+camposAMostrar.forEach(campo => {
+    const th = document.createElement("th");
+    th.textContent = campo;
+    filaEncabezado.appendChild(th);
+});
+
+// Función para obtener el valor de un campo anidado con puntos
+const obtenerValorAnidado = (objeto, ruta) => {
+    const partes = ruta.split('.');
+    let valor = objeto;
+
+    for (const parte of partes) {
+        if (valor && valor.hasOwnProperty(parte)) {
+            valor = valor[parte];
+        } else {
+            valor = null;
+            break;
+        }
+    }
+
+    return valor;
+};
+
+// Función para manejar valores nulos o indefinidos
+const manejarValorNulo = (valor) => {
+    return valor !== null && valor !== undefined ? JSON.stringify(valor) : null;
+};
+
+// Crear filas de datos para cada registro
+data.forEach(registro => {
+    const filaDatos = tabla.insertRow();
+
+    // Llenar la fila de datos con los valores de los campos específicos
+    camposAMostrar.forEach(campo => {
+        const td = document.createElement("td");
+        const valor = obtenerValorAnidado(registro, campo);
+
+        if (typeof valor === 'object') {
+            // Si es un objeto, mostrar los datos en una tabla interna
+            const tablaInterna = document.createElement("table");
+            Object.entries(valor).forEach(([clave, val]) => {
+                const fila = tablaInterna.insertRow();
+                const celdaClave = fila.insertCell(0);
+                const celdaValor = fila.insertCell(1);
+                celdaClave.textContent = clave;
+                celdaValor.textContent = manejarValorNulo(val);
+            });
+            td.appendChild(tablaInterna);
+        } else {
+            // Si no es un objeto, mostrar el valor directamente
+            td.textContent = manejarValorNulo(valor);
+        }
+
+        filaDatos.appendChild(td);
+    });
+});
+
+    })
+   .catch(error => console.error('Error al obtener datos:', error));
+
+
+
+   //rechazado?
+/*const tabla = document.getElementById("facturaTable");
 
 // Crear la fila de encabezado
 const filaEncabezado = tabla.insertRow();
@@ -78,7 +150,7 @@ data.forEach(registro => {
         if (typeof valor === 'object') {
             // Si es un objeto, mostrar los datos en una tabla interna
             const tablaInterna = document.createElement("table");
-            tablaInterna.border = "1"; // Agregar bordes a la tabla interna
+            //tablaInterna.border = "1"; // Agregar bordes a la tabla interna
             Object.entries(valor).forEach(([clave, val]) => {
                 const fila = tablaInterna.insertRow();
                 const celdaClave = fila.insertCell(0);
@@ -93,9 +165,11 @@ data.forEach(registro => {
         }
         filaDatos.appendChild(td);
     });
-});
-    })
-   .catch(error => console.error('Error al obtener datos:', error));
+});*/
     </script>
 </body>
 </html>
+
+
+
+

@@ -14,7 +14,7 @@ const FacturaSchema = mongoose.Schema({
     issuer_id: String,
     installments: String,
     currency_id: String,
-    transaction_details: {type: Object
+    transaction_details: {type: mongoose.Schema.Types.Mixed
         /* acquirer_reference: String,
         external_resource_url: String,
         financial_institution: String,
@@ -26,7 +26,7 @@ const FacturaSchema = mongoose.Schema({
         total_paid_amount: Number */
     },
     //Detalles del comprador:
-    payer: {type: Object/* 
+    payer: {type: mongoose.Schema.Types.Mixed/* 
         identification: {
             number: String,
             type: String
@@ -48,7 +48,7 @@ const FacturaSchema = mongoose.Schema({
     Productsitems: String,
     //Cargos y comisiones:
 
-    charges_details: [{type: Object/* 
+    charges_details: [{type: mongoose.Schema.Types.Mixed/* 
         accounts: {
             from: String,
             to: String
@@ -64,7 +64,7 @@ const FacturaSchema = mongoose.Schema({
     //Datos de facturación:
 
     description: String,
-    items: {type: Object
+    items: {type: mongoose.Schema.Types.Mixed
     } 
 
 
