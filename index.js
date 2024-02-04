@@ -227,6 +227,11 @@ app.get("/factura", function (req, res) {
   res.sendFile(filePath);
 });
 
+app.get("/facturab", function (req, res) {
+  const filePath = path.resolve(__dirname, "client", "html","facturab.html"); 
+  res.sendFile(filePath);
+});
+
 // Ruta para obtener datos desde MongoDB
 app.get('/facturadatos', async (req, res) => {
   try {

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Factura B</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      border: 2px solid #000;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #nombre-empresa {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    #datos-factura {
+      margin-bottom: 20px;
+    }
+    .datos-box {
+      border: 1px solid #000;
+      padding: 10px;
+      margin-bottom: 10px;
+      width: 48%;
+    }
+    .flex-container {
+      display: flex;
+      justify-content: space-between;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #000;
+      text-align: left;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    #resumen {
+      margin-bottom: 20px;
+    }
+    #total {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    #firma-empresa,
+    #firma-cliente {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .firma-box {
+      width: 48%;
+      border: 1px solid #000;
+      padding: 10px;
+    }
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px;
+      font-size: 16px;
+    }
+    @media print {
+      .button-container {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div id="nombre-empresa">Nombre de la Empresa</div>
+    </header>
+
+    <div id="datos-factura">
+      <p><strong>Número de Factura:</strong> F2024-001</p>
+      <p><strong>Fecha de Emisión:</strong> 3 de febrero de 2024</p>
+      <p><strong>Tipo de Factura:</strong> Factura B</p>
+    </div>
+
+    <div class="flex-container">
+      <div id="datos-empresa" class="datos-box">
+        <strong>Datos de la Empresa:</strong>
+        <p>Dirección de la Empresa: lo de paulis</p>
+        <p>Teléfono: paulis phone</p>
+        <p>Cuit: ABC123456DEF</p>
+      </div>
+
+      <div id="datos-cliente" class="datos-box">
+        <strong>Datos del Cliente:</strong>
+        <p>Nombre del Cliente</p>
+        <p>Dirección del Cliente</p>
+        <p>Cuit del Cliente</p>
+      </div>
+    </div>
+
+    <div id="productos">
+      <table>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio Unitario</th>
+          <th>Subtotal</th>
+        </tr>
+        <tr>
+          <td>Producto 1</td>
+          <td id="cantidadProducto1">2</td>
+          <td id="precioProducto1">10.00</td>
+          <td id="subtotalProducto1"></td>
+        </tr>
+        <tr>
+          <td>Producto 2</td>
+          <td id="cantidadProducto2">1</td>
+          <td id="precioProducto2">20.00</td>
+          <td id="subtotalProducto2"></td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="resumen">
+      <p><strong>Subtotal:</strong> <span id="subtotal"></span></p>
+      <p><strong>Descuento:</strong> <span id="descuento"></span></p>
+      <p><strong>Impuestos:</strong> <span id="impuestos"></span></p>
+      <p id="total"><strong>Total factura:</strong> <span id="totalFactura"></span></p>
+    </div>
+
+    <div id="firma-empresa">
+      <div class="firma-box">
+        <p>Firma de la Empresa:</p>
+        <!-- Espacio para la firma de la empresa -->
+      </div>
+      <div class="firma-box">
+        <p>Firma del Cliente:</p>
+        <!-- Espacio para la firma del cliente -->
+      </div>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button onclick="imprimirFactura()">Imprimir Factura</button>
+    <button onclick="volver()">Volver</button>
+  </div>
+
+  <script>
+    // Calcular totales por producto y total de la factura
+    function calcularTotales() {
+      var cantidad1 = parseInt(document.getElementById('cantidadProducto1').innerText);
+      var precio1 = parseFloat(document.getElementById('precioProducto1').innerText);
+      var subtotal1 = cantidad1 * precio1;
+      document.getElementById('subtotalProducto1').innerText = subtotal1.toFixed(2);
+
+      var cantidad2 = parseInt(document.getElementById('cantidadProducto2').innerText);
+      var precio2 = parseFloat(document.getElementById('precioProducto2').innerText);
+      var subtotal2 = cantidad2 * precio2;
+      document.getElementById('subtotalProducto2').innerText = subtotal2.toFixed(2);
+
+      var subtotal = subtotal1 + subtotal2;
+      document.getElementById('subtotal').innerText = subtotal.toFixed(2);
+
+      // Puedes agregar lógica adicional para calcular descuentos, impuestos, etc.
+      var descuento = 0; // Puedes modificar esto según tus necesidades
+      document.getElementById('descuento').innerText = descuento.toFixed(2);
+
+      var impuestos = subtotal * 0.16; // Impuesto del 16% (ejemplo)
+      document.getElementById('impuestos').innerText = impuestos.toFixed(2);
+
+      var totalFactura = subtotal - descuento + impuestos;
+      document.getElementById('totalFactura').innerText = totalFactura.toFixed(2);
+    }
+
+    // Calcular totales al cargar la página
+    window.onload = function() {
+      calcularTotales();
+    };
+
+    // Función para imprimir la factura
+    function imprimirFactura() {
+      window.print();
+    }
+
+    // Función para volver (puedes personalizar según tu aplicación)
+    function volver() {
+      alert("Botón de volver presionado");
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+

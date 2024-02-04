@@ -18,6 +18,13 @@
             padding: 10px;
             text-align: left;
         }
+
+        /* Estilo adicional para las tablas internas */
+        table table {
+            border: none; /* Elimina los bordes de la tabla interna */
+            width: 100%;
+            margin: 0; /* Elimina los márgenes internos de la tabla interna */
+        }
     </style>
 </head>
 <body>
@@ -49,8 +56,8 @@ fetch(`/facturadatos`)
     .then(response => response.json())
     .then(data => { 
 
-    // Obtener el contenedor de la tabla
-    const tabla = document.getElementById("facturaTable");
+     // Obtener el contenedor de la tabla
+     const tabla = document.getElementById("facturaTable");
 
 // Crear la fila de encabezado
 const filaEncabezado = tabla.insertRow();
@@ -68,7 +75,22 @@ data.forEach(registro => {
     // Llenar la fila de datos con los valores de cada campo
     Object.values(registro).forEach(valor => {
         const td = document.createElement("td");
-        td.textContent = JSON.stringify(valor); // Convertir a cadena para mostrar objetos
+        if (typeof valor === 'object') {
+            // Si es un objeto, mostrar los datos en una tabla interna
+            const tablaInterna = document.createElement("table");
+            tablaInterna.border = "1"; // Agregar bordes a la tabla interna
+            Object.entries(valor).forEach(([clave, val]) => {
+                const fila = tablaInterna.insertRow();
+                const celdaClave = fila.insertCell(0);
+                const celdaValor = fila.insertCell(1);
+                celdaClave.textContent = clave;
+                celdaValor.textContent = JSON.stringify(val);
+            });
+            td.appendChild(tablaInterna);
+        } else {
+            // Si no es un objeto, mostrar el valor directamente
+            td.textContent = JSON.stringify(valor);
+        }
         filaDatos.appendChild(td);
     });
 });
