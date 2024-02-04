@@ -107,14 +107,26 @@ const FacturaSchema = mongoose.Schema({
 
 // Middleware para ajustar valores predeterminados antes de validar
 FacturaSchema.pre('validate', function(next) {
-    // Iterar sobre todos los campos del esquema
+    // Función para aplicar valores predeterminados recursivamente
+    const applyDefaults = (obj) => {
+        if (typeof obj === 'object' && obj !== null) {
+            for (const key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    obj[key] = applyDefaults(obj[key]);
+                }
+            }
+        } else if (obj === null || obj === undefined) {
+            return 'vacio';
+        }
+        return obj;
+    };
+
+    // Aplicar valores predeterminados a todos los campos
     this.schema.eachPath((fieldName) => {
         // Excluir el campo __v de la lógica de ajuste
         if (fieldName !== '__v') {
-            // Ajustar valores predeterminados si el campo es null o undefined
-            if (this[fieldName] === null || this[fieldName] === undefined) {
-                this[fieldName] = 'vacio';
-            }
+            // Aplicar valores predeterminados recursivamente
+            this[fieldName] = applyDefaults(this[fieldName]);
         }
     });
 
