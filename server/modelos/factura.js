@@ -16,9 +16,9 @@ const TransactionDetailsSchema = mongoose.Schema({
 
 const PhoneSchema = mongoose.Schema({
     _id: false,
-    number: String,
-    extension: String,
-    area_code: String
+    number: { type: String, default: 'vacio' },
+    extension: { type: String, default: 'vacio' },
+    area_code:{ type: String, default: 'vacio' }
 });
 
 const idenSchema = mongoose.Schema({
