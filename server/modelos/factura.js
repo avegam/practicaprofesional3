@@ -16,14 +16,17 @@ const PhoneSchema = mongoose.Schema({
     area_code: String
 });
 
+const idenSchema = mongoose.Schema({
+    _id: false,
+    number: String,
+    type: String
+});
+
 const PayerSchema = mongoose.Schema({
     _id: false,
-    identification: {
-        number: String,
-        type: String
-    },
+    identification: idenSchema,
     entity_type: String,
-    phone: PhoneSchema,
+    phone: PhoneSchema
     // ... otros campos ...
 });
 
