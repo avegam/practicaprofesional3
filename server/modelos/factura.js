@@ -107,17 +107,22 @@ const FacturaSchema = mongoose.Schema({
 
 // Middleware para ajustar valores predeterminados antes de validar
 FacturaSchema.pre('validate', function(next) {
-    // Función para aplicar valores predeterminados recursivamente
-    const applyDefaults = (obj) => {
+    // Función para aplicar valores predeterminados recursivamente con control de profundidad
+    const applyDefaults = (obj, depth = 0, maxDepth = 10) => {
+        if (depth > maxDepth) {
+            return obj; // Evitar recursión infinita
+        }
+
         if (typeof obj === 'object' && obj !== null) {
             for (const key in obj) {
                 if (obj.hasOwnProperty(key)) {
-                    obj[key] = applyDefaults(obj[key]);
+                    obj[key] = applyDefaults(obj[key], depth + 1, maxDepth);
                 }
             }
         } else if (obj === null || obj === undefined) {
             return 'vacio';
         }
+
         return obj;
     };
 
@@ -125,7 +130,7 @@ FacturaSchema.pre('validate', function(next) {
     this.schema.eachPath((fieldName) => {
         // Excluir el campo __v de la lógica de ajuste
         if (fieldName !== '__v') {
-            // Aplicar valores predeterminados recursivamente
+            // Aplicar valores predeterminados recursivamente con control de profundidad
             this[fieldName] = applyDefaults(this[fieldName]);
         }
     });
