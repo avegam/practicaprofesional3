@@ -3,10 +3,15 @@ const mongoose=require('mongoose')
 
 const TransactionDetailsSchema = mongoose.Schema({
     _id: false,
-    acquirer_reference: String,
-    external_resource_url: String,
-    financial_institution: String,
-    // ... otros campos ...
+    acquirer_reference: { type: String, default: 'vacio' },
+    external_resource_url: { type: String, default: 'vacio' },
+    financial_institution: { type: String, default: 'vacio' },
+    installment_amount: { type: String, default: 'vacio' },
+    net_received_amount: { type: String, default: 'vacio' },
+    overpaid_amount: { type: String, default: 'vacio' },
+    payable_deferral_period: { type: String, default: 'vacio' },
+    payment_method_reference_id: { type: String, default: 'vacio' },
+    total_paid_amount: { type: String, default: 'vacio' }
 });
 
 const PhoneSchema = mongoose.Schema({
@@ -26,7 +31,12 @@ const PayerSchema = mongoose.Schema({
     _id: false,
     identification: idenSchema,
     entity_type: String,
-    phone: PhoneSchema
+    phone: PhoneSchema,
+    last_name: { type: String, default: 'vacio' },
+    id: { type: String, default: 'vacio' },
+    type: { type: String, default: 'vacio' },
+    first_name: { type: String, default: 'vacio' },
+    email: { type: String, default: 'vacio' }
     // ... otros campos ...
 });
 
@@ -40,6 +50,15 @@ const ChargeDetailsSchema = mongoose.Schema({
         original: Number,
         refunded: Number
     },
+    client_id:{ type: String, default: 'vacio' },
+    date_created: { type: String, default: 'vacio' },
+    id: { type: String, default: 'vacio' },
+    last_updated:{ type: String, default: 'vacio' },
+    metadata: { type: String, default: 'vacio' },
+    name: { type: String, default: 'vacio' },
+    refund_charges: { type: String, default: 'vacio' },
+    reserve_id: { type: String, default: 'vacio' },
+    type: { type: String, default: 'vacio' }
     // ... otros campos ...
 });
 
