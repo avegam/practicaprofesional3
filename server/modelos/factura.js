@@ -105,19 +105,23 @@ const FacturaSchema = mongoose.Schema({
 
   })
 
-  // Middleware para ajustar valores predeterminados antes de validar
+// Middleware para ajustar valores predeterminados antes de validar
 FacturaSchema.pre('validate', function(next) {
     // Iterar sobre todos los campos del esquema
     this.schema.eachPath((fieldName) => {
-        // Ajustar valores predeterminados si el campo es null o undefined
-        if (this[fieldName] === null || this[fieldName] === undefined) {
-            this[fieldName] = 'vacio';
+        // Excluir el campo __v de la lógica de ajuste
+        if (fieldName !== '__v') {
+            // Ajustar valores predeterminados si el campo es null o undefined
+            if (this[fieldName] === null || this[fieldName] === undefined) {
+                this[fieldName] = 'vacio';
+            }
         }
     });
 
     // Continuar con el proceso de validación
     next();
 });
+
   
   const FacturacionModel= mongoose.model('factura',FacturaSchema);
 
