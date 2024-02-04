@@ -80,7 +80,7 @@ const obtenerValorAnidado = (objeto, ruta) => {
     for (const parte of partes) {
         if (valor && valor.hasOwnProperty(parte)) {
             valor = valor[parte];
-        } else {
+                    } else {
             valor = null;
             break;
         }
@@ -102,7 +102,7 @@ data.forEach(registro => {
     camposAMostrar.forEach(campo => {
         const td = document.createElement("td");
         const valor = obtenerValorAnidado(registro, campo);
-
+        console.log(valor)
         if (typeof valor === 'object') {
             // Si es un objeto, mostrar los datos en una tabla interna
             const tablaInterna = document.createElement("table");
