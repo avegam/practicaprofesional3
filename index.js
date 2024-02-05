@@ -227,7 +227,7 @@ app.get("/factura", function (req, res) {
   res.sendFile(filePath);
 });
 
-app.get("/facturab", function (req, res) {
+app.get("/facturab/*", function (req, res) {
   const filePath = path.resolve(__dirname, "client", "html","facturab.html"); 
   res.sendFile(filePath);
 });
@@ -241,6 +241,21 @@ app.get('/facturadatos', async (req, res) => {
     res.status(500).json({ error: 'Error al obtener datos desde la base de datos' });
   }
   
+});
+
+// Ruta para obtener datos filtrados por ID
+app.get('/detallefactura/:id', async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const documento = await facturaModelo.findOne({idTransaccion: id});
+    if (!documento) {
+      return res.status(404).json({ mensaje: 'factura no encontrado' });
+    }
+    res.json(documento);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener datos desde la base de datos' });
+  }
 });
 
 /*fetch(urlpay, {

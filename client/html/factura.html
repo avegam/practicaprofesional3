@@ -28,144 +28,88 @@
     </style>
 </head>
 <body>
-    <h2>Información de Factura</h2>
+    <h2>Información de pedidos</h2>
 
     <table id="facturaTable">
-        <thead>
-            <tr>
-                <th>Campo</th>
-                <th>Valor</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Filas de la tabla se llenarán dinámicamente con JavaScript -->
-        </tbody>
     </table>
-    <h2>Información de Factura</h2>
-    <ul id="facturaList"></ul>
+
     <script>
-        // Datos simulados (reemplaza con tus datos reales)
-        /*const facturaData = {
-            idTransaccion: '1316847568',
-            transaction_amount: '19390',
-            status: 'approved',
-            // ... otros campos ...
-        };*/
-// Realizar la solicitud al backend para obtener datos
-fetch(`/facturadatos`)
+
+     fetch(`/facturadatos`)
     .then(response => response.json())
     .then(data => { 
-
         const tabla = document.getElementById("facturaTable");
 
-// Campos específicos que deseas mostrar, incluyendo los del campo "payer"
-const camposAMostrar = ["idTransaccion", "transaction_amount", "status", "status_detail","transaction_details.net_received_amount","payer.identification.number", "payer.identification.type","payer.phone.number","payer.email","payer.phone.area_code","payer.phone.extension"/*,"facturab","entregado"*/];
+        // Campos específicos que deseas mostrar, incluyendo los del campo "payer"
+        const camposAMostrar = ["idTransaccion", "transaction_amount", "status", "status_detail","transaction_details.net_received_amount","payer.identification.number", "payer.identification.type","payer.phone.number","payer.email","payer.phone.area_code","payer.phone.extension"/*,"facturab","entregado"*/];
 
+        // Crear la fila de encabezado
+        const filaEncabezado = tabla.insertRow();
 
-// Crear la fila de encabezado
-const filaEncabezado = tabla.insertRow();
+        // Llenar la fila de encabezado con los nombres de los campos específicos
+        camposAMostrar.forEach(campo => {
+            const th = document.createElement("th");
+            th.textContent = campo;
+            filaEncabezado.appendChild(th);
+        });
 
-// Llenar la fila de encabezado con los nombres de los campos específicos
-camposAMostrar.forEach(campo => {
-    const th = document.createElement("th");
-    th.textContent = campo;
-    filaEncabezado.appendChild(th);
-});
+        //botones
 
-// Función para obtener el valor de un campo anidado con puntos
-const obtenerValorAnidado = (objeto, ruta) => {
-    const partes = ruta.split('.');
-    let valor = objeto;
+        const th = document.createElement("th");
+        th.textContent = "Factura";
+        filaEncabezado.appendChild(th);
+        const th2 = document.createElement("th");
+       th2.textContent = "entregar/pendiente";
+        filaEncabezado.appendChild(th2);
 
-    for (const parte of partes) {
-        if (valor && valor.hasOwnProperty(parte)) {
-            valor = valor[parte];
-                    } else {
-            valor = null;
-            break;
-        }
-    }
+        // Iterar sobre los objetos en el array y agregar filas a la tabla
+        data.forEach(objeto => {
+            const filaDatos = tabla.insertRow();
 
-    return valor;
-};
-
-// Función para manejar valores nulos o indefinidos
-const manejarValorNulo = (valor) => {
-    return valor !== null && valor !== undefined ? JSON.stringify(valor) : null;
-};
-
-// Crear filas de datos para cada registro
-data.forEach(registro => {
-    const filaDatos = tabla.insertRow();
-
-    // Llenar la fila de datos con los valores de los campos específicos
-    camposAMostrar.forEach(campo => {
-        const td = document.createElement("td");
-        const valor = obtenerValorAnidado(registro, campo);
-        console.log(valor)
-        if (typeof valor === 'object') {
-            // Si es un objeto, mostrar los datos en una tabla interna
-            const tablaInterna = document.createElement("table");
-            Object.entries(valor).forEach(([clave, val]) => {
-                const fila = tablaInterna.insertRow();
-                const celdaClave = fila.insertCell(0);
-                const celdaValor = fila.insertCell(1);
-                celdaClave.textContent = clave;
-                celdaValor.textContent = manejarValorNulo(val);
+            camposAMostrar.forEach(campo => {
+                const td = document.createElement("td");
+                const valorColumna = obtenerValor(objeto, campo);
+                td.textContent = valorColumna;
+                filaDatos.appendChild(td);
             });
-            td.appendChild(tablaInterna);
-        } else {
-            // Si no es un objeto, mostrar el valor directamente
-            td.textContent = manejarValorNulo(valor);
-        }
+            // Crea un botón
+            const td = document.createElement("td");
+            var boton = document.createElement('button');
+            boton.innerHTML = 'ver factura';
+            
+            // Agrega un evento de clic al botón para redireccionar a una página específica
+            boton.addEventListener('click', function() {
+                const id = obtenerValor(objeto,"idTransaccion");
+                // Redirecciones a pagina de todos los  producto
+                 location.href = "/facturab/"+ id;
 
-        filaDatos.appendChild(td);
-    });
-});
+            });
+            td.appendChild(boton);
+            filaDatos.appendChild(td);
 
+            const td2 = document.createElement("td");
+            var boton = document.createElement('button');
+            boton.innerHTML = 'entregar';
+
+            // Agrega un evento de clic al botón para redireccionar a una página específica
+            boton.addEventListener('click', function() {
+                // Reemplaza 'URL_DESTINO' con la URL a la que deseas redirigir
+                window.location.href = 'URL_DESTINO';
+            });
+            td2.appendChild(boton);
+            filaDatos.appendChild(td2);
+            
+        });
     })
-   .catch(error => console.error('Error al obtener datos:', error));
+    .catch(error => console.error('Error al obtener datos:', error));
+
+// Función para obtener el valor de una propiedad anidada
+function obtenerValor(objeto, propiedad) {
+    const propiedades = propiedad.split('.');
+    return propiedades.reduce((valor, prop) => valor[prop], objeto);
+}
 
 
-
-   //rechazado?
-/*const tabla = document.getElementById("facturaTable");
-
-// Crear la fila de encabezado
-const filaEncabezado = tabla.insertRow();
-
-// Llenar la fila de encabezado con los nombres de los campos
-Object.keys(data[0]).forEach(campo => {
-    const th = document.createElement("th");
-    th.textContent = campo;
-    filaEncabezado.appendChild(th);
-});
-
-// Crear filas de datos para cada registro
-data.forEach(registro => {
-    const filaDatos = tabla.insertRow();
-    // Llenar la fila de datos con los valores de cada campo
-    Object.values(registro).forEach(valor => {
-        const td = document.createElement("td");
-        if (typeof valor === 'object') {
-            // Si es un objeto, mostrar los datos en una tabla interna
-            const tablaInterna = document.createElement("table");
-            //tablaInterna.border = "1"; // Agregar bordes a la tabla interna
-            Object.entries(valor).forEach(([clave, val]) => {
-                const fila = tablaInterna.insertRow();
-                const celdaClave = fila.insertCell(0);
-                const celdaValor = fila.insertCell(1);
-                celdaClave.textContent = clave;
-                celdaValor.textContent = JSON.stringify(val);
-            });
-            td.appendChild(tablaInterna);
-        } else {
-            // Si no es un objeto, mostrar el valor directamente
-            td.textContent = JSON.stringify(valor);
-        }
-        filaDatos.appendChild(td);
-    });
-});*/
     </script>
 </body>
 </html>
