@@ -28,87 +28,107 @@
     </style>
 </head>
 <body>
-    <h2>Información de pedidos</h2>
+    <h2>Información de pedidos pendiente</h2>
 
     <table id="facturaTable">
     </table>
 
+    <h2>Información de pedidos entregados</h2>
+
+    <table id="facturaTableentregados">
+    </table>
+
+    <h2>Información de pedidos rechazados</h2>
+
+    <table id="facturaTablerechazados">
+    </table>
+
     <script>
 
-     fetch(`/facturadatos`)
-    .then(response => response.json())
-    .then(data => { 
-        const tabla = document.getElementById("facturaTable");
+function llenarTabla(textoComparacion, idTabla) {
+    fetch(`/facturadatos`)
+        .then(response => response.json())
+        .then(data => {
+            const tabla = document.getElementById(idTabla);
 
-        // Campos específicos que deseas mostrar, incluyendo los del campo "payer"
-        const camposAMostrar = ["idTransaccion", "transaction_amount", "status", "status_detail","transaction_details.net_received_amount","payer.identification.number", "payer.identification.type","payer.phone.number","payer.email","payer.phone.area_code","payer.phone.extension","pedido"/*,"facturab","entregado"*/];
+            // Campos específicos que deseas mostrar, incluyendo los del campo "payer"
+            const camposAMostrar = ["idTransaccion", "transaction_amount", "status", "status_detail", "transaction_details.net_received_amount", "payer.identification.number", "payer.identification.type", "payer.phone.number", "payer.email", "payer.phone.area_code", "payer.phone.extension", "pedido"];
 
-        // Crear la fila de encabezado
-        const filaEncabezado = tabla.insertRow();
+            // Crear la fila de encabezado
+            const filaEncabezado = tabla.insertRow();
 
-        // Llenar la fila de encabezado con los nombres de los campos específicos
-        camposAMostrar.forEach(campo => {
-            const th = document.createElement("th");
-            th.textContent = campo;
-            filaEncabezado.appendChild(th);
-        });
-
-        //botones
-
-        const th = document.createElement("th");
-        th.textContent = "Factura";
-        filaEncabezado.appendChild(th);
-        const th2 = document.createElement("th");
-       th2.textContent = "entregar/pendiente";
-        filaEncabezado.appendChild(th2);
-
-        // Iterar sobre los objetos en el array y agregar filas a la tabla
-        data.forEach(objeto => {
-            const filaDatos = tabla.insertRow();
-
+            // Llenar la fila de encabezado con los nombres de los campos específicos
             camposAMostrar.forEach(campo => {
-                const td = document.createElement("td");
-                const valorColumna = obtenerValor(objeto, campo);
-                td.textContent = valorColumna;
-                filaDatos.appendChild(td);
+                const th = document.createElement("th");
+                th.textContent = campo;
+                filaEncabezado.appendChild(th);
             });
-            // Crea un botón
-            const td = document.createElement("td");
-            var boton = document.createElement('button');
-            boton.innerHTML = 'ver factura';
-            
-            // Agrega un evento de clic al botón para redireccionar a una página específica
-            boton.addEventListener('click', function() {
-                const id = obtenerValor(objeto,"idTransaccion");
-                // Redirecciones a pagina de todos los  producto
-                 location.href = "/facturab/"+ id;
 
+            // Agregar botones al encabezado
+            const th1 = document.createElement("th");
+            th1.textContent = "Factura";
+            filaEncabezado.appendChild(th1);
+
+            const th2 = document.createElement("th");
+            th2.textContent = "Entregar/Pendiente";
+            filaEncabezado.appendChild(th2);
+
+            // Iterar sobre los objetos en el array y agregar filas a la tabla
+            data.forEach(objeto => {
+                if (obtenerValor(objeto, "pedido") === textoComparacion) {
+                    const filaDatos = tabla.insertRow();
+
+                    camposAMostrar.forEach(campo => {
+                        const td = document.createElement("td");
+                        const valorColumna = obtenerValor(objeto, campo);
+                        td.textContent = valorColumna;
+                        filaDatos.appendChild(td);
+                    });
+
+                    // Crear un botón para ver la factura
+                    const td1 = document.createElement("td");
+                    var botonVerFactura = document.createElement('button');
+                    botonVerFactura.innerHTML = 'Ver Factura';
+
+                    // Agregar un evento de clic al botón para redireccionar a una página específica
+                    botonVerFactura.addEventListener('click', function () {
+                        const id = obtenerValor(objeto, "idTransaccion");
+                        // Redirección a página de la factura
+                        location.href = "/facturab/" + id;
+                    });
+                    td1.appendChild(botonVerFactura);
+                    filaDatos.appendChild(td1);
+
+                    // Crear botones para entregar y rechazar
+                    const td2 = document.createElement("td");
+                    var botonEntregar = crearBoton(obtenerValor(objeto, "idTransaccion"),"Entregar", "entregado");
+                    var botonRechazar = crearBoton(obtenerValor(objeto, "idTransaccion"),"Rechazar", "rechazado");
+
+                    td2.appendChild(botonEntregar);
+                    td2.appendChild(botonRechazar);
+                    filaDatos.appendChild(td2);
+                }
             });
-            td.appendChild(boton);
-            filaDatos.appendChild(td);
+        })
+        .catch(error => console.error('Error al obtener datos:', error));
 
-            const td2 = document.createElement("td");
-            var boton = document.createElement('button');
-            boton.innerHTML = 'entregar';
+    function crearBoton(idTransaccion,texto, estado) {
+        var boton = document.createElement('button');
+        boton.innerHTML = texto;
 
-            boton.onclick = function() {
-                editarFactura(obtenerValor(objeto, "idTransaccion"), "entregado");
-            };
-            td2.appendChild(boton);
+        boton.onclick = function () {
+            editarFactura(idTransaccion, estado);
+        };
 
-            //segundo boton
-            var boton2 = document.createElement('button');
-            boton2.innerHTML = 'rechazar';
+        return boton;
+    }
+}
 
-            boton2.onclick = function() {
-                editarFactura(obtenerValor(objeto, "idTransaccion"), "rechazado");
-            };
-            td2.appendChild(boton2);
-            filaDatos.appendChild(td2);
-            
-        });
-    })
-    .catch(error => console.error('Error al obtener datos:', error));
+// Ejemplo de uso
+llenarTabla("pendiente", "facturaTable");
+llenarTabla("entregado", "facturaTableentregados");
+llenarTabla("rechazado", "facturaTablerechazados");
+
 
 // Función para obtener el valor de una propiedad anidada
 function obtenerValor(objeto, propiedad) {
