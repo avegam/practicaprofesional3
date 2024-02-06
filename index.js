@@ -81,6 +81,12 @@ app.get("/olvidarcontrasena", function (req, res) {
   res.sendFile(filePath);
 });
 
+// Rutas a Editar Productos
+app.get("/editarproductos", function (req, res) {
+  const filePath = path.resolve(__dirname, "client", "html","editarproductos.html"); 
+  res.sendFile(filePath);
+});
+
 
 
 
