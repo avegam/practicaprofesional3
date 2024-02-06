@@ -118,6 +118,12 @@ function llenarTabla(textoComparacion, idTabla) {
 
         boton.onclick = function () {
             editarFactura(idTransaccion, estado);
+            limpiarTabla("facturaTable");
+            limpiarTabla("facturaTableentregados");
+            limpiarTabla("facturaTablerechazados");
+            llenarTabla("pendiente", "facturaTable");
+            llenarTabla("entregado", "facturaTableentregados");
+            llenarTabla("rechazado", "facturaTablerechazados");
         };
 
         return boton;
@@ -125,11 +131,20 @@ function llenarTabla(textoComparacion, idTabla) {
 }
 
 // Ejemplo de uso
+limpiarTabla("facturaTable");
+limpiarTabla("facturaTableentregados");
+limpiarTabla("facturaTablerechazados");
 llenarTabla("pendiente", "facturaTable");
 llenarTabla("entregado", "facturaTableentregados");
 llenarTabla("rechazado", "facturaTablerechazados");
 
-
+function limpiarTabla(idTabla) {
+    const tabla = document.getElementById(idTabla);
+    // Elimina todas las filas de la tabla
+    while (tabla.rows.length > 0) {
+        tabla.deleteRow(0);
+    }
+}
 // Función para obtener el valor de una propiedad anidada
 function obtenerValor(objeto, propiedad) {
     const propiedades = propiedad.split('.');
