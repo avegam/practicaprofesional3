@@ -41,7 +41,7 @@
         const tabla = document.getElementById("facturaTable");
 
         // Campos específicos que deseas mostrar, incluyendo los del campo "payer"
-        const camposAMostrar = ["idTransaccion", "transaction_amount", "status", "status_detail","transaction_details.net_received_amount","payer.identification.number", "payer.identification.type","payer.phone.number","payer.email","payer.phone.area_code","payer.phone.extension"/*,"facturab","entregado"*/];
+        const camposAMostrar = ["idTransaccion", "transaction_amount", "status", "status_detail","transaction_details.net_received_amount","payer.identification.number", "payer.identification.type","payer.phone.number","payer.email","payer.phone.area_code","payer.phone.extension","pedido"/*,"facturab","entregado"*/];
 
         // Crear la fila de encabezado
         const filaEncabezado = tabla.insertRow();
@@ -91,12 +91,19 @@
             var boton = document.createElement('button');
             boton.innerHTML = 'entregar';
 
-            // Agrega un evento de clic al botón para redireccionar a una página específica
-            boton.addEventListener('click', function() {
-                // Reemplaza 'URL_DESTINO' con la URL a la que deseas redirigir
-                window.location.href = 'URL_DESTINO';
-            });
+            boton.onclick = function() {
+                editarFactura(obtenerValor(objeto, "idTransaccion"), "entregado");
+            };
             td2.appendChild(boton);
+
+            //segundo boton
+            var boton2 = document.createElement('button');
+            boton2.innerHTML = 'rechazar';
+
+            boton2.onclick = function() {
+                editarFactura(obtenerValor(objeto, "idTransaccion"), "rechazado");
+            };
+            td2.appendChild(boton2);
             filaDatos.appendChild(td2);
             
         });
@@ -109,6 +116,33 @@ function obtenerValor(objeto, propiedad) {
     return propiedades.reduce((valor, prop) => valor[prop], objeto);
 }
 
+
+
+
+//editar pedidos
+
+async function editarFactura(idFactura, nuevoCampo) {
+    try {
+    const respuesta = await fetch(`/pedido/${idFactura}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ nuevoCampo }),
+    });
+
+    if (!respuesta.ok) {
+      const error = await respuesta.json();
+      console.error('Error al editar factura:', error);
+    } else {
+      const facturaActualizada = await respuesta.json();
+      console.log('Factura actualizada:', facturaActualizada);
+      // Aquí puedes realizar acciones adicionales después de la actualización
+    }
+  } catch (error) {
+    console.error('Error de red:', error);
+  }
+}
 
     </script>
 </body>

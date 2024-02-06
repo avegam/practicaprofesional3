@@ -205,12 +205,13 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       const { status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description } = dataObject;
       const idTransaccion = data.id;
       const items = data.additional_info.items;
+      const pedido = "pendiente";
       console.log("factura formato:")
       console.log(items ,idTransaccion,status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description)
       const factura = new facturaModelo({
           status, status_detail, date_approved, transaction_amount, payment_type_id,
           payment_method_id, issuer_id, installments, currency_id, transaction_details,
-          payer, charges_details, money_release_date, description, idTransaccion, items
+          payer, charges_details, money_release_date, description, idTransaccion, items,pedido
       });
 
       console.log(factura);
@@ -255,6 +256,29 @@ app.get('/detallefactura/:id', async (req, res) => {
     res.json(documento);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener datos desde la base de datos' });
+  }
+});
+
+// Ruta para editar un campo de la factura por ID
+app.patch('/pedido/:id', async (req, res) => {
+  const id = req.params.id;
+  const nuevoCampo = req.body.nuevoCampo; // Asegúrate de tener el nuevo valor en el cuerpo de la solicitud
+  console.log(nuevoCampo)
+  try {
+    // Encuentra el documento existente por ID y actualiza el campo especificado
+    const documento = await facturaModelo.findOneAndUpdate(
+      { idTransaccion: id },
+      { $set: { pedido: nuevoCampo } },
+      { new: true } // Esto devuelve el documento actualizado
+    );
+
+    if (!documento) {
+      return res.status(404).json({ mensaje: 'Factura no encontrado' });
+    }
+
+    res.json(documento);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al actualizar datos en la base de datos' });
   }
 });
 

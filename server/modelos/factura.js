@@ -74,6 +74,8 @@ const ItemSchema = mongoose.Schema({
 });
 
 const FacturaSchema = mongoose.Schema({
+    //extra propio estado del pedido
+    pedido: String,
     //Datos de la transacción
     idTransaccion: String,
     transaction_amount: String,
