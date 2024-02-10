@@ -1,0 +1,80 @@
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      border: 2px solid #000;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #nombre-empresa {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    #datos-factura {
+      margin-bottom: 20px;
+    }
+    .datos-box {
+      border: 1px solid #000;
+      padding: 10px;
+      margin-bottom: 10px;
+      width: 48%;
+    }
+    .flex-container {
+      display: flex;
+      justify-content: space-between;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #000;
+      text-align: left;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    #resumen {
+      margin-bottom: 20px;
+    }
+    #total {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    #firma-empresa,
+    #firma-cliente {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .firma-box {
+      width: 48%;
+      border: 1px solid #000;
+      padding: 10px;
+    }
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px;
+      font-size: 16px;
+    }
+    @media print {
+      .button-container {
+        display: none;
+      }
+    }
+  </style>

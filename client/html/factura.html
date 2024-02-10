@@ -4,30 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Información de Factura</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
+    <!--Importar Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/factura.css">
+    
 
-        table, th, td {
-            border: 1px solid black;
-        }
+   <!-- Redirecciones al detalle de  Productos--> 
+   <script src="../js/redirecciones.js"></script>
+   <script src="../js/Solicitoken.js"></script>
+   <script src="../js/pedidos.js"></script>
 
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-
-        /* Estilo adicional para las tablas internas */
-        table table {
-            border: none; /* Elimina los bordes de la tabla interna */
-            width: 100%;
-            margin: 0; /* Elimina los márgenes internos de la tabla interna */
-        }
-    </style>
-</head>
-<body>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" >Hygge</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto ">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/home">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/editarproductos">Editar productos </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/factura">Pedidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/facturab">Factura</a>
+              </li>
+            </ul>
+            <a class="nav-link" href="/ingresar">Ingresar/</a>
+            <a class="nav-link" href="/registrar">Registrarse</a>
+            
+          </div>
+        </div>
+      </nav>
+    
     <h2>Información de pedidos pendiente</h2>
 
     <table id="facturaTable">
@@ -43,143 +61,6 @@
     <table id="facturaTablerechazados">
     </table>
 
-    <script>
-
-function llenarTabla(textoComparacion, idTabla) {
-    fetch(`/facturadatos`)
-        .then(response => response.json())
-        .then(data => {
-            const tabla = document.getElementById(idTabla);
-
-            // Campos específicos que deseas mostrar, incluyendo los del campo "payer"
-            const camposAMostrar = ["idTransaccion", "transaction_amount", "status", "status_detail", "transaction_details.net_received_amount", "payer.identification.number", "payer.identification.type", "payer.phone.number", "payer.email", "payer.phone.area_code", "payer.phone.extension", "pedido"];
-
-            // Crear la fila de encabezado
-            const filaEncabezado = tabla.insertRow();
-
-            // Llenar la fila de encabezado con los nombres de los campos específicos
-            camposAMostrar.forEach(campo => {
-                const th = document.createElement("th");
-                th.textContent = campo;
-                filaEncabezado.appendChild(th);
-            });
-
-            // Agregar botones al encabezado
-            const th1 = document.createElement("th");
-            th1.textContent = "Factura";
-            filaEncabezado.appendChild(th1);
-
-            const th2 = document.createElement("th");
-            th2.textContent = "Entregar/Pendiente";
-            filaEncabezado.appendChild(th2);
-
-            // Iterar sobre los objetos en el array y agregar filas a la tabla
-            data.forEach(objeto => {
-                if (obtenerValor(objeto, "pedido") === textoComparacion) {
-                    const filaDatos = tabla.insertRow();
-
-                    camposAMostrar.forEach(campo => {
-                        const td = document.createElement("td");
-                        const valorColumna = obtenerValor(objeto, campo);
-                        td.textContent = valorColumna;
-                        filaDatos.appendChild(td);
-                    });
-
-                    // Crear un botón para ver la factura
-                    const td1 = document.createElement("td");
-                    var botonVerFactura = document.createElement('button');
-                    botonVerFactura.innerHTML = 'Ver Factura';
-
-                    // Agregar un evento de clic al botón para redireccionar a una página específica
-                    botonVerFactura.addEventListener('click', function () {
-                        const id = obtenerValor(objeto, "idTransaccion");
-                        // Redirección a página de la factura
-                        location.href = "/facturab/" + id;
-                    });
-                    td1.appendChild(botonVerFactura);
-                    filaDatos.appendChild(td1);
-
-                    // Crear botones para entregar y rechazar
-                    const td2 = document.createElement("td");
-                    var botonEntregar = crearBoton(obtenerValor(objeto, "idTransaccion"),"Entregar", "entregado");
-                    var botonRechazar = crearBoton(obtenerValor(objeto, "idTransaccion"),"Rechazar", "rechazado");
-
-                    td2.appendChild(botonEntregar);
-                    td2.appendChild(botonRechazar);
-                    filaDatos.appendChild(td2);
-                }
-            });
-        })
-        .catch(error => console.error('Error al obtener datos:', error));
-
-    function crearBoton(idTransaccion,texto, estado) {
-        var boton = document.createElement('button');
-        boton.innerHTML = texto;
-
-        boton.onclick = function () {
-            editarFactura(idTransaccion, estado);
-            limpiarTabla("facturaTable");
-            limpiarTabla("facturaTableentregados");
-            limpiarTabla("facturaTablerechazados");
-            llenarTabla("pendiente", "facturaTable");
-            llenarTabla("entregado", "facturaTableentregados");
-            llenarTabla("rechazado", "facturaTablerechazados");
-        };
-
-        return boton;
-    }
-}
-
-// Ejemplo de uso
-limpiarTabla("facturaTable");
-limpiarTabla("facturaTableentregados");
-limpiarTabla("facturaTablerechazados");
-llenarTabla("pendiente", "facturaTable");
-llenarTabla("entregado", "facturaTableentregados");
-llenarTabla("rechazado", "facturaTablerechazados");
-
-function limpiarTabla(idTabla) {
-    const tabla = document.getElementById(idTabla);
-    // Elimina todas las filas de la tabla
-    while (tabla.rows.length > 0) {
-        tabla.deleteRow(0);
-    }
-}
-// Función para obtener el valor de una propiedad anidada
-function obtenerValor(objeto, propiedad) {
-    const propiedades = propiedad.split('.');
-    return propiedades.reduce((valor, prop) => valor[prop], objeto);
-}
-
-
-
-
-//editar pedidos
-
-async function editarFactura(idFactura, nuevoCampo) {
-    try {
-    const respuesta = await fetch(`/pedido/${idFactura}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ nuevoCampo }),
-    });
-
-    if (!respuesta.ok) {
-      const error = await respuesta.json();
-      console.error('Error al editar factura:', error);
-    } else {
-      const facturaActualizada = await respuesta.json();
-      console.log('Factura actualizada:', facturaActualizada);
-      // Aquí puedes realizar acciones adicionales después de la actualización
-    }
-  } catch (error) {
-    console.error('Error de red:', error);
-  }
-}
-
-    </script>
 </body>
 </html>
 

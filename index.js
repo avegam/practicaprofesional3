@@ -84,11 +84,31 @@ app.get("/olvidarcontrasena", function (req, res) {
   res.sendFile(filePath);
 });
 
+//  Vista Administrador 
+
+app.get("/administrador", function (req, res) {
+  const filePath = path.resolve(__dirname, "client", "html","administrador.html"); 
+  res.sendFile(filePath);
+});
+
 // Rutas a Editar Productos
 app.get("/editarproductos", function (req, res) {
   const filePath = path.resolve(__dirname, "client", "html","editarproductos.html"); 
   res.sendFile(filePath);
 });
+
+// Rutas a Pedidos realizados (Inventario)
+app.get("/factura", function (req, res) {
+  const filePath = path.resolve(__dirname, "client", "html","factura.html"); 
+  res.sendFile(filePath);
+});
+
+// Rutas a Factura
+app.get("/facturab", function (req, res) {
+  const filePath = path.resolve(__dirname, "client", "html","facturab.html"); 
+  res.sendFile(filePath);
+});
+
 
 
 

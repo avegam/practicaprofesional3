@@ -4,88 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Factura B</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      border: 2px solid #000;
-      padding: 20px;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    #nombre-empresa {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    #datos-factura {
-      margin-bottom: 20px;
-    }
-    .datos-box {
-      border: 1px solid #000;
-      padding: 10px;
-      margin-bottom: 10px;
-      width: 48%;
-    }
-    .flex-container {
-      display: flex;
-      justify-content: space-between;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-    th, td {
-      border: 1px solid #000;
-      text-align: left;
-      padding: 8px;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    #resumen {
-      margin-bottom: 20px;
-    }
-    #total {
-      font-size: 18px;
-      font-weight: bold;
-    }
-    #firma-empresa,
-    #firma-cliente {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-    .firma-box {
-      width: 48%;
-      border: 1px solid #000;
-      padding: 10px;
-    }
-    .button-container {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-    button {
-      padding: 10px;
-      font-size: 16px;
-    }
-    @media print {
-      .button-container {
-        display: none;
-      }
-    }
-  </style>
+  <!--Importar Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/facturab.css">
+
+ <!-- Redirecciones al detalle de  Productos--> 
+ <script src="../js/redirecciones.js"></script>
+ <script src="../js/Solicitoken.js"></script>
+ <script src="../js/facturab.js"></script>
+
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" >Hygge</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto ">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/home">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/editarproductos">Editar productos </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/factura">Pedidos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/facturab">Factura</a>
+          </li>
+        </ul>
+        <a class="nav-link" href="/ingresar">Ingresar/</a>
+        <a class="nav-link" href="/registrar">Registrarse</a>
+        
+      </div>
+    </div>
+  </nav>
+   
 
   <div class="container">
     <header>
@@ -113,8 +72,7 @@
       
     </div>
 
-    
-
+  
     <div id="firma-empresa">
       <div class="firma-box">
         <p>Firma de la Empresa:</p>
@@ -131,93 +89,6 @@
     <button onclick="imprimirFactura()">Imprimir Factura</button>
     <button onclick="volver()">Volver</button>
   </div>
-
-  <script>
-const facturaId = window.location.pathname.replace('/facturab/', '');
-fetch(`/detallefactura/${facturaId}`)
-    .then(response => response.json())
-    .then(data => { 
-    // Obtener el contenedor de la tabla
-const tablaProductos = document.getElementById("productos");
-
-// Crear la tabla
-const tabla = document.createElement("table");
-
-// Crear la fila de encabezado
-const encabezado = document.createElement("tr");
-encabezado.innerHTML = "<th>Producto</th><th>Cantidad</th><th>Precio Unitario</th><th>Subtotal</th>";
-tabla.appendChild(encabezado);
-// Inicializar la variable para el precio total
-let precioTotal = 0;
-
-// Iterar sobre los elementos en items y agregar filas a la tabla
-data.items.forEach((item, index) => {
-  const fila = document.createElement("tr");
-  // Calcular el subtotal
-  const subtotal = item.quantity * item.unit_price;
-  // Agregar el subtotal al precio total
-  precioTotal += subtotal;
-  fila.innerHTML = `<td>${item.title}</td><td id="cantidadProducto${index + 1}">${item.quantity}</td><td id="precioProducto${index + 1}">${item.unit_price}</td><td id="subtotalProducto${index + 1}">${subtotal}</td>`;
-  tabla.appendChild(fila);
-});
-// Agregar la fila del precio total
-const filaTotal = document.createElement("tr");
-filaTotal.innerHTML = `<td colspan="3"><strong>Total</strong></td><td>${precioTotal}</td>`;
-tabla.appendChild(filaTotal);
-
-// Agregar la tabla al contenedor
-tablaProductos.appendChild(tabla);
-
-// Datos del cliente dentro de la respuesta
-const datosCliente = {
-  nombre: data.payer.first_name + ' ' + data.payer.last_name,
-  tipo: data.payer.identification.type,
-  numero: data.payer.identification.number,
-  email: data.payer.email
-};
-
-// Obtener el elemento del div
-const divDatosCliente = document.getElementById("datos-cliente");
-
-// Actualizar el contenido del div con los datos del cliente
-divDatosCliente.innerHTML = `
-  <strong>Datos del Cliente:</strong>
-  <p>Nombre: ${datosCliente.nombre}</p>
-  <p>Documento: ${datosCliente.tipo}</p>
-  <p>Numero: ${datosCliente.numero}</p>
-  <p>Email: ${datosCliente.email}</p>
-`;
-
-// Obtener el elemento del div
-const divDatosFactura = document.getElementById("datos-factura");
-
-// Datos de la factura dentro de la respuesta
-const datosFactura = {
-  numero: data.idTransaccion, // Puedes ajustar según la estructura real de tus datos
-  fechaEmision: data.money_release_date, // Puedes ajustar según la estructura real de tus datos
-  tipo: "Factura B" // Puedes ajustar según la estructura real de tus datos
-};
-
-// Actualizar el contenido del div con los datos de la factura
-divDatosFactura.innerHTML = `
-  <p><strong>Número de Factura:</strong> ${datosFactura.numero}</p>
-  <p><strong>Fecha de Emisión:</strong> ${datosFactura.fechaEmision}</p>
-  <p><strong>Tipo de Factura:</strong> ${datosFactura.tipo}</p>
-`;
-})
-   .catch(error => console.error('Error al obtener datos:', error));
-
-
-    // Función para imprimir la factura
-    function imprimirFactura() {
-      window.print();
-    }
-
-    // Función para volver (puedes personalizar según tu aplicación)
-    function volver() {
-      alert("Botón de volver presionado");
-    }
-  </script>
 
 </body>
 </html>
