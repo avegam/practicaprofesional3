@@ -74,13 +74,13 @@ divDatosFactura.innerHTML = `
    .catch(error => console.error('Error al obtener datos:', error));
 
 
+   // Función para volver (puedes personalizar según tu aplicación)
+    function volver() {
+    location.href = "/factura";
+  }
     // Función para imprimir la factura
     function imprimirFactura() {
       window.print();
     }
 
-    // Función para volver (puedes personalizar según tu aplicación)
-    function volver() {
-      alert("Botón de volver presionado");
-    }
-  
+   

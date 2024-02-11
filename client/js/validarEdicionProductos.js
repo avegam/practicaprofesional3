@@ -1,8 +1,8 @@
 function Validacion() {
     
-    nombre = document.getElementById("productoAnadir").value;
-    ingredientes= document.getElementById("Apellido").value;
-    uso = document.getElementById("usoAñadir").value;
+    nombre = document.getElementById("productoanadir").value;
+    ingredientes= document.getElementById("ingredientesAgregar").value;
+    uso = document.getElementById("usoagregar").value;
     
 
     

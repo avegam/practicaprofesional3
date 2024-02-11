@@ -10,8 +10,7 @@
     
     
     <title>productos </title> 
-    <!--Validacion JS -->
-  <script src="../js/validarEdicionProductos.js"></script>
+ 
 
   <!-- Estilo CSS-->
     <link rel="stylesheet" href="../css/estiloeditarproductos.css">
@@ -40,9 +39,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/factura">Pedidos</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/facturab">Factura</a>
-          </li>
+          
         </ul>
         <a class="nav-link" href="/ingresar">Ingresar/</a>
         <a class="nav-link" href="/registrar">Registrarse</a>
@@ -59,22 +56,37 @@
             <form>
 
                 <label>Nombre del producto</label>
-                <input type="text" id="productoAnadir" name="nombreDelProducto">
+                <input type="text" id="productoanadir">
                 
+                <script>
+                 
+
+   
+        // Validacion Campo Nombre del producto:
+        if (nombre == "") {
+    window.alert("El campo nombre no puede estar vacio");
+    return false;
+            }
+
+                </script>
+
+
                 <label>Imagen</label>
-              <input type="file" id="imagenAñadir">
+              <input type="file" id="imagenagregar">
+
+
             
                 <label>Precio</label>
-                <input type="number" id="valorAñadir">
+                <input type="number" id="valorAgregrar">
 
                 <label>Stock</label>
-                <input type="number" id="existenciaAñadir">
+                <input type="number" id="existenciaAgregrar">
                 
                 <label>Ingredientes</label>
-                <textarea id="ingredientesAñadir"></textarea>
+                <textarea id="ingredientesAgregar"></textarea>
                 
                 <label>Uso</label>
-                <textarea id="usoAñadir"></textarea> </br>
+                <textarea id="usoagregar"></textarea> </br>
              
                 <button type="submit" class="estilo_boton" onclick="return validacion()">Añadir</button>
             </form>
@@ -125,4 +137,6 @@
 </main>
 
 </body>
+   <!--Validacion JS -->
+  <!--- <script src="../js/validarEdicionProductos.js"></script> -->
 </html>

@@ -49,19 +49,19 @@ app.get(["/", "/home"], function (req, res) {
 
 
 // Ruta a Productos
-app.get("/productos",authorize('Admin'), function (req, res) {
+app.get("/productos", function (req, res) {
   const filePath = path.resolve(__dirname, "client", "html","productos.html"); 
   res.sendFile(filePath);
 });
 
 // Ruta a Productos detallados
-app.get("/detalleproducto/*",authorize('Admin'), function (req, res) {
+app.get("/detalleproducto/*", function (req, res) {
   const filePath = path.resolve(__dirname, "client", "html","detalleproducto.html"); 
   res.sendFile(filePath);
 });
 
-// Ruta a Productos detallados
-app.get("/modificarproducto/*",authorize('Admin'), function (req, res) {
+// Ruta a Productos detallados 
+app.get("/modificarproducto/*",authorize('Admin'), function (req, res) { // ELIMINAR NICOOOO
   const filePath = path.resolve(__dirname, "client", "html","modificarproducto.html"); 
   res.sendFile(filePath);
 });
@@ -86,25 +86,25 @@ app.get("/olvidarcontrasena", function (req, res) {
 
 //  Vista Administrador 
 
-app.get("/administrador", function (req, res) {
+app.get("/administrador", authorize('Admin'),function (req, res) {
   const filePath = path.resolve(__dirname, "client", "html","administrador.html"); 
   res.sendFile(filePath);
 });
 
 // Rutas a Editar Productos
-app.get("/editarproductos", function (req, res) {
+app.get("/editarproductos",authorize('Admin'), function (req, res) {
   const filePath = path.resolve(__dirname, "client", "html","editarproductos.html"); 
   res.sendFile(filePath);
 });
 
 // Rutas a Pedidos realizados (Inventario)
-app.get("/factura", function (req, res) {
+app.get("/factura",authorize('Admin'), function (req, res) {
   const filePath = path.resolve(__dirname, "client", "html","factura.html"); 
   res.sendFile(filePath);
 });
 
 // Rutas a Factura
-app.get("/facturab", function (req, res) {
+app.get("/facturab",authorize('Admin'), function (req, res) {
   const filePath = path.resolve(__dirname, "client", "html","facturab.html"); 
   res.sendFile(filePath);
 });

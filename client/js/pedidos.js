@@ -4,14 +4,15 @@ function llenarTabla(textoComparacion, idTabla) {
         .then(data => {
             const tabla = document.getElementById(idTabla);
 
-            // Campos específicos que deseas mostrar, incluyendo los del campo "payer"
-            const camposAMostrar = ["idTransaccion", "transaction_amount", "status", "status_detail", "transaction_details.net_received_amount", "payer.identification.number", "payer.identification.type", "payer.phone.number", "payer.email", "payer.phone.area_code", "payer.phone.extension", "pedido"];
+           // Campos específicos que deseas mostrar, incluyendo los del campo "payer"
+            const camposAMostrar = ["idTransaccion", "transaction_amount", "status", "status_detail", "transaction_details.net_received_amount","payer.identification.type", "payer.identification.number", "payer.phone.number", "payer.email", "pedido"];
+            const camposAMostrara = ["id Transaccion", "Monto total", "Estado", "Detalle estado", "Monto neto", "Documento","Numero", "Telefono", "email", "pedido"];
 
             // Crear la fila de encabezado
             const filaEncabezado = tabla.insertRow();
 
             // Llenar la fila de encabezado con los nombres de los campos específicos
-            camposAMostrar.forEach(campo => {
+            camposAMostrara.forEach(campo => {
                 const th = document.createElement("th");
                 th.textContent = campo;
                 filaEncabezado.appendChild(th);
