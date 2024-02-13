@@ -115,6 +115,22 @@
     </div>
 
 </main>
+<h2>Tabla de Productos</h2>
+    <table id="tablaProductos">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Imagen</th>
+                <th>Stock</th>
+                <th>Ingredientes</th>
+                <th>Uso</th>
+            </tr>
+        </thead>
+        <tbody id="tablaBody">
+            <!-- Aquí se agregarán las filas de datos -->
+        </tbody>
+    </table>
 
 </body>
    <!--Validacion JS -->
@@ -146,5 +162,39 @@
       .catch(error => {
         console.error('Error al realizar la solicitud:', error);
       });
+
+         // Función para obtener los datos de la ruta '/datos' en el servidor
+         async function obtenerDatos() {
+            try {
+                const response = await fetch('/datos');
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error al obtener los datos:', error);
+                return [];
+            }
+        }
+
+        // Función para agregar las filas de datos a la tabla
+        async function agregarFilas() {
+            const tablaBody = document.getElementById('tablaBody');
+            const productos = await obtenerDatos();
+
+            productos.forEach(producto => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${producto.nombre}</td>
+                    <td>${producto.precio}</td>
+                    <td><img src="${producto.imagen}" alt="${producto.nombre}" style="width: 100px;"></td>
+                    <td>${producto.stock}</td>
+                    <td>${producto.ingredientes}</td>
+                    <td>${producto.uso}</td>
+                `;
+                tablaBody.appendChild(fila);
+            });
+        }
+
+        // Llamar a la función para agregar las filas cuando la página cargue
+        window.onload = agregarFilas;
     </script>
 </html>
