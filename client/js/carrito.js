@@ -11,6 +11,14 @@ function agregarAlCarrito(productoId, cantidad) {
   // Actualiza la visualización del carrito en la página
   mostrarCarrito();
 }
+function mostrarCarrito3() {
+  let carritoContainer = document.getElementById('contenedorProductos');
+  carritoContainer.innerHTML = '';
+  let carritoContainer2 = document.getElementById('piecarrito');
+  carritoContainer2.innerHTML = '';
+  cargacarro();
+
+}
 
 function mostrarCarrito() {
   let carrito = JSON.parse(getCookie('carrito')) || [];
@@ -62,7 +70,7 @@ function borrarCookie2(nombre) {
 }
 
 
-function actualizarCantidadEnCarrito(nombre, id, nuevaCantidad) {
+function actualizarCantidadEnCarrito(nombre, id, nuevaCantidad,quecarro) {
 // Obtén el valor actual de la cookie "carrito"
 var carritoCookie = getCookie(nombre);
 
@@ -90,6 +98,9 @@ if (carritoCookie) {
     // Actualiza la cookie "carrito"
     document.cookie = nuevoCarritoCookie + '; path=/;';
   }
+}
+if(quecarro === "shop"){
+  mostrarCarrito3();
 }
 
 mostrarCarrito();

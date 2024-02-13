@@ -65,6 +65,7 @@ function validacion() {
 /////////////////////////////VALIDACIONES DE EDITAR PRODUCTOS//////////////////////////////////////////////////////////////////////////////////////////////
           function validar() {
           var nombreProducto = document.getElementById("productoEditar").value;
+          var nombreProducto2 = document.getElementById("productoEditar2").value;
           var imagen = document.getElementById("imagenEditar").value;
           var precio = document.getElementById("valorEditar").value;
           var stock = document.getElementById("stockEditar").value;
@@ -79,7 +80,14 @@ function validacion() {
           if (nombreProducto === "") {
               alert("Por favor, elija el producto disponible");
               return false;
-          }
+          } 
+          if (nombreProducto2 === "") {
+            alert("Por favor, elija el producto disponible");
+            return false;
+        }else if (!expresion.test(nombreProducto2)) {
+            window.alert("Error: Campo Invalido");
+            return false;
+        }
          
           if (imagen === "") {
               alert("Por favor elija una imagen de producto");
@@ -119,3 +127,14 @@ function validacion() {
       }
 
   
+/////////////////////////////VALIDACIONES DE eliminar PRODUCTOS//////////////////////////////////////////////////////////////////////////////////////////////
+function validarEliminar() { 
+    var nombreproductoEliminar = document.getElementById("productoEliminar").value;
+
+    if (nombreproductoEliminar === "") {
+        alert("Por favor, elija el producto disponible");
+        return false;
+    } 
+
+
+ }

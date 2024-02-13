@@ -79,22 +79,23 @@
             <form action="/editarproducto" method="post" enctype="multipart/form-data">
                 <label>Producto Disponible </label>
                 <select id="productoEditar" name="productoEditar">
+                  <option value="">---</option>
                 </select>
                 <label>Nombre del producto</label>
-                <input type="text" id="productoEditar"name="nombre">
+                <input type="text" id="productoEditar2"name="nombre">
                 <label>Imagen</label>
-              <input type="file" id="imagenaEditar"name="imagen">
+              <input type="file" id="imagenEditar"name="imagen">
                 <label>Precio</label>
                 <input type="number" id="valorEditar"name="precio">
 
                 <label>Stock</label>
-                <input type="number" id="existenciaEditar"name="stock">
+                <input type="number" id="stockEditar"name="stock">
                 
                 <label>Ingredientes</label>
                 <textarea id="ingredientesEditar"name="ingredientes"></textarea>
                 
                 <label>Uso</label>
-                <textarea id="usoagregar"name="uso"></textarea> </br>
+                <textarea id="usoEditar"name="uso"></textarea> </br>
                 <button type="submit" class="estilo_boton" onclick="return validar()">Editar</button>
             </form>
         </div>
@@ -106,9 +107,9 @@
             <form action="/eliminarproducto" method="post">
                 <label>Nombre del producto</label>
                 <select id="productoEliminar" name="productoEliminar">
-                    
+                  <option value="">---</option>
                 </select> </br>
-                <button type="submit" class="estilo_boton" onclick="return validar()">Eliminar</button>
+                <button type="submit" class="estilo_boton" onclick="return validarEliminar()">Eliminar</button>
             </form>
         </div>
     </div>

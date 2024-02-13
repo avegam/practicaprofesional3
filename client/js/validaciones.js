@@ -3,7 +3,7 @@
     nombre = document.getElementById("Nombre").value;
     email = document.getElementById("Email").value;
     contraseña=document.getElementById("txtPassword").value;
-
+    contraseña2=document.getElementById("txtPassword2").value;
     // Expresion Regular Correo Electronico
 
     expReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
@@ -58,6 +58,16 @@ if (!expresion.test(apellido)) {
         window.alert("Error: Contraseña Invalida debe contener Al menos 8 carácteres,Al menos una letra, Al menos una letra mayuscula, Al menos un número ")
         return false;
     }
+
+    if (contraseña2 == "") {
+        window.alert("El campo Confirmar Contraseña no puede estar vacio");
+        return false;
+
+    } else if (contraseña != contraseña2) {
+        window.alert("Error: Contraseña no coinciden")
+        return false;
+    }
+
 
 }
 

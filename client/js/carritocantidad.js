@@ -9,24 +9,24 @@
   }
 
   // Función para restar la cantidad
-  function restarCantidad(button, id) {
+  function restarCantidad(button, id,quecarro) {
     // Obtener el elemento de cantidad y restar 1 si es mayor que 0
     var cantidadInput = button.nextElementSibling;
     cantidadInput.value = Math.max(parseInt(cantidadInput.value) - 1, 0);
   
     // Actualizar la cantidad en la cookie solo si es mayor que 0
     if (parseInt(cantidadInput.value) >= -1) {
-      actualizarCantidadEnCarrito("carrito", id, cantidadInput.value);
+      actualizarCantidadEnCarrito("carrito", id, cantidadInput.value,quecarro);
     }
   verificarBotonesEnCarrito()
 }
 
   // Función para sumar la cantidad
-  function sumarCantidad(button, id) {
+  function sumarCantidad(button, id,quecarro) {
     // Obtener el elemento de cantidad y sumar 1
     var cantidadInput = button.previousElementSibling;
     cantidadInput.value = parseInt(cantidadInput.value) + 1;
-    actualizarCantidadEnCarrito("carrito",id,cantidadInput.value);
+    actualizarCantidadEnCarrito("carrito",id,cantidadInput.value,quecarro);
   }
 
 

@@ -166,10 +166,10 @@ function crearProducto(idProducto,imagen, nombre, precio,cantidad) {
 
           // Añadir el contenido del producto
           productoLi.innerHTML = /*`<button class="botonCarrito" data-id='${idProducto}' oculto="1" onclick="manejarBotonAgregar(this, 1, 10)">Agregar al Carrito</button>` +*/
-            `<button class="botonCarrito" data-id='${idProducto}' oculto="0" style="display: inline;" onclick="restarCantidad(this,'${idProducto}')">-</button>` +
+            `<button class="botonCarrito" data-id='${idProducto}' oculto="0" style="display: inline;" onclick="restarCantidad(this,'${idProducto}','shop')">-</button>` +
             `<input class="botonCarrito" data-id='${idProducto}' oculto="0" type="number" value="1" min="1" class="cantidad-input" style="display: inline;">` +
-            `<button class="botonCarrito" data-id='${idProducto}' oculto="0" style="display: inline;" onclick="sumarCantidad(this,'${idProducto}')">+</button>` +
-            `<button class="botonCarrito" data-id='${idProducto}' oculto="0" style="display: inline;" onclick="actualizarCantidadEnCarrito('carrito','${idProducto}','0')">Eliminar</button>`;
+            `<button class="botonCarrito" data-id='${idProducto}' oculto="0" style="display: inline;" onclick="sumarCantidad(this,'${idProducto}','shop')">+</button>` +
+            `<button class="botonCarrito" data-id='${idProducto}' oculto="0" style="display: inline;" onclick="actualizarCantidadEnCarrito('carrito','${idProducto}','0','shop')">Eliminar</button>`;
 
 
     acciones.appendChild(productoLi);
@@ -183,18 +183,19 @@ function crearProducto(idProducto,imagen, nombre, precio,cantidad) {
     // Agregar producto al contenedor
     contenedorProductos.appendChild(producto);
 }
+function cargacarro(){
+  // Código de la primera función
 
-   
-      window.onload = function() {
-        // Código de la primera función
-      
-        console.log('tu función ejecutada');
-        const cookieNombre = 'carrito';
-        const cookieData = getCookie(cookieNombre);
-        if (cookieData) {
-            buscarProductosEnBaseDeDatos(cookieData);
-          } else {
-            console.log('La cookie no fue encontrada o está vacía.');
-          }
+  console.log('tu función ejecutada');
+  const cookieNombre = 'carrito';
+  const cookieData = getCookie(cookieNombre);
+  if (cookieData) {
+      buscarProductosEnBaseDeDatos(cookieData);
+    } else {
+      console.log('La cookie no fue encontrada o está vacía.');
+    }
 
-      };
+};
+window.onload = function() {
+  cargacarro();
+};

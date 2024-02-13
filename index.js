@@ -389,7 +389,7 @@ app.get('/datos', async (req, res) => {
   
 });
 
-
+//insertarProductos();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
