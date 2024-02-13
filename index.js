@@ -11,7 +11,7 @@ const bodyParser=require('body-parser');
 const bcrypt= require('bcrypt');
 const userModelo= require('./server/modelos/user');
 const facturaModelo= require('./server/modelos/factura');
-
+const multer  = require('multer');
 // REPLACE WITH YOUR ACCESS TOKEN AVAILABLE IN: https://developers.mercadopago.com/panel
 mercadopago.configure({
 access_token:"TEST-2643009668753140-112518-a9bb2fbc8f1f5ac0960837e56681f5e9-1566400118",
@@ -24,6 +24,21 @@ app.use(express.static(path.join(__dirname, "/client")));
 app.use(cors());
 
 
+// Configurar multer para manejar la carga de archivos
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './client/imagenes') // Guarda los archivos en la carpeta 'uploads'
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)) // Asigna un nombre único al archivo
+  }
+});
+const upload = multer({ 
+  storage: storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024 // 10 MB
+  }
+});
 // Rutas a Iniciar sesion
 app.get("/ingresar", function (req, res) {
   const filePath = path.resolve(__dirname, "client","html", "ingresar.html"); 
@@ -308,36 +323,6 @@ app.patch('/pedido/:id', async (req, res) => {
   }
 });
 
-/*fetch(urlpay, {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + acctoken
-  }
-})
-  .then(response => response.json())
-  .then(data => {
-    console.log('Respuesta de la solicitud:', data);
-    // Puedes realizar acciones adicionales con la respuesta recibida
-    console.log('Respuesta de la solicitud json:',JSON.stringify(data, null, 2)); // 2 indica la cantidad de espacios de indentación
-    // Puedes realizar acciones adicionales con la respuesta recibida
-    const { status, status_detail,date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date,description } = data;
-    const idTransaccion = data.id;
-    const items = data.additional_info.items;
-     const factura = new facturaModelo({ status, status_detail,date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date,description ,idTransaccion,items });
-     console.log(factura)
-     try {
-       await factura.save();
-       res.status(200).send("factura cargada");
-     } catch (error) {
-       console.error(error);
-       res.status(500).send("Error al cargar factura");
-     }
-  })
-  .catch(error => {
-    console.error('Error al realizar la solicitud:', error);
-    // Maneja el error de alguna manera adecuada para tu aplicación
-  });*/
 
 
 app.get("/feedback", function (req, res) {
@@ -409,6 +394,56 @@ app.get('/datos', async (req, res) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+app.post('/nuevoproducto',upload.single('imagen'), async (req, res) => {
+  const { nombre, precio, stock,ingredientes,uso } = req.body;
+    // El nombre del archivo subido estará en req.file.filename
+  // Envía el nombre del archivo en la respuesta
+  const imagen = req.file.filename;
+ console.log(req.body)
+  const producto = new productoModel({ nombre, precio, imagen, stock,ingredientes,uso});
+  console.log(producto)
+  try {
+    await producto.save();
+    res.status(200).send("producto registrado");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al registrar el producto");
+  }
+});
+
+app.post('/editarproducto', upload.single('imagen'), async (req, res) => {
+  const productoId = req.body.productoEditar; // Obtén el ID del producto seleccionado desde el cuerpo de la solicitud POST
+  const { nombre, precio, stock, ingredientes, uso } = req.body;
+  const imagen = req.file ? req.file.filename : null; // Si se proporciona una nueva imagen, actualizarla
+  
+  try {
+    await productoModel.findByIdAndUpdate(productoId, {
+      nombre,
+      precio,
+      imagen,
+      stock,
+      ingredientes,
+      uso
+    });
+    res.status(200).send("Producto actualizado");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al actualizar el producto");
+  }
+});
+
+app.post('/eliminarproducto', async (req, res) => {
+  try {
+    console.log(req.body)
+    const productoId = req.body.productoEliminar; // Obtén el ID del producto seleccionado desde el cuerpo de la solicitud POST
+    console.log(productoId)
+    await productoModel.findByIdAndDelete(productoId);
+    res.status(200).send("Producto eliminado");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al eliminar el producto");
+  }
+});
 
 
 /* REGISTRO DE USUARIO*/ 

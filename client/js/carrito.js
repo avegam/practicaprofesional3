@@ -138,25 +138,29 @@ function Condicion(boton) {
 //verificarBotonesEnCarrito();
 
 
-window.onload = function() {
+window.onload = async function() {
   // Código de la primera función
-
   console.log('Primera función ejecutada');
- 
+
   mostrarCarrito();
-   // Código de la segunda función
+  
+  // Código de la segunda función
   console.log('Segunda función ejecutada');
 
-  //verificarBotonesEnCarrito();
-  
+  // Esperar a que el contenido esté completamente cargado
+  await esperarContenidoCargado();
 
-  // Puedes agregar más funciones según sea necesario
+  // Verificar los botones en el carrito
+  verificarBotonesEnCarrito();
 };
-document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(function() {
-    verificarBotonesEnCarrito();
-  }, 1000);
-});
+
+async function esperarContenidoCargado() {
+  return new Promise(resolve => {
+    document.addEventListener('DOMContentLoaded', () => {
+      resolve();
+    });
+  });
+}
 /*
 document.addEventListener('DOMContentLoaded', function() {
   verificarBotonesEnCarrito();

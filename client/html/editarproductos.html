@@ -53,22 +53,22 @@
         <!-- Añadir -->
         <div class="añadir">
             <h2>Añadir</h2>
-            <form>
+            <form action="/nuevoproducto" method="post" enctype="multipart/form-data">
                 <label>Nombre del producto</label>
-                <input type="text" id="productoanadir">
+                <input type="text" id="productoanadir"name="nombre">
                 <label>Imagen</label>
-              <input type="file" id="imagenagregar">
+              <input type="file" id="imagenagregar"name="imagen">
                 <label>Precio</label>
-                <input type="number" id="valorAgregrar">
+                <input type="number" id="valorAgregrar"name="precio">
 
                 <label>Stock</label>
-                <input type="number" id="existenciaAgregrar">
+                <input type="number" id="existenciaAgregrar"name="stock">
                 
                 <label>Ingredientes</label>
-                <textarea id="ingredientesAgregar"></textarea>
+                <textarea id="ingredientesAgregar"name="ingredientes"></textarea>
                 
                 <label>Uso</label>
-                <textarea id="usoagregar"></textarea> </br>
+                <textarea id="usoagregar"name="uso"></textarea> </br>
              
                 <button type="submit" class="estilo_boton" onclick="return validacion()">Añadir</button>
             </form>
@@ -77,25 +77,25 @@
         <!-- Editar -->
         <div class="editar">
             <h2>Editar</h2>
-            <form>
+            <form action="/editarproducto" method="post" enctype="multipart/form-data">
                 <label>Producto Disponible </label>
-                <select id="productoEditar">
-                    <option value="">---</option>
+                <select id="productoEditar" name="productoEditar">
                 </select>
+                <label>Nombre del producto</label>
+                <input type="text" id="productoEditar"name="nombre">
                 <label>Imagen</label>
-                <input type="file" id="imagenEditar">
- 
+              <input type="file" id="imagenaEditar"name="imagen">
                 <label>Precio</label>
-                <input type="number" id="valorEditar">
+                <input type="number" id="valorEditar"name="precio">
 
-                  <label>Stock</label>
-                  <input type="number" id="stockEditar">
-                  
-                  <label>Ingredientes</label>
-                  <textarea id="ingredientesEditar"></textarea>
+                <label>Stock</label>
+                <input type="number" id="existenciaEditar"name="stock">
                 
-                  <label>Uso</label>
-                  <textarea id="usoEditar"></textarea> </br>
+                <label>Ingredientes</label>
+                <textarea id="ingredientesEditar"name="ingredientes"></textarea>
+                
+                <label>Uso</label>
+                <textarea id="usoagregar"name="uso"></textarea> </br>
                 <button type="submit" class="estilo_boton" onclick="return validar()">Editar</button>
             </form>
         </div>
@@ -104,10 +104,10 @@
         <div class="eliminar">
             <h2>Eliminar</h2>
 
-            <form>
+            <form action="/eliminarproducto" method="post">
                 <label>Nombre del producto</label>
-                <select id="productoEliminar">
-                    <option value="">---</option>
+                <select id="productoEliminar" name="productoEliminar">
+                    
                 </select> </br>
                 <button type="submit" class="estilo_boton" onclick="return validar()">Eliminar</button>
             </form>
@@ -119,4 +119,32 @@
 </body>
    <!--Validacion JS -->
    <script src="../js/validarEdicionProductos.js"></script>
+   <script>// Obtener referencia al select
+    var select = document.getElementById('productoEliminar');
+    var select2 = document.getElementById('productoEditar');
+    // Hacer una llamada fetch al servidor para obtener los datos
+    fetch('/datos')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('La solicitud falló');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Iterar sobre los datos y agregar opciones al select
+        data.forEach(function(item) {
+          var option = document.createElement('option');
+          option.value = item._id;
+          option.textContent = item.nombre;
+          select.appendChild(option);
+          var option2 = document.createElement('option');
+          option2.value = item._id;
+          option2.textContent = item.nombre;
+          select2.appendChild(option2);
+        });
+      })
+      .catch(error => {
+        console.error('Error al realizar la solicitud:', error);
+      });
+    </script>
 </html>
