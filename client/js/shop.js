@@ -4,89 +4,51 @@ const mercadopago = new MercadoPago("TEST-002e7355-b26c-43b4-880d-29ff8adaa5e9",
 
 //esta funcion toma los ids de las cookies y trae los datos correspondiente de cada una de la base de datos para armar el carrito
 function buscarProductosEnBaseDeDatos(cookieData) {
-    // Parsea la cookie para obtener un array de objetos
-    // Obtén la cookie por su nombre
-    if (cookieData != "vaciar") {
-      
-    
-    const productosEnCarrito = JSON.parse(cookieData);
-    //lista de productos para mercadopago
-    const productosFormateados = [];
-    // Itera sobre cada objeto en la cookie
-    productosEnCarrito.forEach(producto => {
-      const idProducto = producto.id;
-        console.log(producto.id)
-      // Realiza una solicitud a la base de datos para obtener el producto con la ID correspondiente
-      fetch(`/detalle/`+ producto.id)
-        .then(response => response.json())
-        .then(data => {
-            // creo variables para cada dato extraido de la base
-            const { nombre, precio, imagen} = data;
-            
-          //esta funcion crea el html del carrito
-          crearProducto(imagen,nombre,precio,producto.cantidad)
-          console.log(`Producto con ID ${idProducto}:`, data);
-          //formato de orden para enviar a mercado pago
-          const productoFormateado = {
-            title: nombre,
-            quantity:  parseInt(producto.cantidad),
-            currency_id: 'ARS',
-            unit_price:  parseInt(precio),
-          };
-          productosFormateados.push(productoFormateado);
-        })
-        .catch(error => {
-          console.error(`Error al obtener el producto con ID ${idProducto}:`, error);
-        });
-    });
-    
-    setTimeout(function() {
-      console.log(productosFormateados)
-            // Obtener todos los elementos con la clase "subtotal"
-      var elementosSubtotal = document.getElementsByClassName('subtotal');
-      console.log(elementosSubtotal[0])
-      // Inicializar una variable para almacenar la suma
-      var sumaSubtotal = 0;
+  if (cookieData != "vaciar") {
+      const productosEnCarrito = JSON.parse(cookieData);
+      const productosFormateados = [];
+      const fetchPromises = [];
 
-      // Recorrer la lista de elementos y sumar sus valores
-      for (var i = 0; i < elementosSubtotal.length; i++) {
-          // Obtener el texto del elemento y extraer el valor numérico
-          var valorSubtotal = parseFloat(elementosSubtotal[i].textContent.replace('subtotal: $', ''));
-          console.log(valorSubtotal + "prueba")
-          // Sumar al total
-          sumaSubtotal += valorSubtotal;
-      }
+      productosEnCarrito.forEach(producto => {
+          const idProducto = producto.id;
+          const fetchPromise = fetch(`/detalle/` + producto.id)
+              .then(response => response.json())
+              .then(data => {
+                  const { nombre, precio, imagen } = data;
+                  crearProducto(idProducto, imagen, nombre, precio, producto.cantidad);
+                  const productoFormateado = {
+                      title: nombre,
+                      quantity: parseInt(producto.cantidad),
+                      currency_id: 'ARS',
+                      unit_price: parseInt(precio),
+                  };
+                  productosFormateados.push(productoFormateado);
+              })
+              .catch(error => {
+                  console.error(`Error al obtener el producto con ID ${idProducto}:`, error);
+              });
+          fetchPromises.push(fetchPromise);
+      });
 
-      // Mostrar el resultado
-      crearpiedecarrito(sumaSubtotal,productosFormateados)
-      console.log('La suma total de subtotales es: $' + sumaSubtotal);
-    }, 1000);
+      Promise.all(fetchPromises)
+          .then(() => {
+              
+                  var elementosSubtotal = document.getElementsByClassName('subtotal');
+                  var sumaSubtotal = 0;
 
-  } else {
-    limpiarcarrito()
-    console.log('La cookie no fue encontrada o está vacía.');
+                  for (var i = 0; i < elementosSubtotal.length; i++) {
+                      var valorSubtotal = parseFloat(elementosSubtotal[i].textContent.replace('subtotal: $', ''));
+                      sumaSubtotal += valorSubtotal;
+                  }
+
+                  crearpiedecarrito(sumaSubtotal, productosFormateados);
+                  console.log('La suma total de subtotales es: $' + sumaSubtotal);
+              
+          });
   }
-
-  }
+}
 
 function comprarbtn(productosformados){
-  // Crea una preferencia de pago
-
-  /*const mp = new MercadoPago('TEST-002e7355-b26c-43b4-880d-29ff8adaa5e9');
-  const preference = await mp.Create({
-    items: productosformados,
-    back_urls: {
-      success: 'https://tu-sitio.com/pago-exitoso',
-      failure: 'https://tu-sitio.com/pago-fallido',
-      pending: 'https://tu-sitio.com/pago-pendiente'
-    }
-    
-  });
-  console.log(preference)
-  // Abre la ventana de pago
-  window.open(preference.body.init_point, '_blank');*/
-  // MP
-
 
 document.getElementById("checkout").addEventListener("click", function () {
   const orderData = productosformados
@@ -172,7 +134,7 @@ function crearpiedecarrito(sumaprecio,productoformateado){
 
  }
 //crea el html del carrito con los datos parametrizados
-function crearProducto(imagen, nombre, precio,cantidad) {
+function crearProducto(idProducto,imagen, nombre, precio,cantidad) {
     var contenedorProductos = document.getElementById('contenedorProductos');
 
     // Crear elementos del producto
@@ -197,34 +159,21 @@ function crearProducto(imagen, nombre, precio,cantidad) {
     detalles.appendChild(subtotaltext);
 
     var acciones = document.createElement('div');
-    var agregarCarritoBtn = document.createElement('button');
-    agregarCarritoBtn.textContent = 'Agregar al carrito';
-    agregarCarritoBtn.onclick = function () {
-        agregarAlCarrito(id);
-    };
+    
+    const productoLi = document.createElement('p');
+          productoLi.setAttribute('data-id', '1');
+          productoLi.setAttribute('data-cantidad', '0');
 
-    var inputCantidad = document.createElement('input');
-    inputCantidad.type = 'number';
-    inputCantidad.id = 'cantidad' + cantidad;
-    inputCantidad.value = cantidad;
-    inputCantidad.min = '1';
+          // Añadir el contenido del producto
+          productoLi.innerHTML = /*`<button class="botonCarrito" data-id='${idProducto}' oculto="1" onclick="manejarBotonAgregar(this, 1, 10)">Agregar al Carrito</button>` +*/
+            `<button class="botonCarrito" data-id='${idProducto}' oculto="0" style="display: none;" onclick="restarCantidad(this,'${idProducto}')">-</button>` +
+            `<input class="botonCarrito" data-id='${idProducto}' oculto="0" type="number" value="1" min="1" class="cantidad-input" style="display: none;">` +
+            `<button class="botonCarrito" data-id='${idProducto}' oculto="0" style="display: none;" onclick="sumarCantidad(this,'${idProducto}')">+</button>` +
+            `<button class="botonCarrito" data-id='${idProducto}' oculto="0" style="display: none;" onclick="actualizarCantidadEnCarrito('carrito','${idProducto}','0')">Eliminar</button>`;
 
-    var actualizarCantidadBtn = document.createElement('button');
-    actualizarCantidadBtn.textContent = 'Actualizar Cantidad';
-    actualizarCantidadBtn.onclick = function () {
-        actualizarCantidad(id);
-    };
 
-    var eliminarBtn = document.createElement('button');
-    eliminarBtn.textContent = 'Eliminar';
-    eliminarBtn.onclick = function () {
-        eliminarProducto(id);
-    };
+    acciones.appendChild(productoLi);
 
-    acciones.appendChild(agregarCarritoBtn);
-    acciones.appendChild(inputCantidad);
-    acciones.appendChild(actualizarCantidadBtn);
-    acciones.appendChild(eliminarBtn);
 
     // Agregar elementos al producto
     producto.appendChild(imagen2);

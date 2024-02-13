@@ -29,9 +29,5 @@
     actualizarCantidadEnCarrito("carrito",id,cantidadInput.value);
   }
 
-  /* Función para agregar al carrito (actualizar)
-  function agregarAlCarrito(id, cantidad) {
-    // Puedes implementar la lógica para agregar el producto al carrito aquí
-    // Por ahora, simplemente mostraremos un mensaje en la consola
-    console.log('Producto actualizado en el carrito - ID:', id, 'Cantidad:', cantidadInput.value);
-  }*/
+
+  
