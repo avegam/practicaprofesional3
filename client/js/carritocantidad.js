@@ -1,11 +1,21 @@
 // Función para manejar el botón de agregar al carrito
-  function manejarBotonAgregar(button, id, cantidad) {
-    // Ocultar el botón de agregar y mostrar los elementos de cantidad
+  function manejarBotonAgregar(button, condicion) {
+    if(condicion){
+     // Ocultar el botón de agregar y mostrar los elementos de cantidad
     button.style.display = 'none';
     button.nextElementSibling.style.display = 'inline-block';
     button.nextElementSibling.nextElementSibling.style.display = 'inline-block';
     button.nextElementSibling.nextElementSibling.nextElementSibling.style.display = 'inline-block';
-    button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.style.display = 'inline-block';
+    //button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.style.display = 'inline-block'; 
+    } else {
+      // Ocultar el botón de agregar y mostrar los elementos de cantidad
+      button.style.display = 'inline-block';
+      button.nextElementSibling.style.display = 'none';
+      button.nextElementSibling.nextElementSibling.style.display = 'none';
+      button.nextElementSibling.nextElementSibling.nextElementSibling.style.display = 'none';
+      //button.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.style.display = 'inline-block';}
+
+    }
   }
 
   // Función para restar la cantidad
@@ -27,6 +37,7 @@
     var cantidadInput = button.previousElementSibling;
     cantidadInput.value = parseInt(cantidadInput.value) + 1;
     actualizarCantidadEnCarrito("carrito",id,cantidadInput.value,quecarro);
+    verificarBotonesEnCarrito()
   }
 
 

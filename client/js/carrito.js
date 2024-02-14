@@ -135,7 +135,8 @@ function verificarBotonesEnCarrito() {
      // console.log("Resultado deberia" + deberiaMostrar)
       //console.log("Resultado idboton" + todosLosIDs.includes(idBoton))
       //console.log("Resultado condicion" + Condicion(boton))
-      mostrarOcultarBoton(boton, deberiaMostrar);
+      //mostrarOcultarBoton(boton, deberiaMostrar);
+      manejarBotonAgregar(boton,deberiaMostrar)
     });
   }
 }
@@ -146,9 +147,10 @@ function mostrarOcultarBoton(boton, deberiaMostrar) {
 }
 
 function Condicion(boton) {
-  var atributoOculto = boton.getAttribute('oculto');
+  var atributoOculto = boton.getAttribute('display');
   console.log('Valor de atributoOculto:', atributoOculto);
-  return atributoOculto !== null && atributoOculto === '0';
+  //return atributoOculto !== null && atributoOculto === '1';
+  return true
 }
 // Llama a la función al cargar la página
 //verificarBotonesEnCarrito();
