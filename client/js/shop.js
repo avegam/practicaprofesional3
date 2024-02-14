@@ -167,7 +167,7 @@ function crearProducto(idProducto,imagen, nombre, precio,cantidad) {
           // Añadir el contenido del producto
           productoLi.innerHTML = /*`<button class="botonCarrito" data-id='${idProducto}' oculto="1" onclick="manejarBotonAgregar(this, 1, 10)">Agregar al Carrito</button>` +*/
             `<button class="botonCarrito" data-id='${idProducto}' oculto="0" style="display: inline;" onclick="restarCantidad(this,'${idProducto}','shop')">-</button>` +
-            `<input class="botonCarrito" data-id='${idProducto}' oculto="0" type="number" value="1" min="1" class="cantidad-input" style="display: inline;">` +
+            `<input class="botonCarrito" data-id='${idProducto}' oculto="0" type="number" value="${cantidad}" min="1" class="cantidad-input" style="display: inline;">` +
             `<button class="botonCarrito" data-id='${idProducto}' oculto="0" style="display: inline;" onclick="sumarCantidad(this,'${idProducto}','shop')">+</button>` +
             `<button class="botonCarrito" data-id='${idProducto}' oculto="0" style="display: inline;" onclick="actualizarCantidadEnCarrito('carrito','${idProducto}','0','shop')">Eliminar</button>`;
 

@@ -67,6 +67,7 @@ function borrarCookie(nombre) {
 function borrarCookie2(nombre) {
   document.cookie = nombre + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   buscarProductosEnBaseDeDatos("vaciar")
+  mostrarCarrito3();
 }
 
 
@@ -87,6 +88,7 @@ if (carritoCookie) {
     if (parseInt(nuevaCantidad) === 0) {
       // Elimina la línea si la nueva cantidad es 0
       carritoData.splice(indiceElemento, 1);
+
     } else {
       // Actualiza la cantidad
       carritoData[indiceElemento].cantidad = nuevaCantidad;
@@ -99,8 +101,11 @@ if (carritoCookie) {
     document.cookie = nuevoCarritoCookie + '; path=/;';
   }
 }
-if(quecarro === "shop"){
+if (quecarro === "shop" && parseInt(nuevaCantidad) === 0) {
   mostrarCarrito3();
+}
+if(quecarro === "shop"){
+  //mostrarCarrito3();
 }
 
 mostrarCarrito();

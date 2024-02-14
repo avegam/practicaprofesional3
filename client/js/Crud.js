@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const datosLista = document.getElementById('contenedor');
-  
+
     // Realizar la solicitud al backend para obtener datos
     fetch('/datos')
       .then(response => response.json())
       .then(data => {
         // Procesar los datos y actualizar la interfaz
         data.forEach(documento => {
+
           // Crear elementos HTML dinámicamente
           const productoDiv = document.createElement('div');
           productoDiv.classList.add('producto');
@@ -37,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
           Agregarcarrito.onclick = function() {
             agregarAlCarrito(documento._id,"1"); // Agrega la función de redirección que necesites
           };
+          //buscamos en el carrito cual es la cantidad actual de este producto
+          const cantidadEnCarrito = obtenerCantidadPorId(documento._id);
           // Crear un nuevo elemento LI para el producto
           const productoLi = document.createElement('p');
           productoLi.setAttribute('data-id', '1');
@@ -45,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Añadir el contenido del producto
           productoLi.innerHTML = `<button class="botonCarrito" data-id='${documento._id}' oculto="1" onclick="manejarBotonAgregar(this, 1, 10)">Agregar al Carrito</button>` +
             `<button class="botonCarrito" data-id='${documento._id}' oculto="0" style="display: none;" onclick="restarCantidad(this,'${documento._id}')">-</button>` +
-            `<input class="botonCarrito" data-id='${documento._id}' oculto="0" type="number" value="1" min="1" class="cantidad-input" style="display: none;">` +
+            `<input class="botonCarrito" data-id='${documento._id}' oculto="0" type="number" value='${cantidadEnCarrito}' min="1" class="cantidad-input" style="display: none;">` +
             `<button class="botonCarrito" data-id='${documento._id}' oculto="0" style="display: none;" onclick="sumarCantidad(this,'${documento._id}')">+</button>`/* +
             `<button class="botonCarrito" data-id='${documento._id}' oculto="0" style="display: none;" onclick="agregarAlCarrito(1, 10)">Actualizar</button>`*/;
 
@@ -68,3 +71,17 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch(error => console.error('Error al obtener datos:', error));
   });
+
+
+  function obtenerCantidadPorId(id) {
+    const cookieNombre = 'carrito';
+    const cookieData = getCookie(cookieNombre);
+    const productosEnCarrito = JSON.parse(cookieData);
+    for (const producto of productosEnCarrito) {
+      if (producto.id === id) {
+        return producto.cantidad;
+      }
+    }
+    // Si no se encuentra el producto, devolvemos 0 o cualquier valor predeterminado
+    return 0;
+  }
