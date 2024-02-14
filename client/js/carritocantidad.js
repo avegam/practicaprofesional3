@@ -28,7 +28,13 @@
     if (parseInt(cantidadInput.value) >= -1) {
       actualizarCantidadEnCarrito("carrito", id, cantidadInput.value,quecarro);
     }
-  verificarBotonesEnCarrito()
+    if(quecarro === "shop"){
+      console.log("estuve aqui")
+      actualizarSubtotal(id)
+      const carrito = getCookie("carrito")
+      buscarProductosEnBaseDeDatos(carrito,"solopie")
+    }
+  verificarBotonesEnCarrito(quecarro)
 }
 
   // Función para sumar la cantidad
@@ -37,8 +43,30 @@
     var cantidadInput = button.previousElementSibling;
     cantidadInput.value = parseInt(cantidadInput.value) + 1;
     actualizarCantidadEnCarrito("carrito",id,cantidadInput.value,quecarro);
-    verificarBotonesEnCarrito()
+    if(quecarro === "shop"){
+      actualizarSubtotal(id)
+      const carrito = getCookie("carrito")
+      buscarProductosEnBaseDeDatos(carrito,"solopie")
+    }
+    verificarBotonesEnCarrito(quecarro)
   }
+
+
+  function actualizarSubtotal(idProducto) {
+    // Obtener el precio del producto
+    var precioProducto = parseFloat(document.querySelector('.precio[data-id="' + idProducto + '"]').innerText.replace('Precio: $', ''));
+
+    // Obtener la cantidad del producto
+    var cantidadProducto = parseInt(document.querySelector('input[data-id="' + idProducto + '"]').value);
+
+    // Calcular el subtotal
+    var subtotal = precioProducto * cantidadProducto;
+
+    // Actualizar el elemento HTML del subtotal
+    document.querySelector('.subtotal[data-id="' + idProducto + '"]').innerText = 'subtotal: $' + subtotal;
+}
+
+
 
 
   

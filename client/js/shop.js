@@ -3,7 +3,7 @@ const mercadopago = new MercadoPago("TEST-002e7355-b26c-43b4-880d-29ff8adaa5e9",
 });
 
 //esta funcion toma los ids de las cookies y trae los datos correspondiente de cada una de la base de datos para armar el carrito
-function buscarProductosEnBaseDeDatos(cookieData) {
+function buscarProductosEnBaseDeDatos(cookieData,pie) {
   if (cookieData != "vaciar") {
       const productosEnCarrito = JSON.parse(cookieData);
       const productosFormateados = [];
@@ -15,7 +15,9 @@ function buscarProductosEnBaseDeDatos(cookieData) {
               .then(response => response.json())
               .then(data => {
                   const { nombre, precio, imagen } = data;
+                  if(pie != "solopie"){
                   crearProducto(idProducto, imagen, nombre, precio, producto.cantidad);
+                  }
                   const productoFormateado = {
                       title: nombre,
                       quantity: parseInt(producto.cantidad),
@@ -32,21 +34,26 @@ function buscarProductosEnBaseDeDatos(cookieData) {
 
       Promise.all(fetchPromises)
           .then(() => {
-              
-                  var elementosSubtotal = document.getElementsByClassName('subtotal');
-                  var sumaSubtotal = 0;
-
-                  for (var i = 0; i < elementosSubtotal.length; i++) {
-                      var valorSubtotal = parseFloat(elementosSubtotal[i].textContent.replace('subtotal: $', ''));
-                      sumaSubtotal += valorSubtotal;
-                  }
-
-                  crearpiedecarrito(sumaSubtotal, productosFormateados);
-                  console.log('La suma total de subtotales es: $' + sumaSubtotal);
+              sumaSubtotales(productosFormateados)
+                  
               
           });
   }
 }
+
+function sumaSubtotales(productosFormateados){
+  var elementosSubtotal = document.getElementsByClassName('subtotal');
+  var sumaSubtotal = 0;
+
+  for (var i = 0; i < elementosSubtotal.length; i++) {
+      var valorSubtotal = parseFloat(elementosSubtotal[i].textContent.replace('subtotal: $', ''));
+      sumaSubtotal += valorSubtotal;
+  }
+
+  crearpiedecarrito(sumaSubtotal, productosFormateados);
+  console.log('La suma total de subtotales es: $' + sumaSubtotal);
+}
+
 
 function comprarbtn(productosformados){
 
@@ -111,7 +118,10 @@ function limpiarcarrito(){
 }
 
 function crearpiedecarrito(sumaprecio,productoformateado){
+
   var contenedorpiedecarro = document.getElementById('piecarrito');
+    // Limpiar todos los hijos
+    contenedorpiedecarro.innerHTML = "";
   //var piedecarro = document.createElement('div');
   var resultadoprecio = document.createElement('p');
   resultadoprecio.textContent = 'precio final: ' + sumaprecio;
@@ -150,9 +160,13 @@ function crearProducto(idProducto,imagen, nombre, precio,cantidad) {
     nombreProducto.textContent = 'Nombre del Producto ' + nombre;
     var precioProducto = document.createElement('p');
     precioProducto.textContent = 'Precio: $' + precio;
+    precioProducto.setAttribute('class', 'precio');
+    precioProducto.setAttribute('data-id', idProducto);
+
     var subtotaltext = document.createElement('p');
     subtotaltext.textContent = 'subtotal: $' + (precio * cantidad);
     subtotaltext.setAttribute('class', 'subtotal');
+    subtotaltext.setAttribute('data-id', idProducto);
 
     detalles.appendChild(nombreProducto);
     detalles.appendChild(precioProducto);
@@ -190,7 +204,7 @@ function cargacarro(){
   const cookieNombre = 'carrito';
   const cookieData = getCookie(cookieNombre);
   if (cookieData) {
-      buscarProductosEnBaseDeDatos(cookieData);
+      buscarProductosEnBaseDeDatos(cookieData,"si");
     } else {
       console.log('La cookie no fue encontrada o está vacía.');
     }

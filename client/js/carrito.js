@@ -115,29 +115,31 @@ mostrarCarrito();
 
 
   // Función para leer los IDs de la cookie y mostrar u ocultar botones
-function verificarBotonesEnCarrito() {
-  var carritoCookie = getCookie('carrito');
-  console.log('Contenido de la cookie:', carritoCookie);
-  if (carritoCookie) {
-    var carritoData = JSON.parse(carritoCookie);
+function verificarBotonesEnCarrito(quecarro) {
+  if(quecarro != "shop"){
+    var carritoCookie = getCookie('carrito');
+    console.log('Contenido de la cookie:', carritoCookie);
+    if (carritoCookie) {
+      var carritoData = JSON.parse(carritoCookie);
 
-    // Obtener todos los IDs presentes en la cookie
-    var todosLosIDs = carritoData.map(item => item.id);
-    console.log('Todos los IDs:', todosLosIDs);
-    // Obtener todos los botones que deseas verificar
-    var botones = document.getElementsByClassName('botonCarrito');
-    console.log('Número de botones encontrados:', botones.length);
-    var botonesArray = Array.from(botones);
-    // Verificar y mostrar u ocultar los botones según los IDs
-    botonesArray.forEach(boton => {
-      var idBoton = boton.getAttribute('data-id');
-      var deberiaMostrar = todosLosIDs.includes(idBoton) && Condicion(boton);
-     // console.log("Resultado deberia" + deberiaMostrar)
-      //console.log("Resultado idboton" + todosLosIDs.includes(idBoton))
-      //console.log("Resultado condicion" + Condicion(boton))
-      //mostrarOcultarBoton(boton, deberiaMostrar);
-      manejarBotonAgregar(boton,deberiaMostrar)
-    });
+      // Obtener todos los IDs presentes en la cookie
+      var todosLosIDs = carritoData.map(item => item.id);
+      console.log('Todos los IDs:', todosLosIDs);
+      // Obtener todos los botones que deseas verificar
+      var botones = document.getElementsByClassName('botonCarrito');
+      console.log('Número de botones encontrados:', botones.length);
+      var botonesArray = Array.from(botones);
+      // Verificar y mostrar u ocultar los botones según los IDs
+      botonesArray.forEach(boton => {
+        var idBoton = boton.getAttribute('data-id');
+        var deberiaMostrar = todosLosIDs.includes(idBoton) && Condicion(boton);
+      // console.log("Resultado deberia" + deberiaMostrar)
+        //console.log("Resultado idboton" + todosLosIDs.includes(idBoton))
+        //console.log("Resultado condicion" + Condicion(boton))
+        //mostrarOcultarBoton(boton, deberiaMostrar);
+        manejarBotonAgregar(boton,deberiaMostrar)
+      });
+    }
   }
 }
 
@@ -169,7 +171,7 @@ window.onload = async function() {
   await esperarContenidoCargado();
 
   // Verificar los botones en el carrito
-  verificarBotonesEnCarrito();
+  verificarBotonesEnCarrito("no");
 };
 
 async function esperarContenidoCargado() {

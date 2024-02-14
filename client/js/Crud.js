@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
           datosLista.appendChild(productoDiv);
         });
-        verificarBotonesEnCarrito()
+        verificarBotonesEnCarrito("si")
       })
       .catch(error => console.error('Error al obtener datos:', error));
       
