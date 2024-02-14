@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
           productoLi.setAttribute('data-cantidad', '0');
 
           // Añadir el contenido del producto
-          productoLi.innerHTML = `<button class="botonCarrito" data-id='${documento._id}' style="display: none;" oculto="1" onclick="AgregarOcultar(this,'${documento._id}')">Agregar al Carrito</button>` +
+          productoLi.innerHTML = `<button class="botonCarrito" data-id='${documento._id}' style="display: inline;" oculto="1" onclick="AgregarOcultar(this,'${documento._id}')">Agregar al Carrito</button>` +
             `<button  data-id='${documento._id}' oculto="0" style="display: none;" onclick="restarCantidad(this,'${documento._id}')">-</button>` +
             `<input  data-id='${documento._id}' oculto="0" type="number" value='${cantidadEnCarrito}' min="1" class="cantidad-input" style="display: none;">` +
             `<button  data-id='${documento._id}' oculto="0" style="display: none;" onclick="sumarCantidad(this,'${documento._id}')">+</button>`/* +
@@ -83,12 +83,17 @@ document.addEventListener('DOMContentLoaded', () => {
   function obtenerCantidadPorId(id) {
     const cookieNombre = 'carrito';
     const cookieData = getCookie(cookieNombre);
-    const productosEnCarrito = JSON.parse(cookieData);
-    for (const producto of productosEnCarrito) {
-      if (producto.id === id) {
-        return producto.cantidad;
+  
+    // Verificar si la cookie existe
+    if (cookieData) {
+      const productosEnCarrito = JSON.parse(cookieData);
+      for (const producto of productosEnCarrito) {
+        if (producto.id === id) {
+          return producto.cantidad;
+        }
       }
     }
+  
     // Si no se encuentra el producto, devolvemos 0 o cualquier valor predeterminado
     return 0;
   }
