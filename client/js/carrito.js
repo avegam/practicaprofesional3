@@ -21,9 +21,12 @@ function mostrarCarrito3() {
 }
 
 function mostrarCarrito() {
-  let carrito = JSON.parse(getCookie('carrito')) || [];
+
+  //funcion comentanda ya que este carrito solo mejoraba la visibilidad para el desarrollo
+  /*let carrito = JSON.parse(getCookie('carrito')) || [];
   let carritoContainer = document.getElementById('carrito');
   carritoContainer.innerHTML = '';
+
 
   carrito.forEach(item => {
     let li = document.createElement('li');
@@ -36,7 +39,7 @@ function mostrarCarrito() {
   vaciarcarro.onclick = function() {
     borrarCookie("carrito");
   };
-  carritoContainer.appendChild(vaciarcarro)
+  carritoContainer.appendChild(vaciarcarro)*/
 }
 
 function setCookie(nombre, valor, diasExpiracion = 7) {
