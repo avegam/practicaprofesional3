@@ -83,9 +83,11 @@ app.get('/logout', async (req, res) => {
 
 app.post("/create_preference", (req, res) => {
   console.log("quiero ver este")
-  console.log(req.body)
+  console.log(req.body.item)
+  console.log(req.body.additional)
   let preference = {
-    items: req.body
+    items: req.body.item,
+    additional: req.body.additional
     ,
     back_urls: {
       success: "https://practicap3.onrender.com/home",
@@ -199,13 +201,14 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       const { status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description } = dataObject;
       const idTransaccion = data.id;
       const items = data.additional_info.items;
+      const additional = data.additional_info.additional;
       const pedido = "pendiente";
       console.log("factura formato:")
       console.log(items ,idTransaccion,status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description)
       const factura = new facturaModelo({
           status, status_detail, date_approved, transaction_amount, payment_type_id,
           payment_method_id, issuer_id, installments, currency_id, transaction_details,
-          payer, charges_details, money_release_date, description, idTransaccion, items,pedido
+          payer, charges_details, money_release_date, description, idTransaccion, items,pedido,additional
       });
 
       console.log(factura);
@@ -296,6 +299,20 @@ app.get('/detalle/:id', async (req, res) => {
 
   try {
     const documento = await productoModel.findById(id);
+    if (!documento) {
+      return res.status(404).json({ mensaje: 'Producto no encontrado' });
+    }
+    res.json(documento);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener datos desde la base de datos' });
+  }
+});
+
+// Ruta para obtener datos filtrados por ID
+app.get('/usuario/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const documento = await userModelo.findById(id);
     if (!documento) {
       return res.status(404).json({ mensaje: 'Producto no encontrado' });
     }

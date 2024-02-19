@@ -54,56 +54,89 @@ function sumaSubtotales(productosFormateados){
   console.log('La suma total de subtotales es: $' + sumaSubtotal);
 }
 
-
-function comprarbtn(productosformados){
-
-//document.getElementById("checkout").addEventListener("click", function () {
-  const orderData = productosformados
-  console.log(JSON.stringify(orderData))
-  fetch("/create_preference", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(orderData),
-  })
-    .then(function (response) {
-      return response.json();
+async function comprarbtn(productosformados){
+    
+  
+  //document.getElementById("checkout").addEventListener("click", function () {
+    const orderData = productosformados
+    // Datos adicionales
+    const userIDElement = document.getElementById("ID");
+    // Obtener el contenido del atributo textContent
+    const userID = userIDElement.textContent;
+    
+    console.log("add " + JSON.stringify(userID))
+    const requestBody = {
+      item: orderData,
+      additional: userID
+    };
+    console.log(JSON.stringify(orderData))
+    fetch("/create_preference", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
     })
-    .then(function (preference) {
-      createCheckoutButton(preference.id);
-    })
-    .catch(function () {
-      alert("Unexpected error");
-    });
-//});
-
-
-}
-
-
-function createCheckoutButton(preferenceId) {
-  // Initialize the checkout
-  const bricksBuilder = mercadopago.bricks();
-
-  const renderComponent = async (bricksBuilder) => {
-    if (window.checkoutButton) window.checkoutButton.unmount();
-    await bricksBuilder.create(
-      "wallet",
-      "button-checkout", // class/id where the payment button will be displayed
-      {
-        initialization: {
-          preferenceId: preferenceId,
-        },
-        callbacks: {
-          onError: (error) => console.error(error),
-          onReady: () => {},
-        },
-      }
-    );
-  };
-  window.checkoutButton = renderComponent(bricksBuilder);
-}
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (preference) {
+        createCheckoutButton(preference.id);
+      })
+      .catch(function () {
+        alert("Unexpected error");
+      });
+  //});
+  
+  
+  }
+  
+  
+  function createCheckoutButton(preferenceId) {
+    // Initialize the checkout
+    const bricksBuilder = mercadopago.bricks();
+  
+    const renderComponent = async (bricksBuilder) => {
+      if (window.checkoutButton) window.checkoutButton.unmount();
+      await bricksBuilder.create(
+        "wallet",
+        "button-checkout", // class/id where the payment button will be displayed
+        {
+          initialization: {
+            preferenceId: preferenceId,
+          },
+          callbacks: {
+            onError: (error) => console.error(error),
+            onReady: () => {},
+          },
+        }
+      );
+    };
+    window.checkoutButton = renderComponent(bricksBuilder);
+  }
+  async function getUserData() {
+    // Obtener el elemento <p> por su ID
+    const userIDElement = document.getElementById("ID");
+  
+    // Obtener el contenido del atributo textContent
+    const userID = userIDElement.textContent;
+  
+    // Hacer una solicitud fetch para obtener los datos del usuario
+    return fetch(`/usuario/${userID}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('No se pudo obtener los datos del usuario');
+        }
+        return response.json();
+      })
+      .then(userData => {
+        // userData contiene los datos del usuario
+        return userData;
+      })
+      .catch(error => {
+        console.error('Error al obtener los datos del usuario:', error);
+      });
+  }
 
 function limpiarcarrito(){
   var miElemento = document.getElementById("contenedorProductos");

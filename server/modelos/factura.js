@@ -102,8 +102,8 @@ const FacturaSchema = mongoose.Schema({
     transaction_details: TransactionDetailsSchema,
     payer: PayerSchema,
     charges_details: [ChargeDetailsSchema],
-    items: [ItemSchema]
-
+    items: [ItemSchema],
+    additional: String
 
   })
 
