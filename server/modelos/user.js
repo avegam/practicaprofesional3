@@ -14,21 +14,25 @@ const UserSchema = mongoose.Schema({
   Rol: String
 });
 
-UserSchema.pre('save', function (next) {
-  if (this.isNew || this.isModified('password')) {
-    const document = this;
+UserSchema.pre('save', async function (next) {
+  const user = this;
+  
+  try {
+    const existingUser = await userModel.findOne({ Email: user.Email });
+    if (existingUser) {
+      const error = new Error('El correo electrónico ya está registrado');
+      return next(error);
+    }
 
-    bcrypt.hash(document.password, saltRounds, (error, hashedPassword) => {
-      if (error) {
-        next(error);
-      } else {
-        document.password = hashedPassword;
-        next();
-      }
-    });
-  } else {
-    next();
-  }
+ // Si el correo electrónico no existe, proceder con el hash del password
+ if (user.isNew || user.isModified('password')) {
+  const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+  user.password = hashedPassword;
+}
+next();
+} catch (error) {
+next(error);
+}
 });
 
 UserSchema.methods.generateAuthToken = function () {

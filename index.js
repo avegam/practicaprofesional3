@@ -458,7 +458,7 @@ app.post('/registrar', async (req, res) => {
     res.status(200).send("Usuario registrado");
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error al registrar el usuario");
+    res.status(500).send("Error al registrar el usuario: " + error);
   }
 });
 
