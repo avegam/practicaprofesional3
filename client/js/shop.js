@@ -57,7 +57,7 @@ function sumaSubtotales(productosFormateados){
 
 function comprarbtn(productosformados){
 
-document.getElementById("checkout").addEventListener("click", function () {
+//document.getElementById("checkout").addEventListener("click", function () {
   const orderData = productosformados
   console.log(JSON.stringify(orderData))
   fetch("/create_preference", {
@@ -76,7 +76,7 @@ document.getElementById("checkout").addEventListener("click", function () {
     .catch(function () {
       alert("Unexpected error");
     });
-});
+//});
 
 
 }
