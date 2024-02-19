@@ -87,7 +87,7 @@ app.post("/create_preference", (req, res) => {
   console.log(req.body.additional)
   let preference = {
     items: req.body.item,
-    additional: req.body.additional
+    metadata:{id_user: req.body.additional}
     ,
     back_urls: {
       success: "https://practicap3.onrender.com/home",
@@ -103,6 +103,7 @@ app.post("/create_preference", (req, res) => {
       res.json({
         id: response.body.id,
       });
+      
     })
     .catch(function (error) {
       console.log(error);
@@ -201,8 +202,8 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       const { status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description } = dataObject;
       const idTransaccion = data.id;
       const items = data.additional_info.items;
-      const additional = data.additional_info.additional;
-      console.log("Alice la ve " + additional)
+      const id_user = data.metadata.id_user;
+      console.log("Alice la ve " + id_user)
       const pedido = "pendiente";
       console.log("factura formato:")
       console.log(items ,idTransaccion,status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description)
