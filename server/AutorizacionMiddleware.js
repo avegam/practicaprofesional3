@@ -40,8 +40,10 @@ const checkUser = (req, res, next) => {
         next();
       } else {
         console.log("verificado?")
-        let user = await userModelo.findById(decodedToken.id);
+        let user = await userModelo.findById(decodedToken._id);
+        console.log(decodedToken)
         res.locals.user = user;
+        console.log(user)
         next();
       }
     });

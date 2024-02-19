@@ -18,7 +18,9 @@ mercadopago.configure({
 access_token:"TEST-2643009668753140-112518-a9bb2fbc8f1f5ac0960837e56681f5e9-1566400118",
 });
 
-
+app.set('view engine', 'ejs');
+// Especificar la ubicación de las vistas
+app.set('views', path.join(__dirname, 'client', 'html'));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -44,92 +46,33 @@ const upload = multer({
   }
 });
 // Rutas a Iniciar sesion
-app.get("/ingresar", function (req, res) {
-  const filePath = path.resolve(__dirname, "client","html", "ingresar.html"); 
-  res.sendFile(filePath);
-});
+app.get('/ingresar', (req, res) => res.render('ingresar'));
 // Rutas a ingreso exitoso
-app.get("/loginexitoso", function (req, res) {
-  const filePath = path.resolve(__dirname, "client","html", "loginexito.html"); 
-  res.sendFile(filePath);
-});
-
+app.get('/loginexitoso', (req, res) => res.render('loginexito'));
 // Rutas a registrar
-app.get("/registrar", function (req, res) {
-  const filePath = path.resolve(__dirname,  "client","html", "registrar.html"); 
-  res.sendFile(filePath);
-});
-
+app.get('/registrar', (req, res) => res.render('registrar'));
 // Rutas a Index Principal
-app.get(["/", "/home"], function (req, res) {
-  const filePath = path.resolve(__dirname, "client", "html", "index.html"); 
-  res.sendFile(filePath);
-});
-
-
+app.get(["/", "/home"], (req, res) => res.render('index'));
 // Ruta a Productos
-app.get("/productos", function (req, res) {
-  const filePath = path.resolve(__dirname, "client", "html","productos.html"); 
-  res.sendFile(filePath);
-});
-
+app.get('/productos', (req, res) => res.render('productos'));
 // Ruta a Productos detallados
-app.get("/detalleproducto/*", function (req, res) {
-  const filePath = path.resolve(__dirname, "client", "html","detalleproducto.html"); 
-  res.sendFile(filePath);
-});
-
-// Ruta a Productos detallados 
-app.get("/modificarproducto/*",authorize('Admin'), function (req, res) { // ELIMINAR NICOOOO
-  const filePath = path.resolve(__dirname, "client", "html","modificarproducto.html"); 
-  res.sendFile(filePath);
-});
-
+app.get('/detalleproducto/*', (req, res) => res.render('detalleproducto'));
+// Ruta a Productos detallados
+app.get('/registrar', (req, res) => res.render('registrar')); 
 // Ruta a Contacto
-app.get("/contacto", function (req, res) {
-  const filePath = path.resolve(__dirname, "client","html", "contacto.html"); 
-  res.sendFile(filePath);
-});
-
+app.get('/contacto', (req, res) => res.render('contacto'));
 // Rutas a Shop
-app.get("/shop", function (req, res) {
-  const filePath = path.resolve(__dirname, "client", "html","shop.html"); 
-  res.sendFile(filePath);
-});
-
+app.get('/shop', (req, res) => res.render('shop'));
 // Rutas a Olvidar Contraseña
-app.get("/olvidarcontrasena", function (req, res) {
-  const filePath = path.resolve(__dirname, "client", "html","olvidarcontrasena.html"); 
-  res.sendFile(filePath);
-});
-
+app.get('/olvidarcontrasena', (req, res) => res.render('olvidarcontrasena'));
 //  Vista Administrador 
-
-app.get("/administrador", authorize('Admin'),function (req, res) {
-  const filePath = path.resolve(__dirname, "client", "html","administrador.html"); 
-  res.sendFile(filePath);
-});
-
+app.get('/administrador',authorize('Admin'), (req, res) => res.render('administrador'));
 // Rutas a Editar Productos
-app.get("/editarproductos",authorize('Admin'), function (req, res) {
-  const filePath = path.resolve(__dirname, "client", "html","editarproductos.html"); 
-  res.sendFile(filePath);
-});
-
+app.get('/editarproductos', (req, res) => res.render('editarproductos'));
 // Rutas a Pedidos realizados (Inventario)
-app.get("/factura",authorize('Admin'), function (req, res) {
-  const filePath = path.resolve(__dirname, "client", "html","factura.html"); 
-  res.sendFile(filePath);
-});
-
+app.get('/factura', authorize('Admin'), (req, res) => res.render('factura'));
 // Rutas a Factura
-app.get("/facturab",authorize('Admin'), function (req, res) {
-  const filePath = path.resolve(__dirname, "client", "html","facturab.html"); 
-  res.sendFile(filePath);
-});
-
-
-
+app.get('/facturab', authorize('Admin'), (req, res) => res.render('facturab'));
 
 
 app.post("/create_preference", (req, res) => {
@@ -268,15 +211,8 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       //res.status(500).send("Error al cargar factura");
   }
 }
-app.get("/factura", function (req, res) {
-  const filePath = path.resolve(__dirname, "client", "html","factura.html"); 
-  res.sendFile(filePath);
-});
+app.get('/facturab/*', authorize('Admin'), (req, res) => res.render('facturab'));
 
-app.get("/facturab/*", function (req, res) {
-  const filePath = path.resolve(__dirname, "client", "html","facturab.html"); 
-  res.sendFile(filePath);
-});
 
 // Ruta para obtener datos desde MongoDB
 app.get('/facturadatos', async (req, res) => {
