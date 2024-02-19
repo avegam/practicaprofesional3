@@ -74,6 +74,12 @@ app.get('/factura', authorize('Admin'), (req, res) => res.render('factura'));
 // Rutas a Factura
 app.get('/facturab', authorize('Admin'), (req, res) => res.render('facturab'));
 
+app.get('/logout', async (req, res) => {
+  res.cookie('Token', '', { maxAge: 1 });
+  res.redirect('/');
+});
+
+
 
 app.post("/create_preference", (req, res) => {
   console.log("quiero ver este")
@@ -432,7 +438,13 @@ console.log(req.body);
           //return res.status(200).redirect(`/loginexitoso?x-auth-token=${token}`);
           // Establecer la cookie
            res.cookie('Token', token, { maxAge: 900000, httpOnly: true });
-          return res.status(200).redirect(`/`);
+           console.log("este rol?"+ user.Rol)
+           
+           if (user.Rol === "Admin") {
+            return res.status(200).redirect('/editarproductos');
+          } else {
+            return res.status(200).redirect('/');
+          }
         })
         .catch(error => {
           console.error('Error al generar el token:', error);
