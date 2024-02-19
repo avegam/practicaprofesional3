@@ -15,10 +15,16 @@
           <li class="nav-item">
             <a class="nav-link" href="/factura">Pedidos</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/facturaentregado">Pedidos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/facturarechazado">Pedidos</a>
+          </li>
         
         </ul>
         <% if (user) { %>
-          <p>Welcome, <%= user.Email %></p>
+          <p>Bienvenido, <%= user.Nombre %> <%= user.Apellido %></p>
           <p id="ID" hidden><%= user._id %></p>
 
           <a class="nav-link" href="/logout">Desconectarse</a>

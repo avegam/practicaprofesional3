@@ -19,16 +19,20 @@
   <body>
     <%- include('parcial/navbaradmin'); -%>
     
-    <h2>Información de pedidos pendiente</h2>
 
-    <table id="facturaTable">
+
+    <h2>Información de pedidos entregados</h2>
+
+    <table id="facturaTableentregados">
     </table>
 
 
 </body>
 <script src="../js/pedidos.js"></script>
-<script>limpiarTabla("facturaTable");
-llenarTabla("pendiente", "facturaTable");</script>
+<script>
+  limpiarTabla("facturaTableentregados");
+  llenarTabla("entregado", "facturaTableentregados");
+</script>
 </html>
 
 

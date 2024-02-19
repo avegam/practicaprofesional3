@@ -71,13 +71,30 @@ function llenarTabla(textoComparacion, idTabla) {
         boton.innerHTML = texto;
 
         boton.onclick = function () {
+
+            
             editarFactura(idTransaccion, estado);
-            limpiarTabla("facturaTable");
-            limpiarTabla("facturaTableentregados");
-            limpiarTabla("facturaTablerechazados");
-            llenarTabla("pendiente", "facturaTable");
-            llenarTabla("entregado", "facturaTableentregados");
-            llenarTabla("rechazado", "facturaTablerechazados");
+            switch (idTabla) {
+                case "facturaTable":
+                    limpiarTabla("facturaTable");
+                    llenarTabla("pendiente", "facturaTable");
+                  // Código a ejecutar si la expresion es igual a valor1
+                  break;
+                case "facturaTableentregados":
+                    limpiarTabla("facturaTableentregados");
+                    llenarTabla("entregado", "facturaTableentregados");
+                  // Código a ejecutar si la expresion es igual a valor2
+                  break;
+
+                case "facturaTablerechazados":    
+                limpiarTabla("facturaTablerechazados");
+
+                llenarTabla("rechazado", "facturaTablerechazados");
+                // Puedes tener más casos aquí
+                default:
+                  // Código a ejecutar si ninguno de los casos anteriores se cumple
+              }
+      
         };
 
         return boton;
@@ -85,12 +102,12 @@ function llenarTabla(textoComparacion, idTabla) {
 }
 
 // Ejemplo de uso
-limpiarTabla("facturaTable");
+/*limpiarTabla("facturaTable");
 limpiarTabla("facturaTableentregados");
 limpiarTabla("facturaTablerechazados");
 llenarTabla("pendiente", "facturaTable");
 llenarTabla("entregado", "facturaTableentregados");
-llenarTabla("rechazado", "facturaTablerechazados");
+llenarTabla("rechazado", "facturaTablerechazados");*/
 
 function limpiarTabla(idTabla) {
     const tabla = document.getElementById(idTabla);

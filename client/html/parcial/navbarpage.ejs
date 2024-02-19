@@ -21,7 +21,7 @@
         </ul>
 
         <% if (user) { %>
-            <p>Welcome, <%= user.Email %></p>
+            <p>Bienvenido, <%= user.Nombre %> <%= user.Apellido %></p>
             <p id="ID" hidden><%= user._id %></p>
             <a class="nav-link" href="/logout">Desconectarse</a>
           <% } else { %>

@@ -69,8 +69,12 @@ app.get('/olvidarcontrasena', (req, res) => res.render('olvidarcontrasena'));
 app.get('/administrador',authorize('Admin'), (req, res) => res.render('administrador'));
 // Rutas a Editar Productos
 app.get('/editarproductos', (req, res) => res.render('editarproductos'));
-// Rutas a Pedidos realizados (Inventario)
+// Rutas a Pedidos pendientes (Inventario)
 app.get('/factura', authorize('Admin'), (req, res) => res.render('factura'));
+// Rutas a Pedidos entregados (Inventario)
+app.get('/facturaentregado', authorize('Admin'), (req, res) => res.render('facturaentregado'));
+// Rutas a Pedidos rechazados (Inventario)
+app.get('/facturarechazado', authorize('Admin'), (req, res) => res.render('facturarechazado'));
 // Rutas a Factura
 app.get('/facturab', authorize('Admin'), (req, res) => res.render('facturab'));
 
@@ -135,45 +139,10 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .catch(e => console.log('error de conexión', e))
 
 
-
-// Schema:
-
-const clienteSchema = mongoose.Schema({
-    nombre: String,
-    apellido: String,
-    direccion: String,
-    email: String,
-    telefono: String
-})
-
-const ClienteModel= mongoose.model('clientes',clienteSchema);
-
 // Mostar datos bd:
 
-
-const mostrar= async()=>{
-  const clientes=await ClienteModel.find()
-  //console.log(clientes)
-}
-
-mostrar()
-
-// Mostar datos bd:
-
-
-const mostrar2= async()=>{
-const producto=await productoModel.find()
-//console.log(producto)
-}
-
-mostrar2()
 
 app.post("/facturita",function (req, res) {
-  /*res.json({
-    Payment: req.query.payment_id,
-    Status: req.query.status,
-    MerchantOrder: req.query.merchant_order_id,
-  });*/
     // Manejar la notificación del webhook aquí
     console.log('Notificación recibida:', req.body);
     res.status(200).send('OK');
@@ -480,12 +449,5 @@ console.log(req.body);
 });
 
 
-
-
-// Función para generar el token JWT
-/*
-function generateAuthToken(user) {
-  return jwt.sign({ _id: user._id }, secretKey, { expiresIn: '1h' }); // Puedes ajustar la duración del token según tus necesidades
-}*/
 
 
