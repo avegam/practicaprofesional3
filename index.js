@@ -489,7 +489,10 @@ console.log(req.body);
         .then(token => {
           console.log(token);
           // Continúa con el código que utiliza el token aquí
-          return res.status(200).redirect(`/loginexitoso?x-auth-token=${token}`);
+          //return res.status(200).redirect(`/loginexitoso?x-auth-token=${token}`);
+          // Establecer la cookie
+           res.cookie('Token', token, { maxAge: 900000, httpOnly: true });
+          return res.status(200).redirect(`/`);
         })
         .catch(error => {
           console.error('Error al generar el token:', error);
