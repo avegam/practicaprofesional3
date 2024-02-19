@@ -202,6 +202,7 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       const idTransaccion = data.id;
       const items = data.additional_info.items;
       const additional = data.additional_info.additional;
+      console.log("Alice la ve " + additional)
       const pedido = "pendiente";
       console.log("factura formato:")
       console.log(items ,idTransaccion,status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description)
