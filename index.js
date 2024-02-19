@@ -6,16 +6,19 @@ const path = require("path");
 const productoModel = require('./server/modelos/producto'); // Asegúrate de ajustar la ruta según la ubicación de tu modelo
 const mercadopago = require("mercadopago");
 const jwt = require('jsonwebtoken');
-const authorize = require('./server/AutorizacionMiddleware');
+const {authorize, checkUser } = require('./server/AutorizacionMiddleware');
 const bodyParser=require('body-parser');
 const bcrypt= require('bcrypt');
 const userModelo= require('./server/modelos/user');
 const facturaModelo= require('./server/modelos/factura');
 const multer  = require('multer');
+// view engine
 // REPLACE WITH YOUR ACCESS TOKEN AVAILABLE IN: https://developers.mercadopago.com/panel
 mercadopago.configure({
 access_token:"TEST-2643009668753140-112518-a9bb2fbc8f1f5ac0960837e56681f5e9-1566400118",
 });
+
+
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -23,6 +26,7 @@ app.use(express.static(__dirname + '/client/imagenes'));
 app.use(express.static(path.join(__dirname, "/client")));
 app.use(cors());
 
+app.get('*', checkUser);
 
 // Configurar multer para manejar la carga de archivos
 const storage = multer.diskStorage({

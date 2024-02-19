@@ -1,4 +1,5 @@
 // authorizeMiddleware.js x
+const userModelo= require('./modelos/user');
 const jwt = require('jsonwebtoken');
 //const getCookie = require('../client/js/carrito.js')
 
@@ -29,6 +30,27 @@ const authorize = (requiredRole) => {
   };
 };
 
+
+const checkUser = (req, res, next) => {
+  const token = getCookie(req,'Token');
+  if (token) {
+    jwt.verify(token, 'clave_secreta', async (err, decodedToken) => {
+      if (err) {
+        res.locals.user = null;
+        next();
+      } else {
+        console.log("verificado?")
+        let user = await userModelo.findById(decodedToken.id);
+        res.locals.user = user;
+        next();
+      }
+    });
+  } else {
+    res.locals.user = null;
+    next();
+  }
+};
+
 function getCookie(req, nombre) {
   var nombreEQ = nombre + "=";
   var cookies = req.headers.cookie ? req.headers.cookie.split(';') : [];
@@ -43,4 +65,5 @@ function getCookie(req, nombre) {
 
   return null;
 }
-module.exports = authorize;
+
+module.exports = { authorize, checkUser };
