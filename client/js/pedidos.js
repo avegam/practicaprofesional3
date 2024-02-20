@@ -5,8 +5,8 @@ function llenarTabla(textoComparacion, idTabla) {
             const tabla = document.getElementById(idTabla);
 
            // Campos específicos que deseas mostrar, incluyendo los del campo "payer"
-            const camposAMostrar = ["idTransaccion", "transaction_amount", "status", "status_detail", "transaction_details.net_received_amount","payer.identification.type", "payer.identification.number", "payer.phone.number", "payer.email", "pedido"];
-            const camposAMostrara = ["id Transaccion", "Monto total", "Estado", "Detalle estado", "Monto neto", "Documento","Numero", "Telefono", "email", "pedido"];
+            const camposAMostrar = ["idTransaccion", "transaction_amount", "status", "status_detail", "transaction_details.net_received_amount","payer.identification.type", "payer.identification.number", "payer.phone.number", "mail","nombre","apellido", "pedido"];
+            const camposAMostrara = ["id Transaccion", "Monto total", "Estado", "Detalle estado", "Monto neto", "Documento","Numero", "Telefono", "Email","Nombre","Apellido", "pedido"];
 
             // Crear la fila de encabezado
             const filaEncabezado = tabla.insertRow();

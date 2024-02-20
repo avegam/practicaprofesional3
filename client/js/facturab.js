@@ -36,10 +36,10 @@ tablaProductos.appendChild(tabla);
 
 // Datos del cliente dentro de la respuesta
 const datosCliente = {
-  nombre: data.payer.first_name + ' ' + data.payer.last_name,
+  nombre: data.nombre + ' ' + data.apellido,
   tipo: data.payer.identification.type,
   numero: data.payer.identification.number,
-  email: data.payer.email
+  email: data.mail
 };
 
 // Obtener el elemento del div
