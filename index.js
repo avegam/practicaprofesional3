@@ -175,7 +175,7 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       const id_user = data.metadata.id_user;
       console.log("Alice la ve " + id_user)
           // Hacer una solicitud fetch para obtener los datos del usuario
-      const usuario = getUserData(id_user);
+      const usuario = await getUserData(id_user);
       console.log("usereriso " + JSON.stringify(usuario) )
       const nombre = usuario.Nombre ;
       const apellido = usuario.Apellido;
