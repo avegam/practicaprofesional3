@@ -68,7 +68,7 @@ app.get('/olvidarcontrasena', (req, res) => res.render('olvidarcontrasena'));
 //  Vista Administrador 
 app.get('/administrador',authorize('Admin'), (req, res) => res.render('administrador'));
 // Rutas a Editar Productos
-app.get('/editarproductos', (req, res) => res.render('editarproductos'));
+app.get('/editarproductos',authorize('Admin'), (req, res) => res.render('editarproductos'));
 // Rutas a Pedidos pendientes (Inventario)
 app.get('/factura', authorize('Admin'), (req, res) => res.render('factura'));
 // Rutas a Pedidos entregados (Inventario)
@@ -173,13 +173,19 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       const items = data.additional_info.items;
       const id_user = data.metadata.id_user;
       console.log("Alice la ve " + id_user)
+          // Hacer una solicitud fetch para obtener los datos del usuario
+      const usuario = getUserData(id_user)
+      console.log("usereriso " + usuario )
+      const nombre = usuario.Nombre ;
+      const apellido = usuario.Apellido;
+      const mail = usuario.Email;
       const pedido = "pendiente";
       console.log("factura formato:")
       console.log(items ,idTransaccion,status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description)
       const factura = new facturaModelo({
           status, status_detail, date_approved, transaction_amount, payment_type_id,
           payment_method_id, issuer_id, installments, currency_id, transaction_details,
-          payer, charges_details, money_release_date, description, idTransaccion, items,pedido,additional
+          payer, charges_details, money_release_date, description, idTransaccion, items,pedido,nombre,apellido,mail
       });
 
       console.log(factura);
@@ -191,6 +197,26 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       //res.status(500).send("Error al cargar factura");
   }
 }
+
+async function getUserData(userID) {
+
+  // Hacer una solicitud fetch para obtener los datos del usuario
+  return fetch(`/usuario/${userID}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('No se pudo obtener los datos del usuario');
+      }
+      return response.json();
+    })
+    .then(userData => {
+      // userData contiene los datos del usuario
+      return userData;
+    })
+    .catch(error => {
+      console.error('Error al obtener los datos del usuario:', error);
+    });
+}
+
 app.get('/facturab/*', authorize('Admin'), (req, res) => res.render('facturab'));
 
 

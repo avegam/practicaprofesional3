@@ -114,7 +114,7 @@ async function comprarbtn(productosformados){
     };
     window.checkoutButton = renderComponent(bricksBuilder);
   }
-  async function getUserData() {
+  /*async function getUserData() {
     // Obtener el elemento <p> por su ID
     const userIDElement = document.getElementById("ID");
   
@@ -136,7 +136,7 @@ async function comprarbtn(productosformados){
       .catch(error => {
         console.error('Error al obtener los datos del usuario:', error);
       });
-  }
+  }*/
 
 function limpiarcarrito(){
   var miElemento = document.getElementById("contenedorProductos");
