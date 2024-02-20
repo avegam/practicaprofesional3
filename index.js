@@ -12,6 +12,7 @@ const bcrypt= require('bcrypt');
 const userModelo= require('./server/modelos/user');
 const facturaModelo= require('./server/modelos/factura');
 const multer  = require('multer');
+const fetch = require('node-fetch');
 // view engine
 // REPLACE WITH YOUR ACCESS TOKEN AVAILABLE IN: https://developers.mercadopago.com/panel
 mercadopago.configure({
@@ -174,7 +175,7 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       const id_user = data.metadata.id_user;
       console.log("Alice la ve " + id_user)
           // Hacer una solicitud fetch para obtener los datos del usuario
-      const usuario = getUserData(id_user)
+      const usuario = getUserData(id_user);
       console.log("usereriso " + usuario )
       const nombre = usuario.Nombre ;
       const apellido = usuario.Apellido;
