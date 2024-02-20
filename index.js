@@ -180,7 +180,7 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       const nombre = usuario.Nombre ;
       const apellido = usuario.Apellido;
       const mail = usuario.Email;
-      console.log(nombre + apellido + mail);
+      console.log("user " + nombre + apellido + mail);
       const pedido = "pendiente";
       console.log("factura formato:")
       console.log(items ,idTransaccion,status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description)
