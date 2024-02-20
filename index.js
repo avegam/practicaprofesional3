@@ -202,7 +202,7 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
 async function getUserData(userID) {
 
   // Hacer una solicitud fetch para obtener los datos del usuario
-  return fetch(`/usuario/${userID}`)
+  return fetch(`https://practicap3.onrender.com/usuario/${userID}`)
     .then(response => {
       if (!response.ok) {
         throw new Error('No se pudo obtener los datos del usuario');
