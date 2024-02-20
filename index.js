@@ -173,17 +173,14 @@ async function fetchDataAndSave(urlpay, acctoken, res) {
       const idTransaccion = data.id;
       const items = data.additional_info.items;
       const id_user = data.metadata.id_user;
-      console.log("Alice la ve " + id_user)
-          // Hacer una solicitud fetch para obtener los datos del usuario
+     // Hacer una solicitud fetch para obtener los datos del usuario
       const usuario = await getUserData(id_user);
-      console.log("usereriso " + JSON.stringify(usuario) )
       const nombre = usuario.Nombre ;
       const apellido = usuario.Apellido;
       const mail = usuario.Email;
-      console.log("user " + nombre + apellido + mail);
       const pedido = "pendiente";
-      console.log("factura formato:")
-      console.log(items ,idTransaccion,status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description)
+      //console.log("factura formato:")
+      //console.log(items ,idTransaccion,status, status_detail, date_approved, transaction_amount, payment_type_id, payment_method_id, issuer_id, installments, currency_id, transaction_details, payer, charges_details, money_release_date, description)
       const factura = new facturaModelo({
           status, status_detail, date_approved, transaction_amount, payment_type_id,
           payment_method_id, issuer_id, installments, currency_id, transaction_details,

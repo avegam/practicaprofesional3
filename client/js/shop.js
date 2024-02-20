@@ -55,15 +55,15 @@ function sumaSubtotales(productosFormateados){
 }
 
 async function comprarbtn(productosformados){
-    
-  
-  //document.getElementById("checkout").addEventListener("click", function () {
-    const orderData = productosformados
-    // Datos adicionales
-    const userIDElement = document.getElementById("ID");
+      //document.getElementById("checkout").addEventListener("click", function () {
+        const orderData = productosformados
+        // Datos adicionales
+        const userIDElement = document.getElementById("ID");
+        
+  if (userIDElement !== null) {
+    // Accede a la propiedad 'textContent' solo si el elemento no es nulo
     // Obtener el contenido del atributo textContent
     const userID = userIDElement.textContent;
-    
     console.log("add " + JSON.stringify(userID))
     const requestBody = {
       item: orderData,
@@ -86,6 +86,12 @@ async function comprarbtn(productosformados){
       .catch(function () {
         alert("Unexpected error");
       });
+} else {
+  window.alert("Por favor, inicia sesión o regístrate para continuar.");
+}
+
+    
+    
   //});
   
   
