@@ -1,38 +1,46 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" >Hygge</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mx-auto ">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/home">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/editarproductos">Editar productos </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/factura">Pedidos Pendiente</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/facturaentregado">Pedidos Entregados</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/facturarechazado">Pedidos Rechazados</a>
-          </li>
-        
-        </ul>
+  <div class="container-fluid">
+    <a class="navbar-brand" >Hygge</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto ">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/home">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/editarproductos">Editar productos </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/factura">Pedidos Pendiente</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/facturaentregado">Pedidos Entregados</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/facturarechazado">Pedidos Rechazados</a>
+        </li>
+      
+      </ul>
+      <div class="dropdown" id="dropdown">
         <% if (user) { %>
-          <p>Bienvenido, <%= user.Nombre %> <%= user.Apellido %></p>
-          <p id="ID" hidden><%= user._id %></p>
-
-          <a class="nav-link" href="/logout">Desconectarse</a>
+           <p id="userText" class="nav-link"><%= user.Nombre %> <%= user.Apellido %></p>
+            <div class="dropdown-content" id="dropdownContent">
+                <p id="ID" hidden><%= user._id %></p>
+                <a class="nav-link" href="../perfil">Mi perfil</a>
+                <a class="nav-link" href="/logout">Desconectarse</a>
+            </div>
         <% } else { %>
-          <a class="nav-link" href="/ingresar">Ingresar/</a>
-          <a class="nav-link" href="/registrar">Registrarse</a>
+            <a class="nav-link" href="/ingresar">Ingresar/</a>
+            <a class="nav-link" href="/registrar">Registrarse</a>
         <% } %>
-        
-      </div>
     </div>
-  </nav>
+    </div>
+  </div>
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/EstiloLogueo.css">
+   <!-- Redirecciones al detalle de  Productos--> 
+   <script src="../js/DropdownLogueo.js"></script>
+
+</nav>

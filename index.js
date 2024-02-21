@@ -84,6 +84,8 @@ app.get('/logout', async (req, res) => {
   res.redirect('/');
 });
 
+// Rutas a Perfil usuario
+app.get('/perfil', (req, res) => res.render('perfil'));
 
 
 app.post("/create_preference", (req, res) => {

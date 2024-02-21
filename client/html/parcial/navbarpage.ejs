@@ -19,15 +19,23 @@
             <a class="nav-link" href="/shop">🛒</a>
           </li>
         </ul>
-
-        <% if (user) { %>
-            <p>Bienvenido, <%= user.Nombre %> <%= user.Apellido %></p>
-            <p id="ID" hidden><%= user._id %></p>
-            <a class="nav-link" href="/logout">Desconectarse</a>
+        <div class="dropdown" id="dropdown">
+          <% if (user) { %>
+             <p id="userText" class="nav-link"><%= user.Nombre %> <%= user.Apellido %></p>
+              <div class="dropdown-content" id="dropdownContent">
+                  <p id="ID" hidden><%= user._id %></p>
+                  <a class="nav-link" href="/perfil">Mi perfil</a>
+                  <a class="nav-link" href="/logout">Desconectarse</a>
+              </div>
           <% } else { %>
-            <a class="nav-link" href="/ingresar">Ingresar/</a>
-            <a class="nav-link" href="/registrar">Registrarse</a>
+              <a class="nav-link" href="/ingresar">Ingresar/</a>
+              <a class="nav-link" href="/registrar">Registrarse</a>
           <% } %>
       </div>
+      </div>
     </div>
+     <!-- CSS -->
+  <link rel="stylesheet" href="../css/EstiloLogueo.css">
+  <!-- Redirecciones al detalle de  Productos--> 
+  <script src="../js/DropdownLogueo.js"></script>
   </nav>
