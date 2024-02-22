@@ -83,6 +83,9 @@ app.get('/perfil', (req, res) => res.render('perfil'));
 // Rutas a Cambiar Contraseña
 app.get('/cambiarContrasena', (req, res) => res.render('cambiarContrasena'));
 
+// Rutas a Editar Contacto
+app.get('/editarcontacto', (req, res) => res.render('editarcontacto'));
+
 app.get('/logout', async (req, res) => {
   res.cookie('Token', '', { maxAge: 1 });
   res.redirect('/');
@@ -411,10 +414,10 @@ app.post('/eliminarproducto', async (req, res) => {
 
 /* REGISTRO DE USUARIO*/ 
 app.post('/registrar', async (req, res) => {
-  const { Nombre, Apellido, Email, password } = req.body;
+  const { Nombre, Apellido, Email, password,Telefono } = req.body;
  console.log(req.body)
  const Rol = "cliente"
-  const user = new userModelo({ Nombre, Apellido, Email, password,Rol });
+  const user = new userModelo({ Nombre, Apellido, Email, password,Rol,Telefono });
   console.log(user)
   try {
     await user.save();

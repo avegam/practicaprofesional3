@@ -18,9 +18,34 @@
 <body>
   <%- include('parcial/navbarpage'); -%>
   
+<!-- DATOS ACTULES DEL USUARIO-->
   <div class="container">
     <form action="" method="post">
-      <h2 class="estilo_inicio">Datos del usuario</h2>
+         
+      <h2 class="estilo_inicio">Datos actuales del usuario</h2>
+      <table>
+        <tr>
+          <td><label>Nombre</label></td>
+          <td><p>Prueba</p></td>
+        </tr>
+        <tr>
+          <td><label">Apellido</label></td>
+          <td> <p>PruebaApellido</p></td>
+        </tr>
+        <tr>
+          <td><label>Telefono</label></td>
+          <td> <p>1234567890</p></td>
+        </tr>
+      </table>
+      </form>
+    </div>
+
+
+  <!-- DATOS DEL USUARIO A MODIFICAR-->
+  <div class="container">
+    <form action="" method="post">
+         
+      <h2 class="estilo_inicio">Mofidicar Datos</h2>
       <table>
         <tr>
           <td><label for="Nombre">Nombre</label></td>
@@ -32,16 +57,14 @@
         </tr>
         <tr>
           <td><label for="Telefono">Telefono</label></td>
-          <td><input type="text" id="Telofono" name="Telefono"></td>
+          <td><input type="text" id="Telefono" name="Telefono"></td>
         </tr>
-
-      
       </table>
+      </form>
+    </div>
       <div class="estilo_boton">
         <button type="submit" class="estilo_boton" onclick="return validarPerfil()">Guardar Cambios</button> </br></br>  
       </div> <br>
-    
-    </form>
-
+  
 </body>
 </html>

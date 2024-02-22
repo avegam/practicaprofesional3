@@ -12,16 +12,19 @@
         <li class="nav-item">
           <a class="nav-link" href="/editarproductos">Editar productos </a>
         </li>
+      <div class="dropdown" id="dropdown--pedido">
+        <p id="pedidoText" class="nav-link">Pedidos</p>
+        <div class="dropdown-content" id="dropdown--content">
+            <a class="nav-link" href="/factura">Pendientes</a>
+            <a class="nav-link" href="/facturaentregado">Entregados</a>
+            <a class="nav-link" href="/facturarechazado">Rechazados</a>
+        </div>
+    </div>
+
         <li class="nav-item">
-          <a class="nav-link" href="/factura">Pedidos Pendiente</a>
+          <a class="nav-link" href="/editarcontacto">Editar Contacto</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/facturaentregado">Pedidos Entregados</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/facturarechazado">Pedidos Rechazados</a>
-        </li>
-      
+    
       </ul>
       <div class="dropdown" id="dropdown">
         <% if (user) { %>

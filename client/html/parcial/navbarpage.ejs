@@ -18,6 +18,17 @@
           <li class="nav-item">
             <a class="nav-link" href="/shop">🛒</a>
           </li>
+          <% if (user) { %>
+            
+          <% if (user.Rol === "Admin") { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/editarproductos">Administrador</a>
+            </li>
+            <% } else { %>
+          <% } %>
+          <% } else { %>
+  
+            <% } %>
         </ul>
         <div class="dropdown" id="dropdown">
           <% if (user) { %>

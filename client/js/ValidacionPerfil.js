@@ -1,9 +1,8 @@
 function validarPerfil() {
     apellido = document.getElementById("Apellido").value;
     nombre = document.getElementById("Nombre").value;
-    Telefono=document.getElementById("Telofono").value;
-    contraseña=document.getElementById("txtPassword").value;
-    contraseña2=document.getElementById("txtPassword2").value;
+    Telefono=document.getElementById("Telefono").value;
+   
 
     
     // Expresion  Regular Nombre y Apellido
@@ -48,28 +47,6 @@ if (!exptelefono.test(Telefono)) {
     window.alert("Error: Telefono invalido");
     return false;
 }
-
-
-// Validacion Campo Contraseña
-    if (contraseña == "") {
-        window.alert("El campo Contraseña no puede estar vacio");
-        return false;
-
-    }
-    else if (!expclave.test(contraseña)) {
-        window.alert("Error: Contraseña Invalida debe contener Al menos 8 carácteres,Al menos una letra, Al menos una letra mayuscula, Al menos un número ")
-        return false;
-    }
-
-    if (contraseña2 == "") {
-        window.alert("El campo Confirmar Contraseña no puede estar vacio");
-        return false;
-
-    } else if (contraseña != contraseña2) {
-        window.alert("Error: Contraseña no coinciden")
-        return false;
-    }
-
 
 }
 
