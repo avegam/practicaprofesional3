@@ -9,6 +9,7 @@ const secretKey = 'clave_secreta'; // Reemplaza con tu clave secreta
 const UserSchema = mongoose.Schema({
   Nombre: String,
   Apellido: String,
+  Telefono:String,
   Email: String,
   password: String,
   Rol: String

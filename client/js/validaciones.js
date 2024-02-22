@@ -1,6 +1,7 @@
 ﻿function validar() {
     apellido = document.getElementById("Apellido").value;
     nombre = document.getElementById("Nombre").value;
+    Telefono=document.getElementById("Telofono").value;
     email = document.getElementById("Email").value;
     contraseña=document.getElementById("txtPassword").value;
     contraseña2=document.getElementById("txtPassword2").value;
@@ -11,6 +12,9 @@
     // Expresion  Regular Nombre y Apellido
 
     expresion = /^[a-zA-Z]+$/;
+
+    // Expresion Regular Telefono
+      exptelefono=/^[0-9]{10}$/
 
     // Expresion Regural Contraseña
 
@@ -34,6 +38,16 @@
 }
 if (!expresion.test(apellido)) {
     window.alert("Error: Apellido invalido");
+    return false;
+}
+
+// Validacion Campo Telefono
+if (Telefono == "") {
+    window.alert("El campo telefono no puede estar vacio");
+    return false;
+}
+if (!exptelefono.test(Telefono)) {
+    window.alert("Error: Telefono invalido");
     return false;
 }
 
@@ -68,8 +82,9 @@ if (!expresion.test(apellido)) {
         return false;
     }
 
-
 }
+
+
 
 
     

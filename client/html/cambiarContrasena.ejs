@@ -13,32 +13,30 @@
    <!-- Redirecciones al detalle de  Productos--> 
    <script src="../js/redirecciones.js"></script>
    <!-- Redirecciones al detalle de  Productos--> 
-   <script src="../js/ValidacionPerfil.js"></script>
+   <script src="../js/validarContrasena.js"></script>
   </head>
 <body>
   <%- include('parcial/navbarpage'); -%>
   
   <div class="container">
     <form action="" method="post">
-      <h2 class="estilo_inicio">Datos del usuario</h2>
+      <h2 class="estilo_inicio">Cambiar Contraseña</h2>
       <table>
         <tr>
-          <td><label for="Nombre">Nombre</label></td>
-          <td><input type="text" id="Nombre" name="Nombre"></td>
+          <td><label for="password">Contraseña Actual</label></td>
+          <td><input type="password" id="txtPasswordactual" name="password"></td>
         </tr>
         <tr>
-          <td><label for="Apellido">Apellido</label></td>
-          <td><input type="text" id="Apellido" name="Apellido"></td>
-        </tr>
-        <tr>
-          <td><label for="Telefono">Telefono</label></td>
-          <td><input type="text" id="Telofono" name="Telefono"></td>
-        </tr>
-
-      
+            <td><label for="password">Contraseña Nueva</label></td>
+            <td><input type="password" id="txtPassword" name="password"></td>
+          </tr>
+          <tr>
+            <td><label for="password">Confirmar Contraseña</label></td>
+            <td><input type="password" id="txtPassword2" name="password2"></td>
+          </tr>
       </table>
       <div class="estilo_boton">
-        <button type="submit" class="estilo_boton" onclick="return validarPerfil()">Guardar Cambios</button> </br></br>  
+        <button type="submit" class="estilo_boton" onclick="return validarContrasena()">Guardar</button> </br>
       </div> <br>
     
     </form>

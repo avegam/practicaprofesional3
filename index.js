@@ -78,14 +78,16 @@ app.get('/facturaentregado', authorize('Admin'), (req, res) => res.render('factu
 app.get('/facturarechazado', authorize('Admin'), (req, res) => res.render('facturarechazado'));
 // Rutas a Factura
 app.get('/facturab', authorize('Admin'), (req, res) => res.render('facturab'));
+// Rutas a Perfil usuario
+app.get('/perfil', (req, res) => res.render('perfil'));
+// Rutas a Cambiar Contraseña
+app.get('/cambiarContrasena', (req, res) => res.render('cambiarContrasena'));
 
 app.get('/logout', async (req, res) => {
   res.cookie('Token', '', { maxAge: 1 });
   res.redirect('/');
 });
 
-// Rutas a Perfil usuario
-app.get('/perfil', (req, res) => res.render('perfil'));
 
 
 app.post("/create_preference", (req, res) => {
