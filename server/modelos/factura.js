@@ -105,7 +105,8 @@ const FacturaSchema = mongoose.Schema({
     items: [ItemSchema],
     nombre: String,
     apellido: String,
-    mail: String
+    mail: String,
+    telefono: string
   })
 
 // Middleware para ajustar valores predeterminados antes de validar

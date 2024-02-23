@@ -39,7 +39,8 @@ const datosCliente = {
   nombre: data.nombre + ' ' + data.apellido,
   tipo: data.payer.identification.type,
   numero: data.payer.identification.number,
-  email: data.mail
+  email: data.mail,
+  telefono : data.telefono
 };
 
 // Obtener el elemento del div
