@@ -326,6 +326,21 @@ app.get('/usuario/:id', async (req, res) => {
   }
 });
 
+app.post('/editarperfil', async (req, res) => {
+  const perfilId = req.body.id; // Obtén el ID del producto seleccionado desde el cuerpo de la solicitud POST
+  const { Nombre, Apellido, Telefono } = req.body;
+  
+  try {
+    await userModelo.findByIdAndUpdate(perfilId, {
+      Nombre, Apellido, Telefono
+    });
+    res.status(200).send("Perfil actualizado");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al actualizar el Perfil");
+  }
+});
+
 // insertar productos mediante un archivo json
 const fs = require('fs').promises;  // Módulo de sistema de archivos de Node.js
 

@@ -26,15 +26,15 @@
       <table>
         <tr>
           <td><label>Nombre</label></td>
-          <td><p>Prueba</p></td>
+          <td><p><%= user.Nombre %></p></td>
         </tr>
         <tr>
           <td><label">Apellido</label></td>
-          <td> <p>PruebaApellido</p></td>
+          <td> <p><%= user.Apellido %></p></td>
         </tr>
         <tr>
           <td><label>Telefono</label></td>
-          <td> <p>1234567890</p></td>
+          <td> <p><%= user.Telefono %></p></td>
         </tr>
       </table>
       </form>
@@ -43,10 +43,12 @@
 
   <!-- DATOS DEL USUARIO A MODIFICAR-->
   <div class="container">
-    <form action="" method="post">
+    <form action="editarperfil" method="post">
          
       <h2 class="estilo_inicio">Mofidicar Datos</h2>
       <table>
+        <!-- Campo oculto -->
+    <input type="hidden" id="<%= user._id %>" name="id" value="<%= user._id %>">
         <tr>
           <td><label for="Nombre">Nombre</label></td>
           <td><input type="text" id="Nombre" name="Nombre"></td>
@@ -60,11 +62,12 @@
           <td><input type="text" id="Telefono" name="Telefono"></td>
         </tr>
       </table>
-      </form>
     </div>
-      <div class="estilo_boton">
-        <button type="submit" class="estilo_boton" onclick="return validarPerfil()">Guardar Cambios</button> </br></br>  
-      </div> <br>
+    <div class="estilo_boton">
+      <button type="submit" class="estilo_boton" onclick="return validarPerfil()">Guardar Cambios</button> </br></br>  
+    </div> <br>
+      </form>
+    
   
 </body>
 </html>
