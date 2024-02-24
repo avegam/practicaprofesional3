@@ -15,6 +15,7 @@ const facturaModelo= require('./server/modelos/factura');
 const contactoModelo= require('./server/modelos/contacto');
 const multer  = require('multer');
 const fetch = require('node-fetch');
+const nodemailer = require('nodemailer'); // Importa nodemailer para enviar correos electrónicos
 
 // view engine
 // REPLACE WITH YOUR ACCESS TOKEN AVAILABLE IN: https://developers.mercadopago.com/panel
@@ -583,4 +584,67 @@ console.log(req.body);
 
 
 
+app.post('/olvidarpass', async (req, res) => {
+  const { Email } = req.body;
+  console.log(Email)
+  try {
+    // Busca el usuario por su dirección de correo electrónico
+    const user = await userModelo.findOne({Email});
 
+    if (!user) {
+      return res.status(404).send("Usuario no encontrado");
+    }
+
+    // Genera una nueva contraseña temporal
+    const nuevaContraseñaTemporal = generarContraseñaAleatoria();
+
+    // Actualiza la contraseña del usuario en la base de datos
+    user.password = nuevaContraseñaTemporal;
+    //await user.save();
+    const hashedPassword = await hashPassword(user);
+    // Actualiza el documento en la base de datos sin ejecutar los hooks pre-save
+  await userModelo.updateOne({ _id: user.id }, { $set: { password: hashedPassword } });
+
+    // Envía un correo electrónico al usuario con la nueva contraseña temporal
+    await enviarCorreoElectrónico(Email, nuevaContraseñaTemporal);
+
+    res.status(200).send("Se ha enviado una nueva contraseña temporal al correo electrónico proporcionado");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al procesar la solicitud");
+  }
+});
+
+// Función para generar una contraseña aleatoria
+function generarContraseñaAleatoria() {
+  const longitud = 10;
+  const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let contraseña = '';
+  for (let i = 0; i < longitud; i++) {
+    contraseña += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+  }
+  return contraseña;
+}
+
+// Función para enviar un correo electrónico al usuario
+async function enviarCorreoElectrónico(destinatario, nuevaContraseña) {
+  // Configura el transporte de nodemailer (debes configurarlo con tus credenciales de correo electrónico)
+  let transporter = nodemailer.createTransport({
+    service: 'hotmail',
+    auth: {
+      user: 'practicaprofesional33@hotmail.com',
+      pass: 'Ifts2023'
+    }
+  });
+
+  // Configura el correo electrónico a enviar
+  let mailOptions = {
+    from: 'practicaprofesional33@hotmail.com',
+    to: destinatario,
+    subject: 'Restablecimiento de contraseña',
+    text: `Se ha restablecido tu contraseña. Tu nueva contraseña es: ${nuevaContraseña} por favor cambiarla despues del primer uso`
+  };
+
+  // Envía el correo electrónico
+  await transporter.sendMail(mailOptions);
+}
