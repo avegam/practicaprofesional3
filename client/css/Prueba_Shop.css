@@ -120,3 +120,7 @@
 .carrito-total .btn-pagar:hover{
     scale: 1.05;
 }
+
+body{
+    background-color: #f6f4fb;
+  }

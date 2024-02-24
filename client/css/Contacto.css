@@ -8,6 +8,7 @@
     grid-template-columns: repeat(2,1fr);
     grid-gap: 50px;
     margin-top: 90;
+
    
 }
 
@@ -66,5 +67,9 @@ input, textarea{
     margin: auto;
     width: 300px;
 }
+
+body{
+    background-color: #f6f4fb;
+  }
 
 
