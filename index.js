@@ -615,16 +615,32 @@ app.post('/olvidarpass', async (req, res) => {
   }
 });
 
-// Función para generar una contraseña aleatoria
 function generarContraseñaAleatoria() {
   const longitud = 10;
-  const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const letrasMinusculas = 'abcdefghijklmnopqrstuvwxyz';
+  const letrasMayusculas = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const digitos = '0123456789';
+  const caracteresEspeciales = '$@$!%*?&#.$($)$-$_';
+  const caracteres = letrasMinusculas + letrasMayusculas + digitos + caracteresEspeciales;
   let contraseña = '';
-  for (let i = 0; i < longitud; i++) {
+
+  // Agregar al menos un carácter de cada tipo requerido
+  contraseña += letrasMinusculas.charAt(Math.floor(Math.random() * letrasMinusculas.length));
+  contraseña += letrasMayusculas.charAt(Math.floor(Math.random() * letrasMayusculas.length));
+  contraseña += digitos.charAt(Math.floor(Math.random() * digitos.length));
+  contraseña += caracteresEspeciales.charAt(Math.floor(Math.random() * caracteresEspeciales.length));
+
+  // Completar el resto de la contraseña con caracteres aleatorios
+  for (let i = 0; i < longitud - 4; i++) { // 4 caracteres ya han sido añadidos
     contraseña += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
   }
+  
+  // Asegurarse de que la contraseña esté mezclada
+  contraseña = contraseña.split('').sort(function(){return 0.5-Math.random()}).join('');
+  
   return contraseña;
 }
+
 
 // Función para enviar un correo electrónico al usuario
 async function enviarCorreoElectrónico(destinatario, nuevaContraseña) {
