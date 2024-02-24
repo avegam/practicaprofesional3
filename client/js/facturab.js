@@ -53,6 +53,7 @@ divDatosCliente.innerHTML = `
   <p>Documento: ${datosCliente.tipo}</p>
   <p>Numero: ${datosCliente.numero}</p>
   <p>Email: ${datosCliente.email}</p>
+  <p>Telefono: ${datosCliente.telefono}</p>
 `;
 
 // Obtener el elemento del div
