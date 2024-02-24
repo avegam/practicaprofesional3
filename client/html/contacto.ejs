@@ -22,9 +22,9 @@
     <p>
       Si deseas consultar informacion sobre nuestros productos o tienes alguna duda al respecto, no dudes en contactarnos.
     </p>
-    <a><i class="fa fa-phone"></i> (+549)11-6525-9472</a> <br>
-    <a><i class="fa fa-envelope"></i> practica3@protonmail.com</a> <br>
-    <a><i class="fa fa-map-marked"></i> Buenos Aires</a>
+    <a id="telefono"><i class="fa fa-phone"></i> </a> <br>
+    <a id="email"><i class="fa fa-envelope"></i> </a> <br>
+    <a id="ubicacion"><i class="fa fa-map-marked"></i> </a>
   </div>
     <form action="https://formsubmit.co/practica3@protonmail.com" method="POST" class="form-contacto" >
       <label for="First Name">Nombre</label> 
@@ -47,6 +47,20 @@
       <input type="hidden" name="_template" value="table">       
     </form> 
   </div>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    // Realizar la solicitud al backend para obtener datos
+  fetch(`/datoscontactos`)
+  .then(response => response.json())
+  .then(data => {
+    const { Telefono,Email,Ubicacion } = data;
+    document.getElementById('telefono').textContent = Telefono;
+    document.getElementById('email').textContent = Email;
+    document.getElementById('ubicacion').textContent = Ubicacion;
+})
+.catch(error => console.error('Error al obtener datos:', error));
+});</script>
 </body>
 </html>
 

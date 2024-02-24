@@ -1,3 +1,19 @@
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // Realizar la solicitud al backend para obtener datos
+  fetch(`/datoscontactos`)
+  .then(response => response.json())
+  .then(data => {
+    const { Telefono,Email,Ubicacion } = data;
+    document.getElementById('telefono').textContent = Telefono;
+    document.getElementById('email').textContent = Email;
+    document.getElementById('ubicacion').textContent = Ubicacion;
+})
+.catch(error => console.error('Error al obtener datos:', error));
+});
+
+
+
 function validacionEditarContacto () {
     
     Telefono=document.getElementById("telefonoeditar").value;

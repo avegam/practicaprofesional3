@@ -11,6 +11,7 @@ const bodyParser=require('body-parser');
 const bcrypt= require('bcrypt');
 const userModelo= require('./server/modelos/user');
 const facturaModelo= require('./server/modelos/factura');
+const contactoModelo= require('./server/modelos/contacto');
 const multer  = require('multer');
 const fetch = require('node-fetch');
 // view engine
@@ -372,6 +373,53 @@ app.get('/datos', async (req, res) => {
 });
 
 //insertarProductos();
+app.get('/datoscontactos', async (req, res) => {
+  try {
+    const documentos = await contactoModelo.findOne({ Contacto: "este" });
+    res.json(documentos);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener datos desde la base de datos' });
+  }
+  
+});
+
+app.post('/editarcontacto', async (req, res) => {
+  const {Telefono,Email,Ubicacion } = req.body;
+  console.log(req.body)
+  console.log(Telefono + " " + Email + Ubicacion)
+  try {
+    await contactoModelo.findOneAndUpdate({ Contacto: "este" }, {
+      Telefono,
+      Email,
+      Ubicacion
+    }, { new: true }); // Devuelve el documento actualizado
+    res.status(200).send("contacto actualizado");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al actualizar el contacto");
+  }
+});
+
+async function insertarcontacto() {
+  try {
+    // Leer el contenido del archivo productos.json
+    const contenidoJSON = await fs.readFile('server/contactobase.json', 'utf-8');
+    const contactosjson = JSON.parse(contenidoJSON);
+
+    // Insertar cada producto en la base de datos
+    for (const contactojson of contactosjson) {
+      const nuevocontacto = new contactoModelo(contactojson);
+      await nuevocontacto.save();
+    }
+
+    console.log('contacto insertados correctamente');
+  } catch (error) {
+    console.error('Error al insertar contacto:', error);
+  }
+}
+
+//insertarcontacto();
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
