@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { checkExistingEmail, hashPassword  }= require('../utiluser');
 
 const saltRounds = 10;
 const secretKey = 'clave_secreta'; // Reemplaza con tu clave secreta
@@ -15,25 +16,29 @@ const UserSchema = mongoose.Schema({
   Rol: String
 });
 
-UserSchema.pre('save', async function (next) {
+
+
+// Middleware pre-save para el UserSchema
+UserSchema.pre('save', async function(next) {
   const user = this;
-  
+
   try {
-    const existingUser = await userModel.findOne({ Email: user.Email });
-    if (existingUser) {
+    const emailExists = await checkExistingEmail(user);
+    if (emailExists) {
       const error = new Error('El correo electrónico ya está registrado');
       return next(error);
     }
 
- // Si el correo electrónico no existe, proceder con el hash del password
- if (user.isNew || user.isModified('password')) {
-  const hashedPassword = await bcrypt.hash(user.password, saltRounds);
-  user.password = hashedPassword;
-}
-next();
-} catch (error) {
-next(error);
-}
+    // Si el correo electrónico no existe, proceder con el hash del password
+    if (user.isNew || user.isModified('password')) {
+      const hashedPassword = await hashPassword(user);
+      user.password = hashedPassword;
+    }
+
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 
 UserSchema.methods.generateAuthToken = function () {
@@ -63,4 +68,4 @@ UserSchema.methods.isCorrectPassword = function (password) {
 };
 
 const userModel = mongoose.model('user',UserSchema);
-module.exports = userModel;
+module.exports =  userModel;

@@ -10,10 +10,12 @@ const {authorize, checkUser } = require('./server/AutorizacionMiddleware');
 const bodyParser=require('body-parser');
 const bcrypt= require('bcrypt');
 const userModelo= require('./server/modelos/user');
+const { checkExistingEmail, hashPassword }=require('./server/utiluser');
 const facturaModelo= require('./server/modelos/factura');
 const contactoModelo= require('./server/modelos/contacto');
 const multer  = require('multer');
 const fetch = require('node-fetch');
+
 // view engine
 // REPLACE WITH YOUR ACCESS TOKEN AVAILABLE IN: https://developers.mercadopago.com/panel
 mercadopago.configure({
@@ -342,6 +344,41 @@ app.post('/editarperfil', async (req, res) => {
   }
 });
 
+
+app.post('/Cambiarpass', async (req, res) => {
+  const perfilId = req.body.id; // Obtén el ID del producto seleccionado desde el cuerpo de la solicitud POST
+  const { password,password2,password3 } = req.body;
+  
+
+  try {
+    const user = await userModelo.findById(perfilId);
+
+    console.log(user);
+
+    if (!user) {
+      return res.status(500).send("Error: el usuario no existe");
+    }
+
+    const result = await user.isCorrectPassword(password);
+    if (!result) {
+      return res.status(400).send("La contraseña actual no es correcta");
+    }
+    if (result) {
+      user.password = password2;
+      const hashedPassword = await hashPassword(user);
+      // Actualiza el documento en la base de datos sin ejecutar los hooks pre-save
+    await userModelo.updateOne({ _id: perfilId }, { $set: { password: hashedPassword } });
+
+    res.status(200).send("Contraseña actualizada exitosamente");
+  } 
+ }
+ catch (error) {
+    console.error(error);
+    res.status(500).send("Error al cambiar la contraseña");
+  }    
+});
+
+ 
 // insertar productos mediante un archivo json
 const fs = require('fs').promises;  // Módulo de sistema de archivos de Node.js
 

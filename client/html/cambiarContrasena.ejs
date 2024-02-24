@@ -19,8 +19,9 @@
   <%- include('parcial/navbarpage'); -%>
   
   <div class="container">
-    <form action="" method="post">
+    <form action="Cambiarpass" method="post">
       <h2 class="estilo_inicio">Cambiar Contraseña</h2>
+      <input type="hidden" id="<%= user._id %>" name="id" value="<%= user._id %>">
       <table>
         <tr>
           <td><label for="password">Contraseña Actual</label></td>
@@ -28,11 +29,11 @@
         </tr>
         <tr>
             <td><label for="password">Contraseña Nueva</label></td>
-            <td><input type="password" id="txtPassword" name="password"></td>
+            <td><input type="password" id="txtPassword" name="password2"></td>
           </tr>
           <tr>
             <td><label for="password">Confirmar Contraseña</label></td>
-            <td><input type="password" id="txtPassword2" name="password2"></td>
+            <td><input type="password" id="txtPassword2" name="password3"></td>
           </tr>
       </table>
       <div class="estilo_boton">
