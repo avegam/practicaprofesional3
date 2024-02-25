@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { checkExistingEmail, hashPassword  }= require('../utiluser');
+const  hashPassword  = require('../utiluser');
 
 const saltRounds = 10;
 const secretKey = 'clave_secreta'; // Reemplaza con tu clave secreta
@@ -16,7 +16,11 @@ const UserSchema = mongoose.Schema({
   Rol: String
 });
 
-
+// Función para verificar si el correo electrónico ya está registrado
+async function checkExistingEmail(user) {
+  const existingUser = await userModel.findOne({ Email: user.Email });
+  return existingUser !== null;
+}
 
 // Middleware pre-save para el UserSchema
 UserSchema.pre('save', async function(next) {
