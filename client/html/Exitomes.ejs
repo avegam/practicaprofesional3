@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--Importar Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/Inicio.css">
+   <!-- Redirecciones al detalle de  Productos--> 
+
+  </head>
+<body>
+  <%- include('parcial/navbarpage'); -%>
+
+
+
+
+
+  <h1></h1>
+  <p id="exitoMes"></p>
+  <button onclick="goBack()">Volver</button>
+
+  <script>
+      // Función para ir hacia atrás en el historial del navegador
+      function goBack() {
+          window.history.back();
+      }
+
+      // Obtener el mensaje de exito de la URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const exito = urlParams.get('exitoso');
+      document.getElementById("exitoMes").innerText = exito;
+  </script>
+</body>
+</html>

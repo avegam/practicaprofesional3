@@ -89,6 +89,10 @@ app.get('/cambiarContrasena', (req, res) => res.render('cambiarContrasena'));
 
 // Rutas a Editar Contacto
 app.get('/editarcontacto', (req, res) => res.render('editarcontacto'));
+// Rutas a error
+app.get('/errorPage', (req, res) => res.render('error'));
+// Rutas a error
+app.get('/exitoMes', (req, res) => res.render('Exitomes'));
 
 app.get('/logout', async (req, res) => {
   res.cookie('Token', '', { maxAge: 1 });
@@ -338,10 +342,10 @@ app.post('/editarperfil', async (req, res) => {
     await userModelo.findByIdAndUpdate(perfilId, {
       Nombre, Apellido, Telefono
     });
-    res.status(200).send("Perfil actualizado");
+    res.status(200).redirect("/exitoMes?exitoso=Perfil actualizado");
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error al actualizar el Perfil");
+    res.status(500).redirect("/errorPage?error=Error al actualizar el Perfil");
   }
 });
 
@@ -357,7 +361,7 @@ app.post('/Cambiarpass', async (req, res) => {
     console.log(user);
 
     if (!user) {
-      return res.status(500).send("Error: el usuario no existe");
+      return res.status(500).redirect("/errorPage?error=Error: el usuario no existe");
     }
 
     const result = await user.isCorrectPassword(password);
@@ -370,12 +374,12 @@ app.post('/Cambiarpass', async (req, res) => {
       // Actualiza el documento en la base de datos sin ejecutar los hooks pre-save
     await userModelo.updateOne({ _id: perfilId }, { $set: { password: hashedPassword } });
 
-    res.status(200).send("Contraseña actualizada exitosamente");
+    res.status(200).redirect("/exitoMes?exitoso=Contraseña actualizada exitosamente");
   } 
  }
  catch (error) {
     console.error(error);
-    res.status(500).send("Error al cambiar la contraseña");
+    res.status(500).redirect("/errorPage?error=Error al cambiar la contraseña");
   }    
 });
 
@@ -431,10 +435,10 @@ app.post('/editarcontacto', async (req, res) => {
       Email,
       Ubicacion
     }, { new: true }); // Devuelve el documento actualizado
-    res.status(200).send("contacto actualizado");
+    res.status(200).redirect("/exitoMes?exitoso=contacto actualizado");
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error al actualizar el contacto");
+    res.status(500).redirect("/errorPage?error=Error al actualizar el contacto");
   }
 });
 
@@ -472,10 +476,10 @@ app.post('/nuevoproducto',upload.single('imagen'), async (req, res) => {
   console.log(producto)
   try {
     await producto.save();
-    res.status(200).send("producto registrado");
+    res.status(200).redirect("/exitoMes?exitoso=producto registrado");
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error al registrar el producto");
+    res.status(500).redirect("/errorPage?error=Error al registrar el producto");
   }
 });
 
@@ -493,10 +497,10 @@ app.post('/editarproducto', upload.single('imagen'), async (req, res) => {
       ingredientes,
       uso
     });
-    res.status(200).send("Producto actualizado");
+    res.status(200).redirect("/exitoMes?exitoso=Producto actualizado");
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error al actualizar el producto");
+    res.status(500).redirect("/errorPage?error=Error al actualizar el producto");
   }
 });
 
@@ -506,10 +510,10 @@ app.post('/eliminarproducto', async (req, res) => {
     const productoId = req.body.productoEliminar; // Obtén el ID del producto seleccionado desde el cuerpo de la solicitud POST
     console.log(productoId)
     await productoModel.findByIdAndDelete(productoId);
-    res.status(200).send("Producto eliminado");
+    res.status(200).redirect("/exitoMes?exitoso=Producto eliminado");
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error al eliminar el producto");
+    res.status(500).redirect("/errorPage?error=Error al eliminar el producto");
   }
 });
 
@@ -523,10 +527,11 @@ app.post('/registrar', async (req, res) => {
   console.log(user)
   try {
     await user.save();
-    res.status(200).send("Usuario registrado");
+    res.status(200).redirect("/exitoMes?exitoso=Usuario registrado");
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error al registrar el usuario: " + error);
+    //res.status(500).send("Error al registrar el usuario: " + error);
+    res.status(500).redirect("/errorPage?error=Error al registrar el usuario: " + error);
   }
 });
 
@@ -545,7 +550,7 @@ console.log(req.body);
     console.log(user);
 
     if (!user) {
-      return res.status(500).send("Error: el usuario no existe");
+      return res.status(500).redirect("/errorPage?error=Error: el usuario no existe");
     }
 
     const result = await user.isCorrectPassword(password);
@@ -574,11 +579,11 @@ console.log(req.body);
 
       
     } else {
-      return res.status(500).send("Usuario y/o contraseña incorrecta");
+      return res.status(500).redirect("/errorPage?error=Usuario y/o contraseña incorrecta");
     }
   } catch (error) {
     console.error(error);
-    return res.status(500).send("Error al autenticar el usuario");
+    return res.status(500).redirect("/errorPage?error=Error al autenticar el usuario");
   }
 });
 
@@ -608,10 +613,10 @@ app.post('/olvidarpass', async (req, res) => {
     // Envía un correo electrónico al usuario con la nueva contraseña temporal
     await enviarCorreoElectrónico(Email, nuevaContraseñaTemporal);
 
-    res.status(200).send("Se ha enviado una nueva contraseña temporal al correo electrónico proporcionado");
+    res.status(200).redirect("/exitoMes?exitoso=Se ha enviado una nueva contraseña temporal al correo electrónico proporcionado");
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error al procesar la solicitud");
+    res.status(500).redirect("/errorPage?error=Error al procesar la solicitud");
   }
 });
 
