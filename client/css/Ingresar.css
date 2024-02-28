@@ -1,58 +1,64 @@
-
 .container {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 10%;
-    width: 40%;
-    background-color: #f4f4f4;
-   
-  }
-  
-  .estilo_inicio{
-    text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  }
 
-  form {
-    margin-top: 60px;
-  }
-  
-  table {
-    width: 80%;
-    text-align: center;
-  }
-  
+  box-shadow: 0 0 10px rgba(12, 12, 12, 0.1);
+  border-radius: 20px;
+  height: 360px;
+  width: 40%;
+  background-color: rgb(230, 228, 240);
 
-  label {
-   display: block;
-   margin-bottom: 8px;
-   text-align: center;
-  }
-  
-  input {
-    width: 85%; 
-    padding: 5px; 
-    margin-bottom: 16px; 
-    border: 1px solid #ccc; 
-    border-radius: 4px;
-  }
-  
-  button {
+}
 
-    color: #fff;
-    border: 0;
-    border-radius: 25px;
-    background-color: #4caf50;
-    width: 25%;
-   
-    }
+.estilo_inicio{
+  text-align: center;
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+form {
+  margin-top: 60px;
+}
+
+table {
+  width: 80%;
+  text-align: center;
+}
+
+
+label {
+ display: block;
+ margin-bottom: 8px;
+ text-align: center;
+ font-family: Arial, Helvetica, sans-serif;
+}
+
+input {
+  width: 85%; 
+  padding: 5px; 
+  margin-bottom: 16px; 
+  border: 1px solid #ccc; 
+  border-radius: 15px;
+}
+
+button {
+
+  color: #fff;
+  border: 0;
+  border-radius: 25px;
+  background-color: #4caf50;
+  width: 25%;
+
+  }
 
 .estilo_parrafo{
-  text-align: center;
+text-align: center;
+font-family: Arial, Helvetica, sans-serif;
 }
 
 .estilo_boton{
-  text-align: center;
+text-align: center;
+font-family: Arial, Helvetica, sans-serif;
 }
 
-
-   
+body{
+background-color: #f6f4fb;
+}

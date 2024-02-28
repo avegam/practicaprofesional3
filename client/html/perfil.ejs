@@ -14,7 +14,7 @@
    <script src="../js/redirecciones.js"></script>
    <!-- Redirecciones al detalle de  Productos--> 
    <script src="../js/ValidacionPerfil.js"></script>
-  </head>
+</head>
 <body>
   <%- include('parcial/navbarpage'); -%>
   
@@ -40,25 +40,24 @@
       </form>
     </div>
 
-
   <!-- DATOS DEL USUARIO A MODIFICAR-->
   <div class="container">
     <form action="editarperfil" method="post">
          
-      <h2 class="estilo_inicio">Mofidicar Datos</h2>
+      <h2 class="estilo_inicio">Modificar Datos</h2>
       <table>
         <!-- Campo oculto -->
     <input type="hidden" id="<%= user._id %>" name="id" value="<%= user._id %>">
         <tr>
-          <td><label for="Nombre">Nombre</label></td>
+          <td><label for="Nombre">Nombre:</label></td>
           <td><input type="text" id="Nombre" name="Nombre"></td>
         </tr>
         <tr>
-          <td><label for="Apellido">Apellido</label></td>
+          <td><label for="Apellido">Apellido:</label></td>
           <td><input type="text" id="Apellido" name="Apellido"></td>
         </tr>
         <tr>
-          <td><label for="Telefono">Telefono</label></td>
+          <td><label for="Telefono">Teléfono:</label></td>
           <td><input type="text" id="Telefono" name="Telefono"></td>
         </tr>
       </table>

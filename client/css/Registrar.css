@@ -1,16 +1,16 @@
-
 .container {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  height: 10%;
+  box-shadow: 0 0 10px rgba(12, 12, 12, 0.1);
+  border-radius: 20px;
+  height: 505px;
   width: 40%;
-  background-color: #f4f4f4;
- 
+  background-color: rgb(230, 228, 240);
+
 
 }
 
 .estilo_inicio{
   text-align: center;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 form {
@@ -25,8 +25,9 @@ table {
 
 label {
  display: block;
- margin-bottom: 8px;
+ margin-bottom: 15px;
  text-align: center;
+ font-family: Arial, Helvetica, sans-serif;
 }
 
 input {
@@ -34,7 +35,8 @@ input {
   padding: 5px; 
   margin-bottom: 16px; 
   border: 1px solid #ccc; 
-  border-radius: 4px;
+  border-radius: 15px;
+
 }
 
 button {
@@ -49,10 +51,14 @@ button {
 
 .estilo_parrafo{
 text-align: center;
+font-family: Arial, Helvetica, sans-serif;
 }
 
 .estilo_boton{
 text-align: center;
+font-family: Arial, Helvetica, sans-serif;
 }
 
-  
+body{
+  background-color: #f6f4fb;
+}

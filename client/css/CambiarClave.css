@@ -1,16 +1,16 @@
 .container {
- 
-  box-shadow: 0 0 10px rgba(12, 12, 12, 0.1);
-  border-radius: 20px;
-  height: 265px;
-  width: 40%;
-  background-color: rgb(230, 228, 240);
+    box-shadow: 0 0 10px rgba(12, 12, 12, 0.1);
+    border-radius: 20px;
+    height: 310px;
+    width: 40%;
+    background-color: rgb(230, 228, 240);
+
 
   }
 
-  .estilo_titulo{
+  .estilo_inicio{
     text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
 
   form {
@@ -18,14 +18,14 @@
   }
 
   table {
-    width: 80%;
+    width: 75%;
     text-align: center;
   }
 
 
   label {
    display: block;
-   margin-bottom: 8px;
+   margin-bottom: 15px;
    text-align: center;
    font-family: Arial, Helvetica, sans-serif;
   }
@@ -36,6 +36,7 @@
     margin-bottom: 16px; 
     border: 1px solid #ccc; 
     border-radius: 15px;
+
   }
 
   button {
@@ -48,17 +49,16 @@
 
     }
 
-.estilo_iniciarSesion{
+  .estilo_parrafo{
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
+  }
 
-}
-
-.estilo_boton{
+  .estilo_boton{
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-}
+  }
 
-body{
-  background-color: #f6f4fb;
-}
+  body{
+    background-color: #f6f4fb;
+  }
