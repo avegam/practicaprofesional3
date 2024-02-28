@@ -14,7 +14,7 @@
    <script src="../js/redirecciones.js"></script>
    <!-- Redirecciones al detalle de  Productos--> 
    <script src="../js/ValidacionPerfil.js"></script>
-  </head>
+</head>
 <body>
   <%- include('parcial/navbarpage'); -%>
   
@@ -23,48 +23,64 @@
     <form action="" method="post">
          
       <h2 class="estilo_inicio">Datos actuales del usuario</h2>
-      <table>
-        <tr>
-          <td><label>Nombre</label></td>
-          <td><p>Prueba</p></td>
-        </tr>
-        <tr>
-          <td><label">Apellido</label></td>
-          <td> <p>PruebaApellido</p></td>
-        </tr>
-        <tr>
-          <td><label>Telefono</label></td>
-          <td> <p>1234567890</p></td>
-        </tr>
-      </table>
-      </form>
-    </div>
-
+      <div class="row">
+        <div class="col invisible"></div>
+        <div class="col">
+          <div class="row mb-3">
+            <div class="col-auto">
+              <label>Nombre:</label>
+            </div>
+            <div class="col-auto">
+              <p class="mb-0">Prueba</p>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-auto">
+              <label>Apellido:</label>
+            </div>
+            <div class="col-auto">
+              <p class="mb-0">PruebaApellido</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto">
+              <label>Teléfono:</label>
+            </div>
+            <div class="col-auto">
+              <p class="mb-0">1234567890</p>
+            </div>
+          </div>
+        </div>
+        <div class="col invisible"></div>
+      </div>
+    </form>
+  </div>
 
   <!-- DATOS DEL USUARIO A MODIFICAR-->
   <div class="container">
     <form action="" method="post">
          
-      <h2 class="estilo_inicio">Mofidicar Datos</h2>
+      <h2 class="estilo_inicio">Modificar Datos</h2>
       <table>
         <tr>
-          <td><label for="Nombre">Nombre</label></td>
+          <td><label for="Nombre">Nombre:</label></td>
           <td><input type="text" id="Nombre" name="Nombre"></td>
         </tr>
         <tr>
-          <td><label for="Apellido">Apellido</label></td>
+          <td><label for="Apellido">Apellido:</label></td>
           <td><input type="text" id="Apellido" name="Apellido"></td>
         </tr>
         <tr>
-          <td><label for="Telefono">Telefono</label></td>
+          <td><label for="Telefono">Teléfono:</label></td>
           <td><input type="text" id="Telefono" name="Telefono"></td>
         </tr>
       </table>
-      </form>
-    </div>
-      <div class="estilo_boton">
-        <button type="submit" class="estilo_boton" onclick="return validarPerfil()">Guardar Cambios</button> </br></br>  
-      </div> <br>
+    </form>
+  </div>
+  
+  <div class="estilo_boton">
+    <button type="submit" class="estilo_boton" onclick="return validarPerfil()">Guardar Cambios</button> </br></br>  
+  </div> <br>
   
 </body>
 </html>
