@@ -9,11 +9,18 @@
         img {
             max-width: 100px;
             max-height: 100px;
-            margin-right: 10px;
+            margin-right:10px;
+        
         }
         div {
             margin-right: 10px;
+            
         }
         button {
-            margin-left: auto;
+          
+        
+            background-color: #067e28;
+            
         }
+
+    

@@ -2,6 +2,9 @@
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
+ 
+
+
 }
 
 .accion {
@@ -38,7 +41,7 @@ textarea {
 }
 
 .estilo_boton {
-  background-color: #4caf50;
+  background-color: #067e28;
   color: #fff;
   padding: 8px 20px; /* Modificado para un aspecto más adecuado */
   border: none;
@@ -57,3 +60,8 @@ textarea {
   border-radius: 4px;
   font-size: 14px;
 }
+
+body{
+  background-color: #f7f6fa;
+}
+

@@ -1,68 +1,52 @@
-
-  .container{
-    height: 500px;
-    width: 240px;
-    margin-top: 2%;
-    background: rgb(248, 235, 235);
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-    
-  }
-  .left, .right {
-    /*
-    width: 50%;
-    padding: 30px;
-    */
-    /* mio*/
-    width: 50%;
-   padding: 50px;
-  }
-
-  .flex {
-    display: flex;
-  }
-  
+.container {
+  height: 500px;
+  width: 240px;
+  margin-top: 2%;
+  background: #e4e4e4ec; /* Color de fondo de las tarjetas */
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 20px; /* Borde redondeado */
  
-  .main_image {
-    
-    width: 50px;
-    height: 50px;
-   /* padding: 50px;*/
-  }
-  /*
-  
-  .option img {
-    width: 75px;
-    height: 75px;
-    padding: 10px;
-  }
-  */
-  .right {
-    padding: 50px 100px 50px 50px; ;
-  }
-  
-  h3 {
-    color: #af827d;
-    margin: 20px 0 20px 0;
-    font-size: 25px;
-  }
-  
-  
-  
-  p {
-    margin: 20px 0 50px 0;
-    line-height: 25px;
-    color: rgb(19, 17, 17);
-  }
-  
+}
 
-.estilo_volver_PagPrincipal{
-    width: 100%;
-    padding: 10px;
-    border: none;
-    outline: none;
-    background: #C1908B;
-    color: rgb(252, 252, 252);
-    border-radius: 30px;
-  }
+.left, .right {
+  width: 50%;
+  padding: 50px;
+}
 
+.right {
+  padding: 50px 100px 50px 50px;
+}
+
+.flex {
+  display: flex;
+}
+
+.main_image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Borde redondeado */
+}
+
+h3 {
+  color: #af827d;
+  margin: 20px 0 20px 0;
+  font-size: 25px;
+}
+
+p {
+  margin: 20px 0 50px 0;
+  line-height: 25px;
+  color: #131111;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.estilo_volver_PagPrincipal {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  background: #067e28; /* Color de fondo de los botones */
+  color: #fff; /* Color del texto */
+  border-radius: 30px;
+}
 

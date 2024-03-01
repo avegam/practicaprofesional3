@@ -22,9 +22,9 @@
     <p>
       Si deseas consultar informacion sobre nuestros productos o tienes alguna duda al respecto, no dudes en contactarnos.
     </p>
-    <a id="telefono"><i class="fa fa-phone"></i> </a> <br>
-    <a id="email"><i class="fa fa-envelope"></i> </a> <br>
-    <a id="ubicacion"><i class="fa fa-map-marked"></i> </a>
+    <a id="telefono"> </a> <br>
+    <a id="email"> </a> <br>
+    <a id="ubicacion"> </a>
   </div>
     <form action="https://formsubmit.co/practica3@protonmail.com" method="POST" class="form-contacto" >
       <label for="First Name">Nombre</label> 
@@ -55,9 +55,9 @@
   .then(response => response.json())
   .then(data => {
     const { Telefono,Email,Ubicacion } = data;
-    document.getElementById('telefono').textContent = Telefono;
-    document.getElementById('email').textContent = Email;
-    document.getElementById('ubicacion').textContent = Ubicacion;
+    document.getElementById('telefono').innerHTML = '<i class="fa fa-phone"></i> ' + Telefono;
+    document.getElementById('email').innerHTML = '<i class="fa fa-envelope"></i> ' + Email;
+    document.getElementById('ubicacion').innerHTML = '<i class="fa fa-map-marked"></i> ' + Ubicacion;
 })
 .catch(error => console.error('Error al obtener datos:', error));
 });</script>
