@@ -8,7 +8,7 @@ function buscarProductosEnBaseDeDatos(cookieData,pie) {
       const productosEnCarrito = JSON.parse(cookieData);
       const productosFormateados = [];
       const fetchPromises = [];
-
+ // Agarra el token del carrito y busca los datos del producto en la base de datos
       productosEnCarrito.forEach(producto => {
           const idProducto = producto.id;
           const fetchPromise = fetch(`/detalle/` + producto.id)
@@ -40,7 +40,7 @@ function buscarProductosEnBaseDeDatos(cookieData,pie) {
           });
   }
 }
-
+ // Funcion para summar el subtotal del producto seleccionado
 function sumaSubtotales(productosFormateados){
   var elementosSubtotal = document.getElementsByClassName('subtotal');
   var sumaSubtotal = 0;
@@ -49,11 +49,11 @@ function sumaSubtotales(productosFormateados){
       var valorSubtotal = parseFloat(elementosSubtotal[i].textContent.replace('subtotal: $', ''));
       sumaSubtotal += valorSubtotal;
   }
-
+  
   crearpiedecarrito(sumaSubtotal, productosFormateados);
   console.log('La suma total de subtotales es: $' + sumaSubtotal);
 }
-
+ // Funcion comprar que te manda a mercado pago
 async function comprarbtn(productosformados){
       //document.getElementById("checkout").addEventListener("click", function () {
         const orderData = productosformados
@@ -86,8 +86,9 @@ async function comprarbtn(productosformados){
       .catch(function () {
         alert("Unexpected error");
       });
-} else {
-  window.alert("Por favor, inicia sesión o regístrate para continuar.");
+} else { // le pide al usuario que se logue en el sistema para poder comprar el producto
+  window.alert("Por favor, inicia sesión o regístrate para continuar."); 
+                                                                        
 }
 
     
@@ -217,7 +218,7 @@ function crearProducto(idProducto,imagen, nombre, precio,cantidad) {
           productoLi.setAttribute('data-id', '1');
           productoLi.setAttribute('data-cantidad', '0');
 
-          // Añadir el contenido del producto
+          // Añadir el contenido del producto, botones
           productoLi.innerHTML = /*`<button class="botonCarrito" data-id='${idProducto}' oculto="1" onclick="manejarBotonAgregar(this, 1, 10)">Agregar al Carrito</button>` +*/
             `<button class="botonCarrito" data-id='${idProducto}' oculto="0" style="display: inline;" onclick="restarCantidad(this,'${idProducto}','shop')">-</button>` +
             `<input class="botonCarrito" data-id='${idProducto}' oculto="0" type="number" value="${cantidad}" min="1" class="cantidad-input" style="display: inline;">` +

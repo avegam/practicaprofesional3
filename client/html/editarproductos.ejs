@@ -111,6 +111,7 @@
 </body>
    <!--Validacion JS -->
    <script src="../js/validarEdicionProductos.js"></script>
+   
    <script>// Obtener referencia al select
     var select = document.getElementById('productoEliminar');
     var select2 = document.getElementById('productoEditar');
@@ -151,7 +152,7 @@
             }
         }
 
-        // Función para agregar las filas de datos a la tabla
+        // Función para agregar las filas de datos a la tabla que se muestra en la pagina de editar productos
         async function agregarFilas() {
             const tablaBody = document.getElementById('tablaBody');
             const productos = await obtenerDatos();

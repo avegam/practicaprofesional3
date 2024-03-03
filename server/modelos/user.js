@@ -7,6 +7,7 @@ const  hashPassword  = require('../utiluser');
 const saltRounds = 10;
 const secretKey = 'clave_secreta'; // Reemplaza con tu clave secreta
 
+// Modelo de usuario en la base de datos
 const UserSchema = mongoose.Schema({
   Nombre: String,
   Apellido: String,
@@ -22,7 +23,8 @@ async function checkExistingEmail(user) {
   return existingUser !== null;
 }
 
-// Middleware pre-save para el UserSchema
+// Middleware pre-save para el UserSchema, crequea que no este en la base de datos 
+
 UserSchema.pre('save', async function(next) {
   const user = this;
 
@@ -45,6 +47,7 @@ UserSchema.pre('save', async function(next) {
   }
 });
 
+
 UserSchema.methods.generateAuthToken = function () {
   const user = this;
 
@@ -58,7 +61,7 @@ UserSchema.methods.generateAuthToken = function () {
     });
   });
 };
-
+ // Comprueba que la funcion sea correcta
 UserSchema.methods.isCorrectPassword = function (password) {
   return new Promise((resolve, reject) => {
     bcrypt.compare(password, this.password, function (error, same) {

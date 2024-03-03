@@ -28,7 +28,7 @@
       "precio": 1600,
       "imagen": "Jabon-Corporal.jpg",
       "stock": "10",
-      "ingredientes": "Glicerina Neutra Vegetal + Arcilla Caolín + Manteca de Karité + Oleato, Flores y Aceite Esencial de Romero",
+      "ingredientes": "Glicerina Neutra Vegetal, Arcilla Caolín, Manteca de Karité, Oleato, Flores y Aceite Esencial de Romero",
       "uso": "Aplicar únicamente en cuerpo con movimientos circulares y enjuagar la zona con agua templada."
     },
     {
@@ -44,7 +44,7 @@
       "precio": 3000,
       "imagen": "Agua-Micelar.jpg",
       "stock": "10",
-      "ingredientes": "agua, Agua floral de Rosa Damascena, Glicéridos caprílicos/cápricos PEG-6,Propilenglicol, Extracto de Semilla de Avena Sativa, Levulinato de sodio , Sorbato de potasio, Benzoato sódico",
+      "ingredientes": "agua, Agua floral de Rosa Damascena, Glicéridos caprílicos/cápricos ,Propilenglicol, Extracto de Semilla de Avena Sativa, Levulinato de sodio , Sorbato de potasio, Benzoato sódico",
       "uso": "Aplicar el agua micelar con un algodón en rostro. Sin arrastrar, sin frotar, con movimientos suaves. No enjuagar.Utilizar por la mañana y/o por la noche."
     },
     {
@@ -61,6 +61,6 @@
       "imagen": "Jabon-Exfoliante.jpg",
       "stock": "10",
       "ingredientes": "Glicerina Neutra Vegetal, Arcilla Roja, Manteca de Karité, Oleato de Lavanda, Aceite Esencial de Vainilla",
-      "uso": "Humedecer el rostro, aplicar en con movimientos circulares, dejar secar de 5 a 10 minutos, luego proceder a enjuagar el rostro."
+      "uso": "Humedecer el rostro, aplicar en con movimientos circulares, dejar secar de cinco a diez minutos, luego proceder a enjuagar el rostro."
     }
   ]

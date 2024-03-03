@@ -9,7 +9,7 @@ const authorize = (requiredRole) => {
     const token = getCookie(req,'Token');
     //const token = req.header('x-auth-token');
     console.log(token)
-    
+
     if (!token) {
       return res.status(401).redirect('/errorPage?error=Acceso no autorizado. Token no proporcionado.');
     }
@@ -33,6 +33,8 @@ const authorize = (requiredRole) => {
 };
 
 
+// Chequear el token del usuario en la base de datos y si exites nos devuelve los datos
+
 const checkUser = (req, res, next) => {
   const token = getCookie(req,'Token');
   if (token) {
@@ -42,11 +44,11 @@ const checkUser = (req, res, next) => {
         next();
       } else {
         console.log("verificado?")
-        let user = await userModelo.findById(decodedToken._id);
+        let user = await userModelo.findById(decodedToken._id); // busca en la base de datos el id del usuario
         console.log(decodedToken)
         res.locals.user = user;
         console.log(user)
-        next();
+        next();  
       }
     });
   } else {
@@ -55,6 +57,7 @@ const checkUser = (req, res, next) => {
   }
 };
 
+// Lee la cookie del navegador
 function getCookie(req, nombre) {
   var nombreEQ = nombre + "=";
   var cookies = req.headers.cookie ? req.headers.cookie.split(';') : [];
@@ -69,5 +72,6 @@ function getCookie(req, nombre) {
 
   return null;
 }
+
 
 module.exports = { authorize, checkUser };
