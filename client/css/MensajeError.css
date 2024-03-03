@@ -1,0 +1,28 @@
+h1{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    
+
+}
+
+body{
+   
+    background-color: #f7f6fa;
+}
+
+p{
+  font-family: Arial, Helvetica, sans-serif;
+   color:  red;
+   font-weight: bold;
+}
+
+button{
+        background-color: #067e28;
+        color: #fff;
+        padding: 8px 20px; /* Modificado para un aspecto más adecuado */
+        border: none;
+        border-radius: 20px; /* Redondear los bordes */
+        cursor: pointer;
+        font-size: 16px;
+    
+}
