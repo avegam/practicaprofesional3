@@ -9,8 +9,9 @@ const authorize = (requiredRole) => {
     const token = getCookie(req,'Token');
     //const token = req.header('x-auth-token');
     console.log(token)
+    
     if (!token) {
-      return res.status(401).send('Acceso no autorizado. Token no proporcionado.');
+      return res.status(401).redirect('/errorPage?error=Acceso no autorizado. Token no proporcionado.');
     }
 
     try {
@@ -18,14 +19,15 @@ const authorize = (requiredRole) => {
       const userRole = decoded.Rol;
       console.log(userRole)
       if (userRole !== requiredRole) {
-        return res.status(403).send('Acceso no autorizado. Rol insuficiente.');
+        return res.status(403).redirect('/errorPage?error=Acceso no autorizado. Rol insuficiente.');
+
       }
 
       // Usuario autorizado, continúa con la solicitud
       next();
     } catch (error) {
       console.error('Error al verificar el token:', error);
-      return res.status(401).send('Acceso no autorizado. Token inválido.');
+      return res.status(401).redirect('/errorPage?error=Acceso no autorizado. Token inválido.');
     }
   };
 };
