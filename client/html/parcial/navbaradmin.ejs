@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand" >Hygge</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,12 +29,12 @@
         <div class="dropdown" id="dropdown">
           <% if (user) { %>
               <p id="userText" class="nav-link"><%= user.Nombre %> <%= user.Apellido %></p>
-                            <div class="dropdown-content" id="dropdownContent">
+                <div class="dropdown-content" id="dropdownContent">
                   <p id="ID" hidden><%= user._id %></p>
                   <a class="nav-link" href="../perfil">Mi perfil</a>
                   <a class="nav-link" href="../cambiarContrasena">Seguridad</a>
                 <a class="nav-link" href="/logout">Cerrar Sesion </a>
-                                </div>
+               </div>
           <% } else { %>
               <a class="nav-link" href="/ingresar">Ingresar/</a>
               <a class="nav-link" href="/registrar">Registrarse</a>
@@ -44,7 +44,11 @@
 </div>
   <!-- CSS -->
   <link rel="stylesheet" href="../css/EstiloLogueo.css">
+  <link rel="stylesheet" href="../css/EstiloNavbar.css">
    <!-- Redirecciones al detalle de  Productos--> 
    <script src="../js/DropdownLogueo.js"></script>
 
+
   </nav>
+  
+ 

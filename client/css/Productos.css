@@ -4,6 +4,7 @@
 h1 {
     text-align: center;
     margin: 30px 0px; 
+    font-family:sans-serif;
 }
 
 img {
@@ -85,7 +86,9 @@ img {
     font-weight: 300;
 }
 
-
+body{
+    background-color:#f6f4fb !important;
+  }
   
 
     

@@ -1,4 +1,7 @@
-
+/*
+body{
+  background-color: #f6f4fb;
+}
 label {
   display: block;
   margin-bottom: 8px;
@@ -10,7 +13,29 @@ label {
 
  
 } 
- 
+.contenedor {
+  box-shadow: 0 0 10px rgba(12, 12, 12, 0.1);
+  display: flex;
+  justify-content: space-around;
+}
+
+.eliminar,
+.Editar {
+  width: 45%;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+
+.eliminar h2,
+.Editar h2 {
+  margin-top: 0;
+}
+
+
+
+
 input {
   
    width: 100%; 
@@ -37,11 +62,6 @@ button {
   }
 
 
-
-body{
-   background-color: #f6f4fb;
- }
-
  .p{
   display: block;
   margin-bottom: 15px;
@@ -54,4 +74,59 @@ body{
   margin-top: 60px;
 }
 
+*/
+
+.contenedor {
+  display: flex;
+  justify-content: space-around;
+  
+}
+
+
+.eliminar,
+.Editar {
+  width: 45%;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  background-color: rgb(230, 228, 240);
+
+}
+
+.eliminar h2,
+.Editar h2 {
+  margin-top: 0;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+
+}
+
+input{
+   width: 100%; 
+   padding: 6px; 
+   margin-bottom: 16px; 
+   border: 1px solid #ccc; 
+   border-radius: 15px;
+  
+}
+.estilo_boton {
+  color: #fff;
+  border: 0;
+  border-radius: 25px;
+  background-color: #067e28;
+  width: 25%;
+}
+
+body{
+  background-color:#f6f4fb !important;
+}
 

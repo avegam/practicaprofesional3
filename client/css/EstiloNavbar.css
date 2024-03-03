@@ -1,0 +1,66 @@
+
+/* Estilo general para la barra de navegación */
+.navbar {
+    background-color: #eae7f1 !important; /* Color de fondo */
+    border-bottom: 1px solid #ccc; /* Borde inferior */
+    padding: 10px 0; /* Espaciado interno */
+    
+  }
+  
+  /* Estilo para el logo */
+  .navbar-brand {
+    font-size: 20px; /* Tamaño del texto */
+  }
+  
+  /* Estilo para los enlaces del menú */
+  .navbar-nav .nav-link {
+    font-size: 16px; /* Tamaño del texto */
+   /* margin: 0 10px; /* Margen entre enlaces */
+
+  }
+  .nav-link {
+    font-size: 16px; /* Tamaño del texto */
+   /* margin: 0 10px; /* Margen entre enlaces */
+   
+   
+  }
+  
+  
+
+  /* Estilo para el botón de menú desplegable */
+  .navbar-toggler {
+    border: none; /* Sin borde */
+  }
+  
+  
+  /* Estilo para el contenedor del menú desplegable */
+  .dropdown {
+    position: relative; /* Posición relativa */
+   display: inline-block; /* Elemento de línea */
+  }
+  
+  /* Estilo para el contenido del menú desplegable */
+  .dropdown-content {
+    display: none; /* Ocultar por defecto */
+    position: absolute; /* Posición absoluta */
+    background-color: #eae7f1; /* Color de fondo */
+ 
+  }
+  
+  /* Estilo para los enlaces dentro del menú desplegable */
+  .dropdown-content a {
+    color: #333; /* Color del texto */
+    padding: 12px 16px; /* Espaciado interno */
+    display: block; /* Mostrar como bloque */
+  }
+  
+  /* Estilo para los enlaces dentro del menú desplegable al hacer hover */
+  .dropdown-content a:hover {
+    background-color: #eae7f1; /* Color de fondo al hacer hover */
+    text-decoration:underline; /*Subraya la opcion elegida por el usuario*/
+  }
+  
+  /* Mostrar el menú desplegable cuando se pasa el mouse sobre él */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
