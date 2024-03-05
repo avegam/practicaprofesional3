@@ -27,11 +27,6 @@
   border-radius: 50%; /* Borde redondeado */
 }
 
-h3 {
-  color: #af827d;
-  margin: 20px 0 20px 0;
-  font-size: 25px;
-}
 
 p {
   margin: 20px 0 50px 0;
@@ -53,3 +48,12 @@ p {
 body{
   background-color:#f6f4fb !important;
 }
+
+img {
+  width: 360px;
+  height:360px;
+  object-fit: cover;
+  border-radius: 20px 20px 20px 20px;
+ 
+}
+

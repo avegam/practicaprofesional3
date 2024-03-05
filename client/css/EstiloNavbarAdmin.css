@@ -1,15 +1,18 @@
 
-/* Estilo general para la barra de navegación */
+/* Estilo general para la barra de navegación Vista ADMINISTRADOR */
 .navbar {
     background-color: #eae7f1 !important; /* Color de fondo */
     border-bottom: 1px solid #ccc; /* Borde inferior */
     padding: 10px 0; /* Espaciado interno */
+    height: 60px;
     
+
   }
   
   /* Estilo para el logo */
   .navbar-brand {
     font-size: 20px; /* Tamaño del texto */
+    height: 60px;
   }
   
   /* Estilo para los enlaces del menú */

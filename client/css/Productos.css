@@ -70,10 +70,13 @@ img {
     
     font-size: 16px;
     border-radius: 10px; /* Estilo de bordes redondeados*/
+   
  
 
 }
-
+.cantidad-input{
+    text-align: -webkit-center;
+}
 
 .informacion button:focus {
     outline: none; /* Quitar el contorno al hacer foco */
@@ -84,6 +87,7 @@ img {
     font-family: 'Montserrat', sans-serif;
     font-size: 23px;
     font-weight: 300;
+
 }
 
 body{
