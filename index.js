@@ -380,7 +380,7 @@ app.post('/Cambiarpass', async (req, res) => {
     // chequea que la contraseña sea correcta
     const result = await user.isCorrectPassword(password);
     if (!result) { // si la contraseña es incorrecta muestra el siguiente mensaje
-      return res.status(400).send("La contraseña actual no es correcta");
+      return res.status(400).redirect("/errorPage?error=La contraseña actual no es correcta");
     }
     if (result) { // si la clave actual es correcta 
       user.password = password2; // pone la clave nueva en el modelo del usuario
