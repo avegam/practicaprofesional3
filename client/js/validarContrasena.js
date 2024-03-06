@@ -23,13 +23,21 @@ else if (!expclave.test(contraseñaactual)) {
 }
 
 // Validacion Campo Contraseña Nueva
+
     if (contraseña == "") {
-        window.alert("El campo Contraseña no puede estar vacio");
+        window.alert("El campo Contraseña Nueva no puede estar vacio");
         return false;
 
     }
-    else if (!expclave.test(contraseña)) {
-        window.alert("Error: Contraseña Invalida debe contener Al menos 8 carácteres,Al menos una letra, Al menos una letra mayuscula, Al menos un número ")
+
+    if (contraseña == contraseñaactual) {
+        window.alert("El campo contraseña nueva no puede ser igual al campo contraseña actual");
+        return false;
+
+    }
+
+    if (!expclave.test(contraseña)) {
+        window.alert("Error: Contraseña Nueva Invalida debe contener Al menos 8 carácteres,Al menos una letra, Al menos una letra mayuscula, Al menos un número ")
         return false;
     }
 
@@ -39,10 +47,9 @@ else if (!expclave.test(contraseñaactual)) {
         return false;
 
     } else if (contraseña != contraseña2) {
-        window.alert("Error: Contraseña no coinciden")
+        window.alert("La confirmación de contraseña no coincide con la contraseña nueva ingresada. Por favor, vuelva a ingresarla.")
         return false;
     }
-
 
 }
 

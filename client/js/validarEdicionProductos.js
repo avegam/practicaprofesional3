@@ -11,13 +11,16 @@ function validacion() {
                // Expresion  Regular Campos script
 
                expresion = /^[a-zA-Z]+$/;
+           
+               // Expresion Regular de Campo uso e ingredientes
+               expresionuno = /^[a-zA-Z\s,]+,?$/;
 
               if (nombreProducto === "") {
                   alert("Por favor, ingrese un nombre de producto");
                   return false;
               }
               else if (!expresion.test(nombreProducto)) {
-              window.alert("Error: Campo Invalido");
+              window.alert("Error: Campo Nombre Invalido");
               return false;
       }
 
@@ -40,8 +43,8 @@ function validacion() {
                   alert("Por favor, ingrese los ingredientes");
                   return false;
               }
-              else if (!expresion.test(ingredientes)) {
-            window.alert("Error: Campo Invalido");
+              else if (!expresionuno.test(ingredientes)) {
+            window.alert("Error: Campo Ingredientes Invalido");
             return false;
       }
 
@@ -49,8 +52,8 @@ function validacion() {
                   alert("Por favor, ingrese el uso del producto");
                   return false;
               }
-              else if (!expresion.test(uso)) {
-            window.alert("Error: Campo Invalido");
+              else if (!expresionuno.test(uso)) {
+            window.alert("Error: Campo Uso Invalido");
             return false;
       }
 
@@ -73,19 +76,23 @@ function validacion() {
           var uso = document.getElementById("usoEditar").value;
 
           
-    // Expresion  Regular Campos String
+    // Expresion  Regular Campos Nombre
 
     expresion = /^[a-zA-Z]+$/;
+    // Expresion Regular Campo Ingredientes y Uso
+
+    expresiondos = /^[a-zA-Z\s,]+,?$/;
+    
 
           if (nombreProducto === "") {
               alert("Por favor, elija el producto disponible");
               return false;
           } 
           if (nombreProducto2 === "") {
-            alert("Por favor, elija el producto disponible");
+            alert("Por favor, ingrese un nombre de producto");
             return false;
         }else if (!expresion.test(nombreProducto2)) {
-            window.alert("Error: Campo Invalido");
+            window.alert("Error: Campo Nombre Invalido");
             return false;
         }
          
@@ -108,8 +115,8 @@ function validacion() {
               alert("Por favor, ingrese los ingredientes");
               return false;
           }
-          else if (!expresion.test(ingredientes)) {
-          window.alert("Error: Campo Invalido");
+          else if (!expresiondos.test(ingredientes)) {
+          window.alert("Error: Campo Ingredientes Invalido");
           return false;
       }
 
@@ -118,8 +125,8 @@ function validacion() {
               alert("Por favor, ingrese el uso del producto");
               return false;
           }
-          else if (!expresion.test(uso)) {
-          window.alert("Error: Campo Invalido");
+          else if (!expresiondos.test(uso)) {
+          window.alert("Error: Campo Uso Invalido");
           return false;
       }
 
@@ -135,6 +142,5 @@ function validarEliminar() {
         alert("Por favor, elija el producto disponible");
         return false;
     } 
-
-
  }
+ 
