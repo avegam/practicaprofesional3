@@ -8,9 +8,9 @@ function validacion() {
               var ingredientes = document.getElementById("ingredientesAgregar").value;
               var uso = document.getElementById("usoagregar").value;
 
-               // Expresion  Regular Campos script
+             // Expresion regular para Nombre de Producto
+                expresion = /^[a-zA-Z\s]+$/;
 
-               expresion = /^[a-zA-Z]+$/;
            
                // Expresion Regular de Campo uso e ingredientes
                expresionuno = /^[a-zA-Z\s,]+,?$/;
@@ -76,9 +76,9 @@ function validacion() {
           var uso = document.getElementById("usoEditar").value;
 
           
-    // Expresion  Regular Campos Nombre
+    // Expresion regular para Nombre de Producto
+    expresion = /^[a-zA-Z\s]+$/;
 
-    expresion = /^[a-zA-Z]+$/;
     // Expresion Regular Campo Ingredientes y Uso
 
     expresiondos = /^[a-zA-Z\s,]+,?$/;
@@ -133,7 +133,7 @@ function validacion() {
           return true;
       }
 
-  
+   
 /////////////////////////////VALIDACIONES DE eliminar PRODUCTOS//////////////////////////////////////////////////////////////////////////////////////////////
 function validarEliminar() { 
     var nombreproductoEliminar = document.getElementById("productoEliminar").value;
